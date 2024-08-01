@@ -2,26 +2,29 @@
     <div class="flex-grow w-full p-5">
         <div class="breadcrumbs text-sm">
             <ul>
-                    <li><a href="{{ route('admin.initiatives.index') }}">Danh sách sáng kiến</a></li>
-                    <li><a class="text-teal-600">Chỉnh sửa</a></li>
-                </ul>
+                <li><a href="{{ route('admin.initiatives.index') }}">Danh sách sáng kiến</a></li>
+                <li><a class="text-teal-600">Chỉnh sửa</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
-            <div class="overflow-x-auto p-5">
-                <form action="{{ route('admin.initiatives.update', $initiative->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
 
+            <form action="{{ route('admin.initiatives.update', $initiative->id) }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="space-y-4 px-3">
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
 
-                    <div class="grid grid-flow-row-dense grid-cols-4 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Tên sáng kiến</span>
                                 </div>
-                                <input type="text" name="name" placeholder="..." value="{{ old('name', $initiative->name) }}"
+                                <input type="text" name="name" placeholder="..."
+                                    value="{{ old('name', $initiative->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
@@ -82,7 +85,8 @@
                                     class="input input-bordered w-full @error('recognition_year') border-red-500 @enderror">
                                     <option value="">Lựa chọn</option>
                                     @for ($year = now()->year; 2015 <= $year; $year--)
-                                        <option value="{{ $year }}" {{ old('recognition_year', $initiative->recognition_year) == $year ? 'selected' : '' }}>
+                                        <option value="{{ $year }}"
+                                            {{ old('recognition_year', $initiative->recognition_year) == $year ? 'selected' : '' }}>
                                             {{ $year }}
                                         </option>
                                     @endfor
@@ -99,19 +103,29 @@
                                 <select name="status"
                                     class="input input-bordered w-full @error('status') border-red-500 @enderror">
                                     <option value="">Lựa chọn</option>
-                                    <option value="1" {{ old('status', $initiative->status) == '1' ? 'selected' : '' }}>Đang chờ xử lý
+                                    <option value="1"
+                                        {{ old('status', $initiative->status) == '1' ? 'selected' : '' }}>Đang chờ xử
+                                        lý
                                     </option>
-                                    <option value="2" {{ old('status', $initiative->status) == '2' ? 'selected' : '' }}>Đang được xem
+                                    <option value="2"
+                                        {{ old('status', $initiative->status) == '2' ? 'selected' : '' }}>Đang được xem
                                         xét</option>
-                                    <option value="3" {{ old('status', $initiative->status) == '3' ? 'selected' : '' }}>Được phê duyệt
+                                    <option value="3"
+                                        {{ old('status', $initiative->status) == '3' ? 'selected' : '' }}>Được phê
+                                        duyệt
                                     </option>
-                                    <option value="4" {{ old('status', $initiative->status) == '4' ? 'selected' : '' }}>Bị từ chối
+                                    <option value="4"
+                                        {{ old('status', $initiative->status) == '4' ? 'selected' : '' }}>Bị từ chối
                                     </option>
-                                    <option value="5" {{ old('status', $initiative->status) == '5' ? 'selected' : '' }}>Đã triển khai
+                                    <option value="5"
+                                        {{ old('status', $initiative->status) == '5' ? 'selected' : '' }}>Đã triển khai
                                     </option>
-                                    <option value="6" {{ old('status', $initiative->status) == '6' ? 'selected' : '' }}>Hết hạn
+                                    <option value="6"
+                                        {{ old('status', $initiative->status) == '6' ? 'selected' : '' }}>Hết hạn
                                     </option>
-                                    <option value="7" {{ old('status', $initiative->status) == '7' ? 'selected' : '' }}>Đã rút</option>
+                                    <option value="7"
+                                        {{ old('status', $initiative->status) == '7' ? 'selected' : '' }}>Đã rút
+                                    </option>
                                 </select>
                                 @error('status')
                                     <small class="text-red-500">{{ $message }}</small>
@@ -119,13 +133,14 @@
                             </label>
                         </div>
                     </div>
+                </div>
+                <div class="flex justify-center p-3">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
+                    <a href="{{ route('admin.initiatives.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                </div>
+            </form>
 
-                    <div class="flex justify-center pb-3">
-                        <a href="{{ route('admin.initiatives.index') }}" class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 

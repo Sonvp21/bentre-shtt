@@ -80,15 +80,15 @@ Route::middleware('auth')->group(function () {
         Route::get('patents/{patent}/edit', [PatentController::class, 'edit'])->middleware('can:edit,App\Models\Admin\Patent')->name('patents.edit');
         Route::put('patents/{patent}', [PatentController::class, 'update'])->middleware('can:edit,App\Models\Admin\Patent')->name('patents.update');
         Route::delete('patents/{patent}', [PatentController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\Patent')->name('patents.destroy');
-        //Lấy xã theo huyện 
-        Route::get('admin/patents/get-communes/{district_id}', [PatentController::class, 'getCommunes'])->name('patents.getCommunes');
-        // POST cho lọc, GET cho phân trang
-        Route::match(['get', 'post'], 'patents/ajax_list', [PatentController::class, 'ajaxList'])->name('patents.ajax_list');
+            //Lấy xã theo huyện 
+            Route::get('admin/patents/get-communes/{district_id}', [PatentController::class, 'getCommunes'])->name('patents.getCommunes');
+            // POST cho lọc, GET cho phân trang
+            Route::match(['get', 'post'], 'patents/ajax_list', [PatentController::class, 'ajaxList'])->name('patents.ajax_list');
 
-        // POST cho lọc, GET cho export excel, pdf
-        Route::post('patents/ajax_export', [PatentController::class, 'ajaxExport'])->name('patents.ajax_export');
-        Route::post('patents/export_excel', [PatentController::class, 'exportExcel'])->name('patents.export_excel');
-        Route::post('patents/export_pdf', [PatentController::class, 'exportPdf'])->name('patents.export_pdf');
+            // POST cho lọc, GET cho export excel, pdf
+            Route::post('patents/ajax_export', [PatentController::class, 'ajaxExport'])->name('patents.ajax_export');
+            Route::post('patents/export_excel', [PatentController::class, 'exportExcel'])->name('patents.export_excel');
+            Route::post('patents/export_pdf', [PatentController::class, 'exportPdf'])->name('patents.export_pdf');
         
     ////Bảo hộ nhãn hiệu
         // Route::resource('trademark_types', TrademarkTypeController::class);
@@ -151,6 +151,14 @@ Route::middleware('auth')->group(function () {
         Route::get('initiatives/{initiative}/edit', [InitiativeController::class, 'edit'])->middleware('can:edit,App\Models\Admin\Initiative')->name('initiatives.edit');
         Route::put('initiatives/{initiative}', [InitiativeController::class, 'update'])->middleware('can:edit,App\Models\Admin\Initiative')->name('initiatives.update');
         Route::delete('initiatives/{initiative}', [InitiativeController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\Initiative')->name('initiatives.destroy');
+
+            // POST cho lọc, GET cho phân trang
+            Route::match(['get', 'post'], 'initiatives/ajax_list', [InitiativeController::class, 'ajaxList'])->name('initiatives.ajax_list');
+
+            // POST cho lọc, GET cho export excel, pdf
+            Route::post('initiatives/ajax_export', [InitiativeController::class, 'ajaxExport'])->name('initiatives.ajax_export');
+            Route::post('initiatives/export_excel', [InitiativeController::class, 'exportExcel'])->name('initiatives.export_excel');
+            Route::post('initiatives/export_pdf', [InitiativeController::class, 'exportPdf'])->name('initiatives.export_pdf');
 
         // Route::resource('initiative_dossiers', InitiativeDossierController::class); //hồ sơ sáng kiến
         Route::get('initiative_dossiers', [InitiativeDossierController::class, 'index'])->middleware('can:index,App\Models\Admin\InitiativeDossier')->name('initiative_dossiers.index');
@@ -324,6 +332,7 @@ Route::get('admin/patents/statistical', [PatentController::class, 'statistical']
 Route::get('admin/trademarks/statistical', [TrademarkController::class, 'statistical'])->name('admin.trademarks.statistical');
 Route::get('admin/geographical_indications/statistical', [GeographicalIndicationController::class, 'statistical'])->name('admin.geographical_indications.statistical');
 Route::get('admin/industrial_designs/statistical', [IndustrialDesignController::class, 'statistical'])->name('admin.industrial_designs.statistical');
+Route::get('admin/initiatives/statistical', [InitiativeController::class, 'statistical'])->name('admin.initiatives.statistical');
 
 
 require __DIR__ . '/auth.php';

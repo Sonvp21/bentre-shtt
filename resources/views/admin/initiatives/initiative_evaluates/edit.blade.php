@@ -15,7 +15,7 @@
                     @method('PUT') <!-- Sử dụng method PUT để gửi request cập nhật -->
 
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-4 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
 
                         {{-- Cột 2 --}}
                         <div class="col-span-2">
