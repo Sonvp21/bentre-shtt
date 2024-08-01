@@ -2,9 +2,9 @@
     <div class="flex-grow w-full p-5">
         <div class="breadcrumbs text-sm">
             <ul>
-                    <li><a href="{{ route('admin.initiative_dossiers.index') }}">Danh sách Hồ sơ sáng kiến</a></li>
-                    <li><a class="text-teal-600">Thêm mới</a></li>
-                </ul>
+                <li><a href="{{ route('admin.initiative_dossiers.index') }}">Danh sách Hồ sơ sáng kiến</a></li>
+                <li><a class="text-teal-600">Thêm mới</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
@@ -13,7 +13,7 @@
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                     <div class="grid grid-cols-3 gap-4 !m-0">
-                      
+
                         {{-- Cột 2 --}}
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
@@ -44,22 +44,18 @@
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
-                            
-                            <label class="form-control w-full">
+
+                            <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Tài liệu đính kèm</span>
+                                    <span class="label-text">Nhận xét</span>
                                 </div>
-                                <input type="file" name="document" id="document"
-                                    class="file-input file-input-bordered file-input-accent w-full" />
-                                @error('document')
-                                    <small class="text-red-500">{{ $message }}</small>
-                                @enderror
+                                <textarea name="comment" class="textarea textarea-bordered h-24" placeholder="nhận xét, đánh giá"></textarea>
                             </label>
+
+                            
                         </div>
                         {{-- Cột 3 --}}
                         <div>
-                           
-
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày nộp</span>
@@ -83,7 +79,8 @@
                                         chờ xử lý</option>
                                     <option value="2" {{ old('submission_status') == '2' ? 'selected' : '' }}>Đang
                                         được xem xét</option>
-                                    <option value="3" {{ old('submission_status') == '3' ? 'selected' : '' }}>Được phê duyệt</option>
+                                    <option value="3" {{ old('submission_status') == '3' ? 'selected' : '' }}>Được
+                                        phê duyệt</option>
                                     <option value="4" {{ old('submission_status') == '4' ? 'selected' : '' }}>Bị
                                         từ chối</option>
                                 </select>
@@ -91,12 +88,23 @@
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
+                            <label class="form-control w-full">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Tài liệu đính kèm</span>
+                                </div>
+                                <input type="file" name="document" id="document"
+                                    class="file-input file-input-bordered file-input-accent w-full" />
+                                @error('document')
+                                    <small class="text-red-500">{{ $message }}</small>
+                                @enderror
+                            </label>
                         </div>
                     </div>
 
-                    <div class="flex gap-4 justify-center">
-                        <a href="{{ route('admin.initiative_dossiers.index') }}" class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                    <div class="flex gap-4 justify-center m-3">
                         <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
+                        <a href="{{ route('admin.initiative_dossiers.index') }}"
+                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
                     </div>
                 </form>
             </div>

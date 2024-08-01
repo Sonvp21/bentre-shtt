@@ -21,6 +21,7 @@ class InitiativeDossier extends Model implements HasMedia
         'name',
         'submission_date',
         'submission_status',
+        'comment',
     ];
 
     public function user()

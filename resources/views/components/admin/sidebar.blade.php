@@ -167,7 +167,7 @@
 
             <li><a {{ Request::routeIs('admin.products.*') ? 'open' : '' }} href="{{ route('admin.products.index') }}"
                     class="group font-bold {{ Request::routeIs('admin.products.*') ? 'active' : '' }}">
-                    <i class="fab fa-product-hunt"></i>Sản phẩm
+                    <i class="fab fa-product-hunt"></i>Sản phẩm đăng ký xây dựng, phát triển thương hiệu
                 </a>
             </li>
 

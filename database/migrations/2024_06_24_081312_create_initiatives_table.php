@@ -37,6 +37,7 @@ return new class extends Migration
             //document use laravel media
             $table->timestamp('submission_date')->comment('Thời gian nộp');
             $table->string('submission_status')->comment('Trạng thái hồ sơ');
+            $table->string('comment')->nullable()->comment('Nhận xét');
 
             $table->timestamps();
             $table->softDeletes();

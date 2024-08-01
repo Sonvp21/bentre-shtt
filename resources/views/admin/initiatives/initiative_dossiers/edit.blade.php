@@ -47,48 +47,18 @@
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
-
-                            <label class="form-control w-full">
+                            <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Document</span>
+                                    <span class="label-text">Nhận xét</span>
                                 </div>
-                                @if ($initiativeDossier->hasMedia('document_initiatives'))
-                                    <div>
-                                        <span class="text-sm font-medium text-gray-700">Tệp hiện tại:</span>
-                                        <a id="currentDocumentLink"
-                                            href="{{ $initiativeDossier->getFirstMedia('document_initiatives')->getUrl() }}"
-                                            class="text-blue-600 hover:underline">
-                                            {{ $initiativeDossier->getFirstMedia('document_initiatives')->file_name }}
-                                        </a>
-                                        <label for="document"
-                                            class="text-sm text-red-600 hover:underline cursor-pointer">
-                                            Đổi tệp
-                                        </label>
-                                        <input id="document" type="file" name="document" style="display: none;"
-                                            onchange="updateDocumentName(event)" />
-                                    </div>
-                                @else
-                                    <input id="document" type="file" name="document"
-                                        class="file-input file-input-bordered file-input-accent w-full" />
-                                    @error('document')
-                                        <small class="text-red-500">{{ $message }}</small>
-                                    @enderror
-                                @endif
+                                <textarea name="comment" class="textarea textarea-bordered h-24" 
+                                placeholder="nhận xét, đánh giá">{{ old('comment', $initiativeDossier->comment) }}
+                                </textarea>
                             </label>
-
-                            <script>
-                                function updateDocumentName(event) {
-                                    const input = event.target;
-                                    const fileName = input.files[0].name;
-                                    const linkElement = document.getElementById('currentDocumentLink');
-                                    linkElement.textContent = fileName;
-                                }
-                            </script>
+                            
                         </div>
                         {{-- Cột 3 --}}
                         <div>
-
-
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày nộp</span>
@@ -128,13 +98,49 @@
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
+                            <label class="form-control w-full">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Document</span>
+                                </div>
+                                @if ($initiativeDossier->hasMedia('document_initiatives'))
+                                    <div>
+                                        <span class="text-sm font-medium text-gray-700">Tệp hiện tại:</span>
+                                        <a id="currentDocumentLink"
+                                            href="{{ $initiativeDossier->getFirstMedia('document_initiatives')->getUrl() }}"
+                                            class="text-blue-600 hover:underline">
+                                            {{ $initiativeDossier->getFirstMedia('document_initiatives')->file_name }}
+                                        </a>
+                                        <label for="document"
+                                            class="text-sm text-red-600 hover:underline cursor-pointer">
+                                            Đổi tệp
+                                        </label>
+                                        <input id="document" type="file" name="document" style="display: none;"
+                                            onchange="updateDocumentName(event)" />
+                                    </div>
+                                @else
+                                    <input id="document" type="file" name="document"
+                                        class="file-input file-input-bordered file-input-accent w-full" />
+                                    @error('document')
+                                        <small class="text-red-500">{{ $message }}</small>
+                                    @enderror
+                                @endif
+                            </label>
+
+                            <script>
+                                function updateDocumentName(event) {
+                                    const input = event.target;
+                                    const fileName = input.files[0].name;
+                                    const linkElement = document.getElementById('currentDocumentLink');
+                                    linkElement.textContent = fileName;
+                                }
+                            </script>
                         </div>
                     </div>
 
-                    <div class="flex gap-4 justify-center">
+                    <div class="flex gap-4 justify-center m-3">
+                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
                         <a href="{{ route('admin.initiative_dossiers.index') }}"
                             class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
                     </div>
                 </form>
             </div>

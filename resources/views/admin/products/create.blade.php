@@ -53,6 +53,18 @@
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Ngày đăng ký</span>
+                                </div>
+                                <input type="date" name="submission_date" placeholder="Select Submission Date"
+                                    value="{{ old('submission_date') }}"
+                                    class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
+                                @error('submission_date')
+                                    <small class="text-red-500">{{ $message }}</small>
+                                @enderror
+                            </label>
                         </div>
                         {{-- Cột 2 --}}
                         <div class="col-span-2">

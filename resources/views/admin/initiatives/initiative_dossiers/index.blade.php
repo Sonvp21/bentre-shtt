@@ -29,9 +29,6 @@
                         style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                         <thead>
                             <tr>
-                                <th class="p-0">
-                                    <input type="checkbox" id="checkAll" class="checkbox checkbox-accent" />
-                                </th>
                                 <th>STT</th>
                                 <th>Tên Hồ sơ</th>
                                 <th>Sáng kiến</th>
@@ -43,19 +40,17 @@
                         <tbody>
                             @foreach ($initiativeDossiers as $index => $initiativeDossier)
                                 <tr>
-                                    <td class="text-center">
-                                        <input type="checkbox" class="checkbox checkbox-accent check-item" />
-                                    </td>
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     <td>{{ $initiativeDossier->name }}</td>
                                     <td>{{ $initiativeDossier->initiative->name }}</td>
                                     <td class="text-center">{{ $initiativeDossier->submissionAtVi }}</td>
                                     <td class="text-center">{!! $initiativeDossier->submission_status_text !!}</td>
                                     <td class="flex justify-around">
-                                        <a href="{{ route('admin.initiative_dossiers.edit', $initiativeDossier) }}" type="button"><i
-                                                class="fa fa-edit text-yellow-600"></i></a>
+                                        <a href="{{ route('admin.initiative_dossiers.edit', $initiativeDossier) }}"
+                                            type="button"><i class="fa fa-edit text-yellow-600"></i></a>
                                         <form id="delete-form-{{ $initiativeDossier->id }}"
-                                            action="{{ route('admin.initiative_dossiers.destroy', $initiativeDossier) }}" method="POST">
+                                            action="{{ route('admin.initiative_dossiers.destroy', $initiativeDossier) }}"
+                                            method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -92,18 +87,6 @@
                 })
                 .columns.adjust()
                 .responsive.recalc();
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkAll = document.getElementById('checkAll');
-            const checkItems = document.querySelectorAll('.check-item');
-
-            checkAll.addEventListener('change', function() {
-                checkItems.forEach(item => {
-                    item.checked = checkAll.checked;
-                });
-            });
         });
     </script>
 

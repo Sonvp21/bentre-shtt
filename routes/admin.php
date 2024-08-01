@@ -229,6 +229,14 @@ Route::middleware('auth')->group(function () {
         Route::put('products/{product}', [ProductController::class, 'update'])->middleware('can:edit,App\Models\Admin\Product')->name('products.update');
         Route::delete('products/{product}', [ProductController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\Product')->name('products.destroy');
 
+            // POST cho lọc, GET cho phân trang
+            Route::match(['get', 'post'], 'products/ajax_list', [ProductController::class, 'ajaxList'])->name('products.ajax_list');
+
+            // POST cho lọc, GET cho export excel, pdf
+            Route::post('products/ajax_export', [ProductController::class, 'ajaxExport'])->name('products.ajax_export');
+            Route::post('products/export_excel', [ProductController::class, 'exportExcel'])->name('products.export_excel');
+            Route::post('products/export_pdf', [ProductController::class, 'exportPdf'])->name('products.export_pdf');
+
     ///thông tin hỗ trợ, tư vấn
         // Route::resource('advisory_supports', AdvisorySupportController::class);
         Route::get('advisory_supports', [AdvisorySupportController::class, 'index'])->middleware('can:index,App\Models\Admin\AdvisorySupport')->name('advisory_supports.index');
@@ -333,6 +341,7 @@ Route::get('admin/trademarks/statistical', [TrademarkController::class, 'statist
 Route::get('admin/geographical_indications/statistical', [GeographicalIndicationController::class, 'statistical'])->name('admin.geographical_indications.statistical');
 Route::get('admin/industrial_designs/statistical', [IndustrialDesignController::class, 'statistical'])->name('admin.industrial_designs.statistical');
 Route::get('admin/initiatives/statistical', [InitiativeController::class, 'statistical'])->name('admin.initiatives.statistical');
+Route::get('admin/products/statistical', [ProductController::class, 'statistical'])->name('admin.products.statistical');
 
 
 require __DIR__ . '/auth.php';

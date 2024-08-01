@@ -21,6 +21,7 @@ class InitiativeDossierRequest extends FormRequest
             'submission_status' => 'required|string|max:255',
 
             'document' => 'nullable|file|mimes:pdf,xlsx,docx|max:2048',
+            'comment' => 'nullable',
         ];
     }
 

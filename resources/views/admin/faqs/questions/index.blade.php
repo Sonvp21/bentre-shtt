@@ -95,36 +95,39 @@
             </div>
         </div>
     </dialog>
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!--Datatables -->
-    <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            var table = $('#example').DataTable({
-                responsive: true
-            }).columns.adjust().responsive.recalc();
-        });
+    @pushOnce('scripts')
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!--Datatables -->
+        <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                    responsive: true
+                }).columns.adjust().responsive.recalc();
+            });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkAll = document.getElementById('checkAll');
-            const checkItems = document.querySelectorAll('.check-item');
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkAll = document.getElementById('checkAll');
+                const checkItems = document.querySelectorAll('.check-item');
 
-            checkAll.addEventListener('change', function() {
-                checkItems.forEach(item => {
-                    item.checked = checkAll.checked;
+                checkAll.addEventListener('change', function() {
+                    checkItems.forEach(item => {
+                        item.checked = checkAll.checked;
+                    });
                 });
             });
-        });
 
-        function showModal(element) {
-            document.getElementById('modal-title').innerText = element.getAttribute('data-title');
-            document.getElementById('modal-content').innerHTML = element.getAttribute('data-content');
-            document.getElementById('modal-name-sender').innerText = element.getAttribute('data-name_sender');
-            document.getElementById('modal-email').innerText = element.getAttribute('data-email');
-            document.getElementById('modal-status').innerText = element.getAttribute('data-status');
-            document.getElementById('my_modal_5').showModal();
-        }
-    </script>
+            function showModal(element) {
+                document.getElementById('modal-title').innerText = element.getAttribute('data-title');
+                document.getElementById('modal-content').innerHTML = element.getAttribute('data-content');
+                document.getElementById('modal-name-sender').innerText = element.getAttribute('data-name_sender');
+                document.getElementById('modal-email').innerText = element.getAttribute('data-email');
+                document.getElementById('modal-status').innerText = element.getAttribute('data-status');
+                document.getElementById('my_modal_5').showModal();
+            }
+        </script>
+    @endPushOnce
+
 </x-admin-layout>

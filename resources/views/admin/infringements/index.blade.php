@@ -49,13 +49,14 @@
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     <td>{{ $infringement->name }}</td>
                                     <td class="text-center">{{ $infringement->date }}</td>
-                                    <td class="text-center">{{ $infringement->formatted_penalty_amount  }}</td>
+                                    <td class="text-center">{{ $infringement->formatted_penalty_amount }}</td>
                                     <td class="text-center">{{ $infringement->status }}</td>
                                     <td class="flex justify-around">
-                                        <a href="{{ route('admin.infringements.edit', $infringement) }}" type="button"><i
-                                                class="text-yellow-600 fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.infringements.edit', $infringement) }}"
+                                            type="button"><i class="text-yellow-600 fa fa-edit"></i></a>
                                         <form id="delete-form-{{ $infringement->id }}"
-                                            action="{{ route('admin.infringements.destroy', $infringement) }}" method="POST">
+                                            action="{{ route('admin.infringements.destroy', $infringement) }}"
+                                            method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -78,33 +79,35 @@
         </div>
     </div>
 
+    @pushOnce('scripts')
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!--Datatables -->
+        <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
+        <script>
+            $(document).ready(function() {
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!--Datatables -->
-    <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
+                var table = $('#example').DataTable({
+                        responsive: true
+                    })
+                    .columns.adjust()
+                    .responsive.recalc();
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkAll = document.getElementById('checkAll');
+                const checkItems = document.querySelectorAll('.check-item');
 
-            var table = $('#example').DataTable({
-                    responsive: true
-                })
-                .columns.adjust()
-                .responsive.recalc();
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkAll = document.getElementById('checkAll');
-            const checkItems = document.querySelectorAll('.check-item');
-
-            checkAll.addEventListener('change', function() {
-                checkItems.forEach(item => {
-                    item.checked = checkAll.checked;
+                checkAll.addEventListener('change', function() {
+                    checkItems.forEach(item => {
+                        item.checked = checkAll.checked;
+                    });
                 });
             });
-        });
-    </script>
+        </script>
+    @endPushOnce
+
 
 </x-admin-layout>

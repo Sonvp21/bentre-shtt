@@ -25,6 +25,7 @@ class ProductRequest extends FormRequest
             'status' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'document.*' => 'nullable|mimes:pdf,doc,docx|max:2048',
+            'submission_date' => 'nullable|date',
         ];
     }
 
