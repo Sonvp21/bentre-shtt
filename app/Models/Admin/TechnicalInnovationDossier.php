@@ -49,6 +49,6 @@ class TechnicalInnovationDossier extends Model implements HasMedia
 
     public function results()
     {
-        return $this->hasMany(TechnicalInnovationResult::class, 'technical_id', 'id');
+        return $this->hasMany(TechnicalInnovationResult::class, 'technical_id');
     }
 }

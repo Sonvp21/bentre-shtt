@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Admin\TechnicalInnovationResult;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
@@ -203,6 +204,8 @@ Route::middleware('auth')->group(function () {
         Route::put('technical_innovation_results/{technical_innovation_result}', [TechnicalInnovationResultController::class, 'update'])->middleware('can:edit,App\Models\Admin\TechnicalInnovationResult')->name('technical_innovation_results.update');
         Route::delete('technical_innovation_results/{technical_innovation_result}', [TechnicalInnovationResultController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\TechnicalInnovationResult')->name('technical_innovation_results.destroy');
 
+        Route::match(['get', 'post'], 'technical_innovation_results/ajax_list', [TechnicalInnovationResultController::class, 'ajaxList'])->name('technical_innovation_results.ajax_list');
+
     ///Chỉ dẫn địa lý
         // Route::resource('geographical_indications', GeographicalIndicationController::class);
         Route::get('geographical_indications', [GeographicalIndicationController::class, 'index'])->middleware('can:index,App\Models\Admin\GeographicalIndication')->name('geographical_indications.index');
@@ -347,6 +350,7 @@ Route::get('admin/geographical_indications/statistical', [GeographicalIndication
 Route::get('admin/industrial_designs/statistical', [IndustrialDesignController::class, 'statistical'])->name('admin.industrial_designs.statistical');
 Route::get('admin/initiatives/statistical', [InitiativeController::class, 'statistical'])->name('admin.initiatives.statistical');
 Route::get('admin/products/statistical', [ProductController::class, 'statistical'])->name('admin.products.statistical');
+Route::get('admin/technical_innovation_results/statistical', [TechnicalInnovationResultController::class, 'statistical'])->name('admin.technical_innovation_results.statistical');
 
 
 require __DIR__ . '/auth.php';

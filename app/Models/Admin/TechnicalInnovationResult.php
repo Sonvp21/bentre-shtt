@@ -17,6 +17,6 @@ class TechnicalInnovationResult extends Model
     // Relationships
     public function dossier()
     {
-        return $this->belongsTo(TechnicalInnovationDossier::class, 'technical_id', 'id');
+        return $this->belongsTo(TechnicalInnovationDossier::class, 'technical_id');
     }
 }
