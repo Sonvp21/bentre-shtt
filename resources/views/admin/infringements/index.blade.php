@@ -6,19 +6,15 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
-        <div class="breadcrumbs text-sm">
-            <span class="flex items-center gap-2 text-sm font-semibold leading-tight text-gray-800">
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
                 Danh sách vi phạm
-            </span>
+            </span><div class="breadcrumbs text-sm">
+            
             <div class="flex ml-auto">
-                <form action="{{ route('admin.infringements.index') }}" method="GET" class="w-full">
-                    <div class="flex items-center justify-between">
-                        <a class="flex btn" href="{{ route('admin.infringements.create') }}">
-                            <i class="fad fa-plus-circle"></i>
-                        </a>
-                    </div>
-                </form>
+                <a class="btn btn-outline btn-accent !min-h-9 h-9 ml-auto" href="{{ route('admin.infringements.create') }}">
+                    <i class="fad fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <x-admin.alerts.success />

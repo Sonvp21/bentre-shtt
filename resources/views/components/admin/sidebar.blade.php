@@ -85,7 +85,7 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.industrial_design_types.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.industrial_design_type.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.industrial_design_types.*') ? 'active' : '' }}">
                                 <i class="fad fa-bookmark"></i>
                                 Nhóm ngành
                             </a>
@@ -135,21 +135,21 @@
                     <ul>
                         <li>
                             <a href="{{ route('admin.technical_innovation_dossiers.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.technical_innovation.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.technical_innovation_dossiers.*') ? 'active' : '' }}">
                                 <i class="fas fa-file-alt"></i>
                                 Hồ sơ
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('admin.technical_innovation_committees.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.technical_innovation.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.technical_innovation_committees.*') ? 'active' : '' }}">
                                 <i class="fas fa-users"></i>
                                 Hội đồng
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('admin.technical_innovation_results.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.technical_innovation.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.technical_innovation_results.*') ? 'active' : '' }}">
                                 <i class="far fa-user-check"></i>
                                 Kết quả
                             </a>

@@ -1,20 +1,22 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
-            
-                <ul>
-                    <li><a href="{{ route('admin.technical_innovation_results.index') }}">Danh sách vi phạm</a></li>
-                    <li><a class="text-teal-600">Chỉnh sửa</a></li>
-                </ul>
+            <ul>
+                <li><a href="{{ route('admin.technical_innovation_results.index') }}">Danh sách vi phạm</a></li>
+                <li><a class="text-teal-600">Chỉnh sửa</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
 
-                <form action="{{ route('admin.technical_innovation_results.update', $technicalInnovationResult->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+            <form action="{{ route('admin.technical_innovation_results.update', $technicalInnovationResult->id) }}"
+                method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="space-y-4 px-3">
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-cols-1 gap-4">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         <div>
                             <label class="form-control">
                                 <span class="text-sm font-medium text-gray-700">Hồ sơ</span>
@@ -40,7 +42,8 @@
                                     class="input input-bordered w-full @error('year') border-red-500 @enderror">
                                     <option value="">Lựa chọn</option>
                                     @for ($year = now()->year; 2015 <= $year; $year--)
-                                        <option value="{{ $year }}" {{ $technicalInnovationResult->year == $year ? 'selected' : '' }}>
+                                        <option value="{{ $year }}"
+                                            {{ $technicalInnovationResult->year == $year ? 'selected' : '' }}>
                                             {{ $year }}
                                         </option>
                                     @endfor
@@ -53,7 +56,8 @@
                         <div>
                             <label class="form-control">
                                 <span class="text-sm font-medium text-gray-700">Xếp hạng</span>
-                                <input type="text" name="rank" placeholder="Nhập vào" value="{{ $technicalInnovationResult->rank }}"
+                                <input type="text" name="rank" placeholder="Nhập vào"
+                                    value="{{ $technicalInnovationResult->rank }}"
                                     class="input input-bordered w-full @error('rank') border-red-500 @enderror" />
                                 @error('rank')
                                     <small class="text-red-500">{{ $message }}</small>
@@ -71,13 +75,14 @@
                             </label>
                         </div>
                     </div>
-
-                    <div class="flex gap-4 justify-center pb-3">
-                        <a href="{{ route('admin.technical_innovation_results.index') }}"
-                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
-                    </div>
-                </form>
+                </div>
+                <div class="flex gap-4 justify-center p-3">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
+                    <a href="{{ route('admin.technical_innovation_results.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                    
+                </div>
+            </form>
 
         </div>
     </div>

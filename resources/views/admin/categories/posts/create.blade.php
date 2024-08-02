@@ -1,7 +1,7 @@
 <x-admin-layout>
     <div class="p-6">
-        <div class="text-gray-800 text-sm font-semibold leading-tight">
-            <span class="text-gray-800 text-sm flex items-center gap-2 font-semibold leading-tight">
+        <div class="text-gray-800 text-3xl uppercase font-semibold leading-tight">
+            <span class="text-3xl uppercase font-semibold">
                 {{ app()->getLocale() === 'en' ? $category->title_en : $category->title }}
                 <x-heroicon-m-arrow-small-right class="size-4" />
                 @lang('admin.add')

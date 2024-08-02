@@ -5,7 +5,7 @@
             <label class="label">
                 <span class="label-text">Tìm kiếm</span>
             </label>
-            <input type="text" name="search" id="search" value="{{ request('search') }}" placeholder="Mã, tên, năm..."
+            <input type="text" name="search" id="search" value="{{ request('search') }}" placeholder=""
                 class="input input-sm input-bordered w-32">
         </div>
         @foreach ($filters as $filter)

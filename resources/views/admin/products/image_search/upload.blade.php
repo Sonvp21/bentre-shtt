@@ -1,7 +1,7 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
-        <div class="text-gray-800 text-sm font-semibold leading-tight flex">
-            <span class="text-gray-800 text-sm flex items-center gap-2 font-semibold leading-tight">
+    <div class="flex-grow w-full p-5 text-center">
+        <div class="text-gray-800 text-3xl uppercase font-semibold leading-tight flex">
+            <span class="text-3xl uppercase font-semibold">
                 Danh sách
             </span>
         </div>

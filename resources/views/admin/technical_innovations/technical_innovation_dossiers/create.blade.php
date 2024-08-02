@@ -1,19 +1,21 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
-            
-                <ul>
-                    <li><a href="{{ route('admin.technical_innovation_dossiers.index') }}">Danh sách hồ sơ sáng tạo kỹ thuật</a></li>
-                    <li><a class="text-teal-600">Thêm mới</a></li>
-                </ul>
+            <ul>
+                <li><a href="{{ route('admin.technical_innovation_dossiers.index') }}">Danh sách hồ sơ sáng tạo kỹ
+                        thuật</a></li>
+                <li><a class="text-teal-600">Thêm mới</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
 
-                <form action="{{ route('admin.technical_innovation_dossiers.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+            <form action="{{ route('admin.technical_innovation_dossiers.store') }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="space-y-4 px-3">
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
                                 <div class="label">
@@ -30,7 +32,8 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Tên đơn vị</span>
                                 </div>
-                                <input type="text" name="unit_name" placeholder="Nhập vào" value="{{ old('unit_name') }}"
+                                <input type="text" name="unit_name" placeholder="Nhập vào"
+                                    value="{{ old('unit_name') }}"
                                     class="input input-bordered w-full {{ $errors->has('unit_name') ? 'input-error' : '' }}" />
                                 @error('unit_name')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
@@ -47,9 +50,9 @@
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
-                            
+
                         </div>
-                        <div class="col-span-1">
+                        <div>
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày nộp</span>
@@ -92,13 +95,13 @@
                             </label>
                         </div>
                     </div>
-
-                    <div class="flex gap-4 justify-center pb-3">
-                        <a href="{{ route('admin.technical_innovation_dossiers.index') }}"
-                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
-                    </div>
-                </form>
+                </div>
+                <div class="flex gap-4 justify-center p-3">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
+                    <a href="{{ route('admin.technical_innovation_dossiers.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                </div>
+            </form>
 
         </div>
     </div>

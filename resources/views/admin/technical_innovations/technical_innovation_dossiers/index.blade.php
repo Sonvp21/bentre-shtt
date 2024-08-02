@@ -6,19 +6,16 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
+            Danh sách hồ sơ sáng tạo kỹ thuật
+        </span>
         <div class="breadcrumbs text-sm">
-            <span class="flex items-center gap-2 text-sm font-semibold leading-tight text-gray-800">
-                Danh sách hồ sơ sáng tạo kỹ thuật
-            </span>
             <div class="flex ml-auto">
-                <form action="{{ route('admin.technical_innovation_dossiers.index') }}" method="GET" class="w-full">
-                    <div class="flex items-center justify-between">
-                        <a class="flex btn" href="{{ route('admin.technical_innovation_dossiers.create') }}">
-                            <i class="fad fa-plus-circle"></i>
-                        </a>
-                    </div>
-                </form>
+                <a class="btn btn-outline btn-accent !min-h-9 h-9 ml-auto"
+                    href="{{ route('admin.technical_innovation_dossiers.create') }}">
+                    <i class="fad fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <x-admin.alerts.success />
@@ -50,14 +47,15 @@
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     <td>{{ $technicalInnovationDossier->name }}</td>
                                     <td>{{ $technicalInnovationDossier->unit_name }}</td>
-                                    <td>{{ $technicalInnovationDossier->field  }}</td>
+                                    <td>{{ $technicalInnovationDossier->field }}</td>
                                     <td class="text-center">{{ $technicalInnovationDossier->submissionAtVi }}</td>
                                     <td class="text-center">{!! $technicalInnovationDossier->submission_status_text !!}</td>
                                     <td class="flex justify-around">
-                                        <a href="{{ route('admin.technical_innovation_dossiers.edit', $technicalInnovationDossier) }}" type="button"><i
-                                                class="text-yellow-600 fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.technical_innovation_dossiers.edit', $technicalInnovationDossier) }}"
+                                            type="button"><i class="text-yellow-600 fa fa-edit"></i></a>
                                         <form id="delete-form-{{ $technicalInnovationDossier->id }}"
-                                            action="{{ route('admin.technical_innovation_dossiers.destroy', $technicalInnovationDossier) }}" method="POST">
+                                            action="{{ route('admin.technical_innovation_dossiers.destroy', $technicalInnovationDossier) }}"
+                                            method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

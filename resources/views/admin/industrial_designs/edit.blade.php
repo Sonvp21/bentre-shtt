@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             <ul>
                 <li><a href="{{ route('admin.industrial_designs.index') }}">Danh sách kiểu dáng</a></li>

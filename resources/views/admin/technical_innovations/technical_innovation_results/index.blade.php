@@ -6,19 +6,16 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
+            Danh sách kết quả
+        </span>
         <div class="breadcrumbs text-sm">
-            <span class="flex items-center gap-2 text-sm font-semibold leading-tight text-gray-800">
-                Danh sách kết quả
-            </span>
             <div class="flex ml-auto">
-                <form action="{{ route('admin.technical_innovation_results.index') }}" method="GET" class="w-full">
-                    <div class="flex items-center justify-between">
-                        <a class="flex btn" href="{{ route('admin.technical_innovation_results.create') }}">
-                            <i class="fad fa-plus-circle"></i>
-                        </a>
-                    </div>
-                </form>
+                <a class="btn btn-outline btn-accent !min-h-9 h-9 ml-auto"
+                    href="{{ route('admin.technical_innovation_results.create') }}">
+                    <i class="fad fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <x-admin.alerts.success />
@@ -49,13 +46,14 @@
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     <td>{{ $technicalInnovationResult->dossier->name }}</td>
                                     <td class="text-center">{{ $technicalInnovationResult->year }}</td>
-                                    <td class="text-center">{{ $technicalInnovationResult->rank  }}</td>
+                                    <td class="text-center">{{ $technicalInnovationResult->rank }}</td>
                                     <td class="text-center">{{ $technicalInnovationResult->status }}</td>
                                     <td class="flex justify-around">
-                                        <a href="{{ route('admin.technical_innovation_results.edit', $technicalInnovationResult) }}" type="button"><i
-                                                class="text-yellow-600 fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.technical_innovation_results.edit', $technicalInnovationResult) }}"
+                                            type="button"><i class="text-yellow-600 fa fa-edit"></i></a>
                                         <form id="delete-form-{{ $technicalInnovationResult->id }}"
-                                            action="{{ route('admin.technical_innovation_results.destroy', $technicalInnovationResult) }}" method="POST">
+                                            action="{{ route('admin.technical_innovation_results.destroy', $technicalInnovationResult) }}"
+                                            method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
