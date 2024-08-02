@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('representatives')->comment('Đại diện');
             //image and document use laravel media
             $table->text('status')->nullable()->comment('Ghi chú');
+            $table->dateTime('submission_date')->comment('ngày đăng ký');
             $table->timestamps();
             $table-> softDeletes();
         });

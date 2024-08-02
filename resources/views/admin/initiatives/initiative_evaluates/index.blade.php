@@ -6,19 +6,16 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
-        <div class="text-gray-800 text-sm font-semibold leading-tight flex">
-            <span class="text-gray-800 text-sm flex items-center gap-2 font-semibold leading-tight">
+    <div class="flex-grow w-full p-5 text-center">
+       <span class="text-3xl uppercase font-semibold">
                 Danh sách Hội đồng sáng kiến
-            </span>
+            </span> 
+            <div class="text-gray-800 text-3xl uppercase font-semibold leading-tight flex">
+            
             <div class="flex ml-auto">
-                <form action="{{ route('admin.initiative_evaluates.index') }}" method="GET" class="w-full">
-                    <div class="flex items-center justify-between">
-                        <a class="btn flex" href="{{ route('admin.initiative_evaluates.create') }}">
-                            <i class="fad fa-plus-circle"></i>
-                        </a>
-                    </div>
-                </form>
+                <a class="btn btn-outline btn-accent !min-h-9 h-9" href="{{ route('admin.initiative_evaluates.create') }}">
+                    <i class="fad fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <x-admin.alerts.success />

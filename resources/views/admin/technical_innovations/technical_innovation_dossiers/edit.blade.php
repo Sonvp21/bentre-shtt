@@ -1,26 +1,30 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
-            
-                <ul>
-                    <li><a href="{{ route('admin.technical_innovation_dossiers.index') }}">Danh sách hồ sơ sáng tạo kỹ thuật<menu type="context"></menu></a></li>
-                    <li><a class="text-teal-600">Chỉnh sửa</a></li>
-                </ul>
+            <ul>
+                <li><a href="{{ route('admin.technical_innovation_dossiers.index') }}">Danh sách hồ sơ sáng tạo kỹ thuật
+                        <menu type="context"></menu></a></li>
+                <li><a class="text-teal-600">Chỉnh sửa</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
 
-                <form action="{{ route('admin.technical_innovation_dossiers.update', $technicalInnovationDossier->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+            <form action="{{ route('admin.technical_innovation_dossiers.update', $technicalInnovationDossier->id) }}"
+                method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="space-y-4 px-3">
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Tên hồ sơ</span>
                                 </div>
-                                <input type="text" name="unit_name" placeholder="Nhập vào" value="{{ old('unit_name', $technicalInnovationDossier->unit_name) }}"
+                                <input type="text" name="unit_name" placeholder="Nhập vào"
+                                    value="{{ old('unit_name', $technicalInnovationDossier->unit_name) }}"
                                     class="input input-bordered w-full {{ $errors->has('unit_name') ? 'input-error' : '' }}" />
                                 @error('unit_name')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
@@ -30,7 +34,8 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Tên đơn vị</span>
                                 </div>
-                                <input type="text" name="field" placeholder="Nhập vào" value="{{ old('field', $technicalInnovationDossier->field) }}"
+                                <input type="text" name="field" placeholder="Nhập vào"
+                                    value="{{ old('field', $technicalInnovationDossier->field) }}"
                                     class="input input-bordered w-full {{ $errors->has('field') ? 'input-error' : '' }}" />
                                 @error('field')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
@@ -40,7 +45,8 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Lĩnh vực</span>
                                 </div>
-                                <input type="text" name="name" placeholder="Nhập vào" value="{{ old('name', $technicalInnovationDossier->name) }}"
+                                <input type="text" name="name" placeholder="Nhập vào"
+                                    value="{{ old('name', $technicalInnovationDossier->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
@@ -89,11 +95,13 @@
                                 @if ($technicalInnovationDossier->hasMedia('document_technical'))
                                     <div>
                                         <span class="text-sm font-medium text-gray-700">Tệp hiện tại:</span>
-                                        <a id="currentDocumentLink" href="{{ $technicalInnovationDossier->getFirstMedia('document_technical')->getUrl() }}"
+                                        <a id="currentDocumentLink"
+                                            href="{{ $technicalInnovationDossier->getFirstMedia('document_technical')->getUrl() }}"
                                             class="text-blue-600 hover:underline">
                                             {{ $technicalInnovationDossier->getFirstMedia('document_technical')->file_name }}
                                         </a>
-                                        <label for="document" class="text-sm text-red-600 cursor-pointer hover:underline">
+                                        <label for="document"
+                                            class="text-sm text-red-600 cursor-pointer hover:underline">
                                             Đổi tệp
                                         </label>
                                         <input id="document" type="file" name="document" style="display: none;"
@@ -107,7 +115,7 @@
                                     @enderror
                                 @endif
                             </label>
-                            
+
                             <script>
                                 function updateDocumentName(event) {
                                     const input = event.target;
@@ -118,13 +126,13 @@
                             </script>
                         </div>
                     </div>
-
-                    <div class="flex gap-4 justify-center pb-3">
-                        <a href="{{ route('admin.technical_innovation_dossiers.index') }}"
-                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
-                    </div>
-                </form>
+                </div>
+                <div class="flex gap-4 justify-center p-3">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
+                    <a href="{{ route('admin.technical_innovation_dossiers.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                </div>
+            </form>
 
         </div>
     </div>

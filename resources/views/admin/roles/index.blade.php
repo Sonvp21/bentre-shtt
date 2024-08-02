@@ -6,19 +6,15 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
-        <div class="text-gray-800 text-sm font-semibold leading-tight flex">
-            <span class="text-gray-800 text-sm flex items-center gap-2 font-semibold leading-tight">
-                Danh sách vai trò
-            </span>
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
+            Danh sách vai trò
+        </span>
+        <div class="text-gray-800 text-3xl uppercase font-semibold leading-tight flex">
             <div class="flex ml-auto">
-                <form action="{{ route('admin.roles.index') }}" method="GET" class="w-full">
-                    <div class="flex items-center justify-between">
-                        <a class="btn flex" href="{{ route('admin.roles.create') }}">
-                            <i class="fad fa-plus-circle"></i>
-                        </a>
-                    </div>
-                </form>
+                <a class="btn btn-outline btn-accent !min-h-9 h-9" href="{{ route('admin.roles.create') }}">
+                    <i class="fad fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <x-admin.alerts.success />
@@ -47,7 +43,7 @@
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->display_name }}</td>
-                                    
+
                                     <td class="flex justify-around">
                                         <a href="{{ route('admin.roles.edit', $role) }}" type="button"><i
                                                 class="fa fa-edit text-yellow-600"></i></a>

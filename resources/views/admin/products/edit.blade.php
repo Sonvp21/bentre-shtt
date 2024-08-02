@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             <ul>
                     <li><a href="{{ route('admin.products.index') }}">Danh sách sản phẩm</a></li>
@@ -14,7 +14,7 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-4 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         {{-- cột 1 --}}
                         <div class="col-span-1">
                             {{-- huyện --}}
@@ -52,6 +52,18 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
+                                    <small class="text-red-500">{{ $message }}</small>
+                                @enderror
+                            </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Ngày đăng ký</span>
+                                </div>
+                                <input type="date" name="submission_date" placeholder="Select Submission Date"
+                                    value="{{ old('submission_date', $product->submission_date ? \Carbon\Carbon::parse($product->submission_date)->format('Y-m-d') : '') }}"
+                                    class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
+                                @error('submission_date')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>

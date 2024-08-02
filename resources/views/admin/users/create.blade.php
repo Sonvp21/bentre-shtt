@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             
                 <ul>
@@ -13,7 +13,7 @@
                 <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-4 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         {{-- cột 1 --}}
                         <div class="col-span-1">
                             {{-- huyện --}}
@@ -236,7 +236,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-4 justify-center pb-3">
+                    <div class="flex gap-4 justify-center p-3">
                         <a href="{{ route('admin.users.index') }}" class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
                         <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
                     </div>

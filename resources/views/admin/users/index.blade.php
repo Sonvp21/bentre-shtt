@@ -8,26 +8,20 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
+            Danh sách tài khoản
+        </span>
         <div class="breadcrumbs text-sm">
-            <span class="flex items-center gap-2 text-sm font-semibold leading-tight text-gray-800">
-                Danh sách tài khoản
-            </span>
             <div class="flex ml-auto">
-                <form action="{{ route('admin.users.index') }}" method="GET" class="w-full">
-                    <div class="flex items-center justify-between">
-                        <a class="flex btn-ghosdt btn" href="{{ route('admin.users.create') }}">
-                            <i class="fas fa-users-medical"></i>
-                        </a>
-                    </div>
-                </form>
+                <a class="btn btn-outline btn-accent !min-h-9 h-9 ml-auto" href="{{ route('admin.users.create') }}">
+                    <i class="fad fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <x-admin.alerts.success />
         <div class="p-3 overflow-hidden text-sm bg-white shadow-sm sm:rounded-lg">
             <div class="overflow-x-auto">
-
-
                 <div id='recipients' class="bg-white rounded shadow lg:mt-0">
                     <table id="example" class="stripe hover"
                         style="width:100%; padding-top: 1em;  padding-bottom: 1em;">

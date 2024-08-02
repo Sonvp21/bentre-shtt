@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             <ul>
                     <li><a href="{{ route('admin.initiative_evaluates.index') }}">Danh sách hội đồng thông qua</a></li>
@@ -13,7 +13,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-4 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
 
                         {{-- Cột 2 --}}
                         <div class="col-span-2">

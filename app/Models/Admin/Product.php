@@ -26,6 +26,7 @@ class Product extends Model implements HasMedia
         'contact',
         'representatives',
         'status',
+        'submission_date',
     ];
     public function registerMediaCollections(): void
     {
@@ -61,10 +62,8 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-    protected function submissionAtVi(): Attribute
+    public function getSubmissionDateAttribute($value)
     {
-        return Attribute::make(
-            get: fn () => Carbon::parse($this->issue_date)->format('d.m.Y h:i'),
-        );
+        return $value ? Carbon::parse($value)->format('d.m.Y h:i') : null;
     }
 }

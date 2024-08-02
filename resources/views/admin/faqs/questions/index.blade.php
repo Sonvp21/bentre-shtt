@@ -8,12 +8,13 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
+            Danh sách câu hỏi
+        </span>
         <div class="breadcrumbs text-sm">
-            <span class="flex items-center gap-2 text-sm font-semibold leading-tight text-gray-800">
-                Danh sách câu hỏi
-            </span>
-            <div class=" items-center justify-between w-max ml-auto">
+
+            <div class=" justify-between w-max ml-auto self-center">
                 <a class="btn btn-outline btn-accent !min-h-9 h-9" href="{{ route('admin.questions.create') }}">
                     <i class="fad fa-plus-circle"></i>
                 </a>
@@ -95,36 +96,39 @@
             </div>
         </div>
     </dialog>
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!--Datatables -->
-    <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            var table = $('#example').DataTable({
-                responsive: true
-            }).columns.adjust().responsive.recalc();
-        });
+    @pushOnce('bottom_scripts')
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!--Datatables -->
+        <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                    responsive: true
+                }).columns.adjust().responsive.recalc();
+            });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkAll = document.getElementById('checkAll');
-            const checkItems = document.querySelectorAll('.check-item');
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkAll = document.getElementById('checkAll');
+                const checkItems = document.querySelectorAll('.check-item');
 
-            checkAll.addEventListener('change', function() {
-                checkItems.forEach(item => {
-                    item.checked = checkAll.checked;
+                checkAll.addEventListener('change', function() {
+                    checkItems.forEach(item => {
+                        item.checked = checkAll.checked;
+                    });
                 });
             });
-        });
 
-        function showModal(element) {
-            document.getElementById('modal-title').innerText = element.getAttribute('data-title');
-            document.getElementById('modal-content').innerHTML = element.getAttribute('data-content');
-            document.getElementById('modal-name-sender').innerText = element.getAttribute('data-name_sender');
-            document.getElementById('modal-email').innerText = element.getAttribute('data-email');
-            document.getElementById('modal-status').innerText = element.getAttribute('data-status');
-            document.getElementById('my_modal_5').showModal();
-        }
-    </script>
+            function showModal(element) {
+                document.getElementById('modal-title').innerText = element.getAttribute('data-title');
+                document.getElementById('modal-content').innerHTML = element.getAttribute('data-content');
+                document.getElementById('modal-name-sender').innerText = element.getAttribute('data-name_sender');
+                document.getElementById('modal-email').innerText = element.getAttribute('data-email');
+                document.getElementById('modal-status').innerText = element.getAttribute('data-status');
+                document.getElementById('my_modal_5').showModal();
+            }
+        </script>
+    @endPushOnce
+
 </x-admin-layout>

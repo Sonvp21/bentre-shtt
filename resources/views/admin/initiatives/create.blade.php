@@ -1,20 +1,21 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             <ul>
-                    <li><a href="{{ route('admin.initiatives.index') }}">Danh sách sáng kiến</a></li>
-                    <li><a class="text-teal-600">Thêm mới</a></li>
-                </ul>
+                <li><a href="{{ route('admin.initiatives.index') }}">Danh sách sáng kiến</a></li>
+                <li><a class="text-teal-600">Thêm mới</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
-            <div class="overflow-x-auto p-5">
-                <form action="{{ route('admin.initiatives.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
 
+            <form action="{{ route('admin.initiatives.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <div class="space-y-4 px-3">
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
 
-                    <div class="grid grid-flow-row-dense grid-cols-4 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
                                 <div class="label">
@@ -118,13 +119,14 @@
                             </label>
                         </div>
                     </div>
+                </div>
+                <div class="flex justify-center p-3">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
+                    <a href="{{ route('admin.initiatives.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                </div>
+            </form>
 
-                    <div class="flex justify-center pb-3">
-                        <a href="{{ route('admin.initiatives.index') }}" class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 

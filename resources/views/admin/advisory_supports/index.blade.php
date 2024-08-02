@@ -6,19 +6,16 @@
             text-transform: none;
         }
     </style>
-    <div class="flex-grow w-full p-5">
-        <div class="text-gray-800 text-sm font-semibold leading-tight flex">
-            <span class="text-gray-800 text-sm flex items-center gap-2 font-semibold leading-tight">
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
                 Danh sách thông tin hỗ trợ, tư vấn
             </span>
+        <div class="text-gray-800 text-3xl uppercase font-semibold leading-tight flex">
+            
             <div class="flex ml-auto">
-                <form action="{{ route('admin.advisory_supports.index') }}" method="GET" class="w-full">
-                    <div class="flex items-center justify-between">
-                        <a class="btn flex" href="{{ route('admin.advisory_supports.create') }}">
-                            <i class="fad fa-plus-circle"></i>
-                        </a>
-                    </div>
-                </form>
+                <a class="btn btn-outline btn-accent !min-h-9 h-9" href="{{ route('admin.advisory_supports.create') }}">
+                    <i class="fad fa-plus-circle"></i>
+                </a>
             </div>
         </div>
         <x-admin.alerts.success />
@@ -47,13 +44,14 @@
                                     </td>
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     <td>{{ $advisorySupport->title }}</td>
-                                    <td>{{ $advisorySupport->publishedAtVi }}</td>
+                                    <td class="text-center">{{ \Carbon\Carbon::parse($advisorySupport->published_at)->format('d-m-Y') }}</td>
                                     <td>{{ $advisorySupport->status }}</td>
-                                    <td class="flex justify-around">
-                                        <a href="{{ route('admin.advisory_supports.edit', $advisorySupport) }}" type="button"><i
-                                                class="fa fa-edit text-yellow-600"></i></a>
+                                    <td class="flex justify-center">
+                                        <a href="{{ route('admin.advisory_supports.edit', $advisorySupport) }}" class="mr-2"
+                                            type="button"><i class="fa fa-edit text-yellow-600"></i></a>
                                         <form id="delete-form-{{ $advisorySupport->id }}"
-                                            action="{{ route('admin.advisory_supports.destroy', $advisorySupport) }}" method="POST">
+                                            action="{{ route('admin.advisory_supports.destroy', $advisorySupport) }}"
+                                            method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -76,33 +74,33 @@
         </div>
     </div>
 
+    @pushOnce('bottom_scripts')
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!--Datatables -->
+        <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
+        <script>
+            $(document).ready(function() {
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!--Datatables -->
-    <script src="{{ asset('adminpage/table/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('adminpage/table/js/dataTables.responsive.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
+                var table = $('#example').DataTable({
+                        responsive: true
+                    })
+                    .columns.adjust()
+                    .responsive.recalc();
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkAll = document.getElementById('checkAll');
+                const checkItems = document.querySelectorAll('.check-item');
 
-            var table = $('#example').DataTable({
-                    responsive: true
-                })
-                .columns.adjust()
-                .responsive.recalc();
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkAll = document.getElementById('checkAll');
-            const checkItems = document.querySelectorAll('.check-item');
-
-            checkAll.addEventListener('change', function() {
-                checkItems.forEach(item => {
-                    item.checked = checkAll.checked;
+                checkAll.addEventListener('change', function() {
+                    checkItems.forEach(item => {
+                        item.checked = checkAll.checked;
+                    });
                 });
             });
-        });
-    </script>
-
+        </script>
+    @endPushOnce
 </x-admin-layout>

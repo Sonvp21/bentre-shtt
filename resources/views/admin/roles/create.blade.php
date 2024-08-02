@@ -1,18 +1,18 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             <ul>
-                    <li><a href="{{ route('admin.roles.index') }}">Danh sách sáng chế</a></li>
-                    <li><a class="text-teal-600">Thêm mới</a></li>
-                </ul>
+                <li><a href="{{ route('admin.roles.index') }}">Danh sách sáng chế</a></li>
+                <li><a class="text-teal-600">Thêm mới</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
-        <div class="overflow-x-auto bg-white rounded-lg mt-5">
-            <div class="overflow-x-auto p-5">
+        <div class="overflow-x-auto bg-white rounded-lg mt-3">
+            <div class="overflow-x-auto p-3 pt-0">
                 <form action="{{ route('admin.roles.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-4 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         {{-- Cột 2 --}}
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
@@ -44,7 +44,7 @@
                             <input type="checkbox" class="checkall checkbox checkbox-accent"> Tất cả
                         </label>
                         {{-- Cột 2 --}}
-                        <div class="grid grid-cols-3 gap-3">
+                        <div class="grid grid-cols-2 gap-2">
                             @foreach ($permissionsParent as $permissionsParentItem)
                                 <div class="card border-primary mb-3 mt-3">
                                     <div class="p-2">
@@ -73,7 +73,8 @@
                         </div>
                     </div>
                     <div class="flex justify-center pb-3">
-                        <a href="{{ route('admin.roles.index') }}" class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                        <a href="{{ route('admin.roles.index') }}"
+                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
                         <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
                     </div>
                 </form>

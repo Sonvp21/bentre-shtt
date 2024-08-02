@@ -1,26 +1,43 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
-            
-                <ul>
-                    <li><a href="{{ route('admin.advisory_supports.index') }}">Danh sách thông tin hỗ trợ, tư vấn</a></li>
-                    <li><a class="text-teal-600">Chỉnh sửa</a></li>
-                </ul>
+            <ul>
+                <li><a href="{{ route('admin.advisory_supports.index') }}">Danh sách thông tin hỗ trợ, tư vấn</a></li>
+                <li><a class="text-teal-600">Chỉnh sửa</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
 
-                <form action="{{ route('admin.advisory_supports.update', $advisorySupport->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+            <form action="{{ route('admin.advisory_supports.update', $advisorySupport->id) }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="space-y-4 px-3">
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         <div class="col-span-2">
+                            <label for="parent_id" class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="label-text">Danh mục tài liệu</span>
+                                </div>
+                                <select id="parent_id" name="parent_id"
+                                    class="!max-h-11 !min-h-0 select select-bordered ">
+                                    <option value="" disabled selected>Chọn danh mục</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ $advisorySupport->parent_id == $category->id ? 'selected' : '' }}>
+                                            {{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Tiêu đề</span>
                                 </div>
-                                <input type="text" name="title" placeholder="Nhập vào" value="{{ old('title', $advisorySupport->title) }}"
+                                <input type="text" name="title" placeholder="Nhập vào"
+                                    value="{{ old('title', $advisorySupport->title) }}"
                                     class="input input-bordered w-full {{ $errors->has('title') ? 'input-error' : '' }}" />
                                 @error('title')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
@@ -40,10 +57,10 @@
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Ghi chú</span>
+                                    <span class="label-text">Ghi chú</span>
                                 </div>
                                 <textarea name="status" id="status"
-                                    class="form-textarea input input-bordered w-full @error('status') border-red-500 @enderror" rows="4">{{ old('status', $advisorySupport->status) }}</textarea>
+                                    class="textarea textarea-bordered h-12 @error('status') border-red-500 @enderror" placeholder="...">{{ old('status', $advisorySupport->status) }}</textarea>
                                 @error('status')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
@@ -68,11 +85,13 @@
                                 @if ($advisorySupport->hasMedia('document_support'))
                                     <div>
                                         <span class="text-sm font-medium text-gray-700">Tệp hiện tại:</span>
-                                        <a id="currentDocumentLink" href="{{ $advisorySupport->getFirstMedia('document_support')->getUrl() }}"
+                                        <a id="currentDocumentLink"
+                                            href="{{ $advisorySupport->getFirstMedia('document_support')->getUrl() }}"
                                             class="text-blue-600 hover:underline">
                                             {{ $advisorySupport->getFirstMedia('document_support')->file_name }}
                                         </a>
-                                        <label for="document" class="text-sm text-red-600 cursor-pointer hover:underline">
+                                        <label for="document"
+                                            class="text-sm text-red-600 cursor-pointer hover:underline">
                                             Đổi tệp
                                         </label>
                                         <input id="document" type="file" name="document" style="display: none;"
@@ -86,7 +105,7 @@
                                     @enderror
                                 @endif
                             </label>
-                            
+
                             <script>
                                 function updateDocumentName(event) {
                                     const input = event.target;
@@ -95,7 +114,7 @@
                                     linkElement.textContent = fileName;
                                 }
                             </script>
-                            
+
 
                             <div class="items-center space-x-6 form-group">
                                 <div class="label">
@@ -117,13 +136,13 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="flex gap-4 justify-center pb-3">
-                        <a href="{{ route('admin.advisory_supports.index') }}"
-                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
-                    </div>
-                </form>
+                </div>
+                <div class="flex gap-4 justify-center p-3 pt-5">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
+                    <a href="{{ route('admin.advisory_supports.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                </div>
+            </form>
 
         </div>
     </div>

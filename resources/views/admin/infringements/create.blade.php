@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             
                 <ul>
@@ -86,7 +86,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-4 justify-center pb-3">
+                    <div class="flex gap-4 justify-center p-3">
                         <a href="{{ route('admin.infringements.index') }}"
                             class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
                         <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>

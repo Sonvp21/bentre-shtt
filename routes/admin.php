@@ -80,15 +80,15 @@ Route::middleware('auth')->group(function () {
         Route::get('patents/{patent}/edit', [PatentController::class, 'edit'])->middleware('can:edit,App\Models\Admin\Patent')->name('patents.edit');
         Route::put('patents/{patent}', [PatentController::class, 'update'])->middleware('can:edit,App\Models\Admin\Patent')->name('patents.update');
         Route::delete('patents/{patent}', [PatentController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\Patent')->name('patents.destroy');
-        //Lấy xã theo huyện 
-        Route::get('admin/patents/get-communes/{district_id}', [PatentController::class, 'getCommunes'])->name('patents.getCommunes');
-        // POST cho lọc, GET cho phân trang
-        Route::match(['get', 'post'], 'patents/ajax_list', [PatentController::class, 'ajaxList'])->name('patents.ajax_list');
+            //Lấy xã theo huyện 
+            Route::get('admin/patents/get-communes/{district_id}', [PatentController::class, 'getCommunes'])->name('patents.getCommunes');
+            // POST cho lọc, GET cho phân trang
+            Route::match(['get', 'post'], 'patents/ajax_list', [PatentController::class, 'ajaxList'])->name('patents.ajax_list');
 
-        // POST cho lọc, GET cho export excel, pdf
-        Route::post('patents/ajax_export', [PatentController::class, 'ajaxExport'])->name('patents.ajax_export');
-        Route::post('patents/export_excel', [PatentController::class, 'exportExcel'])->name('patents.export_excel');
-        Route::post('patents/export_pdf', [PatentController::class, 'exportPdf'])->name('patents.export_pdf');
+            // POST cho lọc, GET cho export excel, pdf
+            Route::post('patents/ajax_export', [PatentController::class, 'ajaxExport'])->name('patents.ajax_export');
+            Route::post('patents/export_excel', [PatentController::class, 'exportExcel'])->name('patents.export_excel');
+            Route::post('patents/export_pdf', [PatentController::class, 'exportPdf'])->name('patents.export_pdf');
         
     ////Bảo hộ nhãn hiệu
         // Route::resource('trademark_types', TrademarkTypeController::class);
@@ -151,6 +151,14 @@ Route::middleware('auth')->group(function () {
         Route::get('initiatives/{initiative}/edit', [InitiativeController::class, 'edit'])->middleware('can:edit,App\Models\Admin\Initiative')->name('initiatives.edit');
         Route::put('initiatives/{initiative}', [InitiativeController::class, 'update'])->middleware('can:edit,App\Models\Admin\Initiative')->name('initiatives.update');
         Route::delete('initiatives/{initiative}', [InitiativeController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\Initiative')->name('initiatives.destroy');
+
+            // POST cho lọc, GET cho phân trang
+            Route::match(['get', 'post'], 'initiatives/ajax_list', [InitiativeController::class, 'ajaxList'])->name('initiatives.ajax_list');
+
+            // POST cho lọc, GET cho export excel, pdf
+            Route::post('initiatives/ajax_export', [InitiativeController::class, 'ajaxExport'])->name('initiatives.ajax_export');
+            Route::post('initiatives/export_excel', [InitiativeController::class, 'exportExcel'])->name('initiatives.export_excel');
+            Route::post('initiatives/export_pdf', [InitiativeController::class, 'exportPdf'])->name('initiatives.export_pdf');
 
         // Route::resource('initiative_dossiers', InitiativeDossierController::class); //hồ sơ sáng kiến
         Route::get('initiative_dossiers', [InitiativeDossierController::class, 'index'])->middleware('can:index,App\Models\Admin\InitiativeDossier')->name('initiative_dossiers.index');
@@ -221,14 +229,27 @@ Route::middleware('auth')->group(function () {
         Route::put('products/{product}', [ProductController::class, 'update'])->middleware('can:edit,App\Models\Admin\Product')->name('products.update');
         Route::delete('products/{product}', [ProductController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\Product')->name('products.destroy');
 
+            // POST cho lọc, GET cho phân trang
+            Route::match(['get', 'post'], 'products/ajax_list', [ProductController::class, 'ajaxList'])->name('products.ajax_list');
+
+            // POST cho lọc, GET cho export excel, pdf
+            Route::post('products/ajax_export', [ProductController::class, 'ajaxExport'])->name('products.ajax_export');
+            Route::post('products/export_excel', [ProductController::class, 'exportExcel'])->name('products.export_excel');
+            Route::post('products/export_pdf', [ProductController::class, 'exportPdf'])->name('products.export_pdf');
+
     ///thông tin hỗ trợ, tư vấn
-        // Route::resource('advisory_supports', AdvisorySupportController::class);
         Route::get('advisory_supports', [AdvisorySupportController::class, 'index'])->middleware('can:index,App\Models\Admin\AdvisorySupport')->name('advisory_supports.index');
         Route::get('advisory_supports/create', [AdvisorySupportController::class, 'create'])->middleware('can:create,App\Models\Admin\AdvisorySupport')->name('advisory_supports.create');
         Route::post('advisory_supports', [AdvisorySupportController::class, 'store'])->middleware('can:create,App\Models\Admin\AdvisorySupport')->name('advisory_supports.store');
         Route::get('advisory_supports/{advisory_support}/edit', [AdvisorySupportController::class, 'edit'])->middleware('can:edit,App\Models\Admin\AdvisorySupport')->name('advisory_supports.edit');
         Route::put('advisory_supports/{advisory_support}', [AdvisorySupportController::class, 'update'])->middleware('can:edit,App\Models\Admin\AdvisorySupport')->name('advisory_supports.update');
         Route::delete('advisory_supports/{advisory_support}', [AdvisorySupportController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\AdvisorySupport')->name('advisory_supports.destroy');
+
+        Route::get('advisory_supports/categories', [AdvisorySupportController::class, 'indexCategories'])->name('advisory_supports.categories.index');
+        Route::get('advisory_supports/categories/create', [AdvisorySupportController::class, 'createCategory'])->name('advisory_supports.categories.create');
+        Route::post('advisory_supports/categories', [AdvisorySupportController::class, 'storeCategory'])->name('advisory_supports.categories.store');
+        Route::get('advisory_supports/categories/{category}/edit', [AdvisorySupportController::class, 'editCategory'])->name('advisory_supports.categories.edit');
+        Route::put('advisory_supports/categories/{category}', [AdvisorySupportController::class, 'updateCategory'])->name('advisory_supports.categories.update');
 
     ///Vi phạm
         // Route::resource('infringements', InfringementController::class);
@@ -324,6 +345,8 @@ Route::get('admin/patents/statistical', [PatentController::class, 'statistical']
 Route::get('admin/trademarks/statistical', [TrademarkController::class, 'statistical'])->name('admin.trademarks.statistical');
 Route::get('admin/geographical_indications/statistical', [GeographicalIndicationController::class, 'statistical'])->name('admin.geographical_indications.statistical');
 Route::get('admin/industrial_designs/statistical', [IndustrialDesignController::class, 'statistical'])->name('admin.industrial_designs.statistical');
+Route::get('admin/initiatives/statistical', [InitiativeController::class, 'statistical'])->name('admin.initiatives.statistical');
+Route::get('admin/products/statistical', [ProductController::class, 'statistical'])->name('admin.products.statistical');
 
 
 require __DIR__ . '/auth.php';

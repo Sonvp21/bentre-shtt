@@ -1,16 +1,16 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
-        <span class="text-sm font-semibold">
+    <div class="flex-grow w-full p-5 text-center">
+        <span class="text-3xl uppercase font-semibold">
            Thống kê sáng chế toàn văn
         </span>
-        <div class=" items-center justify-between w-max ml-auto">
+        <div class=" justify-between w-max ml-auto self-center">
             <a class="btn btn-outline btn-accent !min-h-9 h-9" href="{{ route('admin.geographical_indications.index') }}">
                 Danh sách
             </a>
         </div>
         <x-admin.alerts.success />
 
-        <div class="grid grid-cols-3 gap-4 pb-3">
+        <div class="grid grid-cols-3 gap-4 py-4">
             <!-- Form lọc -->
             @component('components.admin.filter-geographical', [
                 'action' => route('admin.geographical_indications.index'),

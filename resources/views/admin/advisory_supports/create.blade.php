@@ -1,19 +1,34 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             <ul>
-                    <li><a href="{{ route('admin.advisory_supports.index') }}">Danh sách thông tin hỗ trợ, tư vấn</a></li>
-                    <li><a class="text-teal-600">Thêm mới</a></li>
-                </ul>
+                <li><a href="{{ route('admin.advisory_supports.index') }}">Danh sách thông tin hỗ trợ, tư vấn</a></li>
+                <li><a class="text-teal-600">Thêm mới</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
-            <div class="overflow-x-auto p-5">
-                <form action="{{ route('admin.advisory_supports.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+
+            <form action="{{ route('admin.advisory_supports.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="space-y-4 px-3">
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-1 ...">
+                    <div class="grid grid-cols-3 gap-4 !m-0">
                         <div class="col-span-2">
+
+                            <label for="parent_id" class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="label-text">Danh mục tài liệu</span>
+                                </div>
+                                <select id="parent_id" name="parent_id"
+                                    class="!max-h-11 !min-h-0 select select-bordered ">
+                                    <option value="" disabled selected>Chọn danh mục</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </label>
+
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Tiêu đề</span>
@@ -35,13 +50,12 @@
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
-
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Ghi chú</span>
+                                    <span class="label-text">Ghi chú</span>
                                 </div>
                                 <textarea name="status" id="status"
-                                    class="form-textarea input input-bordered w-full @error('status') border-red-500 @enderror" rows="4">{{ old('status') }}</textarea>
+                                    class="textarea textarea-bordered h-12 @error('status') border-red-500 @enderror" placeholder="...">{{ old('status') }}</textarea>
                                 @error('status')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
@@ -86,14 +100,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="flex justify-center pb-3 pt-5"><button type="submit"
+                        class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
+                    <a href="{{ route('admin.advisory_supports.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
 
-                    <div class="flex justify-center pb-3">
-                        <a href="{{ route('admin.advisory_supports.index') }}"
-                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
+
         </div>
     </div>
 

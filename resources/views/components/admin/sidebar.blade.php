@@ -85,7 +85,7 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.industrial_design_types.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.industrial_design_type.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.industrial_design_types.*') ? 'active' : '' }}">
                                 <i class="fad fa-bookmark"></i>
                                 Nhóm ngành
                             </a>
@@ -135,21 +135,21 @@
                     <ul>
                         <li>
                             <a href="{{ route('admin.technical_innovation_dossiers.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.technical_innovation.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.technical_innovation_dossiers.*') ? 'active' : '' }}">
                                 <i class="fas fa-file-alt"></i>
                                 Hồ sơ
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('admin.technical_innovation_committees.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.technical_innovation.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.technical_innovation_committees.*') ? 'active' : '' }}">
                                 <i class="fas fa-users"></i>
                                 Hội đồng
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('admin.technical_innovation_results.index') }}"
-                                class="group font-bold {{ Request::routeIs('admin.technical_innovation.*') ? 'active' : '' }}">
+                                class="group font-bold {{ Request::routeIs('admin.technical_innovation_results.*') ? 'active' : '' }}">
                                 <i class="far fa-user-check"></i>
                                 Kết quả
                             </a>
@@ -167,7 +167,7 @@
 
             <li><a {{ Request::routeIs('admin.products.*') ? 'open' : '' }} href="{{ route('admin.products.index') }}"
                     class="group font-bold {{ Request::routeIs('admin.products.*') ? 'active' : '' }}">
-                    <i class="fab fa-product-hunt"></i>Sản phẩm
+                    <i class="fab fa-product-hunt"></i>Sản phẩm đăng ký xây dựng, phát triển thương hiệu
                 </a>
             </li>
 
@@ -177,11 +177,29 @@
                 </a>
             </li>
 
-            <li><a {{ Request::routeIs('admin.advisory_supports.*') ? 'open' : '' }}
-                    href="{{ route('admin.advisory_supports.index') }}"
-                    class="group font-bold {{ Request::routeIs('admin.advisory_supports.*') ? 'active' : '' }}">
-                    <i class="far fa-user-headset"></i>thông tin hỗ trợ, tư vấn
-                </a>
+            <li>
+                <details
+                    {{ Request::routeIs('admin.advisory_supports.*') ? 'open' : '' }}>
+                    <summary class="font-semibold group">
+                        <i class="fad fa-bezier-curve"></i>Thông tin hỗ trợ, tư vấn
+                    </summary>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.advisory_supports.categories.index') }}"
+                                class="group font-bold {{ Request::routeIs('admin.advisory_supports.categories.*') ? 'active' : '' }}">
+                                <i class="fas fa-file-alt"></i>
+                                Danh mục
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.advisory_supports.index') }}"
+                                class="group font-bold {{ Request::routeIs('admin.advisory_supports.*') && !Request::routeIs('admin.advisory_supports.categories.*') ? 'active' : '' }}">
+                                <i class="fas fa-users"></i>
+                                Tài liệu hỗ trợ, tư vấn
+                            </a>
+                        </li>
+                    </ul>
+                </details>
             </li>
 
             <li><a {{ Request::routeIs('admin.infringements.*') ? 'open' : '' }}
@@ -247,7 +265,7 @@
                     </ul>
                 </details>
             </li>
-<li></li>
+            <li></li>
             <li><a target="_blank" href="{{ route('home') }}" class="font-semibold group">
                     <i class="fad fa-home-alt"></i>
                     Trang chủ

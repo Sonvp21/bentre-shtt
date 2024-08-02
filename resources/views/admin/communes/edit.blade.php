@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="flex-grow w-full p-5">
+    <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
             <ul>
                 <li><a href="{{ route('admin.communes.index') }}" class="font-semibold">Danh sách Xã</a></li>

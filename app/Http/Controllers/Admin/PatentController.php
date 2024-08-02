@@ -153,6 +153,7 @@ class PatentController extends Controller
         $patent->delete();
         return redirect()->route('admin.patents.index')->with('success', 'Xoá thành công.');
     }
+    /////
 
     public function exportExcel(Request $request)
     {
