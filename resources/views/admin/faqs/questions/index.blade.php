@@ -95,7 +95,7 @@
             </div>
         </div>
     </dialog>
-    @pushOnce('scripts')
+    @pushOnce('bottom_scripts')
         <!-- jQuery -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <!--Datatables -->

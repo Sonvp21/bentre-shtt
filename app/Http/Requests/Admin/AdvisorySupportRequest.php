@@ -14,6 +14,7 @@ class AdvisorySupportRequest extends FormRequest
     public function rules()
     {
         return [
+            'parent_id' => 'nullable|exists:advisory_supports,id',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'status' => 'nullable|string|max:255',

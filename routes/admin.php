@@ -238,13 +238,18 @@ Route::middleware('auth')->group(function () {
             Route::post('products/export_pdf', [ProductController::class, 'exportPdf'])->name('products.export_pdf');
 
     ///thông tin hỗ trợ, tư vấn
-        // Route::resource('advisory_supports', AdvisorySupportController::class);
         Route::get('advisory_supports', [AdvisorySupportController::class, 'index'])->middleware('can:index,App\Models\Admin\AdvisorySupport')->name('advisory_supports.index');
         Route::get('advisory_supports/create', [AdvisorySupportController::class, 'create'])->middleware('can:create,App\Models\Admin\AdvisorySupport')->name('advisory_supports.create');
         Route::post('advisory_supports', [AdvisorySupportController::class, 'store'])->middleware('can:create,App\Models\Admin\AdvisorySupport')->name('advisory_supports.store');
         Route::get('advisory_supports/{advisory_support}/edit', [AdvisorySupportController::class, 'edit'])->middleware('can:edit,App\Models\Admin\AdvisorySupport')->name('advisory_supports.edit');
         Route::put('advisory_supports/{advisory_support}', [AdvisorySupportController::class, 'update'])->middleware('can:edit,App\Models\Admin\AdvisorySupport')->name('advisory_supports.update');
         Route::delete('advisory_supports/{advisory_support}', [AdvisorySupportController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\AdvisorySupport')->name('advisory_supports.destroy');
+
+        Route::get('advisory_supports/categories', [AdvisorySupportController::class, 'indexCategories'])->name('advisory_supports.categories.index');
+        Route::get('advisory_supports/categories/create', [AdvisorySupportController::class, 'createCategory'])->name('advisory_supports.categories.create');
+        Route::post('advisory_supports/categories', [AdvisorySupportController::class, 'storeCategory'])->name('advisory_supports.categories.store');
+        Route::get('advisory_supports/categories/{category}/edit', [AdvisorySupportController::class, 'editCategory'])->name('advisory_supports.categories.edit');
+        Route::put('advisory_supports/categories/{category}', [AdvisorySupportController::class, 'updateCategory'])->name('advisory_supports.categories.update');
 
     ///Vi phạm
         // Route::resource('infringements', InfringementController::class);

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('status')->nullable()->comment('Ghi chú');
             $table->timestamp('published_at')->comment('Thời gian đăng');
             //image and document use laravel media
+            $table->unsignedBigInteger('parent_id')->nullable()->comment('ID hỗ trợ cha');
             $table->timestamps();
             $table-> softDeletes();
         });

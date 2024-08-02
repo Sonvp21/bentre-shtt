@@ -17,9 +17,21 @@ class AdvisorySupport extends Model implements HasMedia
         'title',
         'content',
         'status',
-        'published_at'
+        'published_at',
+        'parent_id',
     ];
+    protected $dates = [
+        'published_at',
+    ];
+    public function parent()
+    {
+        return $this->belongsTo(AdvisorySupport::class, 'parent_id');
+    }
 
+    public function children()
+    {
+        return $this->hasMany(AdvisorySupport::class, 'parent_id');
+    }
     /**
      * Register the conversions that should be performed.
      *
