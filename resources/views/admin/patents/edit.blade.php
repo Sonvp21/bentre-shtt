@@ -298,13 +298,43 @@
                             </label>
 
                         </div>
-                    </div>
+                        <!-- Tọa độ -->
+                        <label class="form-control w-[95%]">
+                            <div class="label">
+                                <span class="text-sm font-medium text-gray-700">Kinh độ</span>
+                            </div>
+                            <input type="text" id="longitude" name="longitude" placeholder="Nhập kinh độ"
+                                value="{{ old('longitude', $patent->getLongitude($patent->id)) }}"
+                                class="input input-bordered w-full {{ $errors->has('longitude') ? 'input-error' : '' }}" />
+                            @error('longitude')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+                        </label>
 
-                    <div class="flex gap-4 justify-center p-3">
-                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 px-4">Lưu</button><a
-                            href="{{ route('admin.patents.index') }}"
-                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                        <label class="form-control w-[95%]">
+                            <div class="label">
+                                <span class="text-sm font-medium text-gray-700">Vĩ độ</span>
+                            </div>
+                            <input type="text" id="latitude" name="latitude" placeholder="Nhập vĩ độ"
+                                value="{{ old('latitude', $patent->getLatitude($patent->id)) }}"
+                                class="input input-bordered w-full {{ $errors->has('latitude') ? 'input-error' : '' }}" />
+                            @error('latitude')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+                        </label>
+
                     </div>
+                    <div id="map" style="height: 500px; width: 100%;"></div>
+
+                    <!-- Nút để lấy tọa độ hiện tại của người dùng -->
+                    <button id="getCurrentLocation" class="btn btn-link float-left !m-0" type="button">Lấy vị trí
+                        hiện tại</button>
+
+                </div>
+                <div class="flex gap-4 justify-center p-3">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 px-4">Lưu</button><a
+                        href="{{ route('admin.patents.index') }}"
+                        class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
                 </div>
             </form>
         </div>
@@ -333,6 +363,11 @@
                 }
             };
         </script>
+
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
+        <script src='{{ asset('adminpage/map/getlocation_edit.js') }}'></script>
+        
     @endpushonce
 
 </x-admin-layout>

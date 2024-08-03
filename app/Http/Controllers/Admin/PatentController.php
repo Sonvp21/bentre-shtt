@@ -137,6 +137,11 @@ class PatentController extends Controller
 
         $patent->update($validatedData);
 
+        // Cập nhật tọa độ
+        $longitude = $request->input('longitude');
+        $latitude = $request->input('latitude');
+        $patent->updateCoordinates($patent->id, $longitude, $latitude);
+
         if ($request->hasFile('document')) {
             $patent->clearMediaCollection('documents'); // Xóa tất cả media trong collection 'documents'
             $patent->addMedia($request->file('document'))->toMediaCollection('documents');
