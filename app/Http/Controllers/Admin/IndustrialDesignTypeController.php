@@ -58,7 +58,14 @@ class IndustrialDesignTypeController extends Controller
      */
     public function destroy(IndustrialDesignType $industrialDesignType): RedirectResponse
     {
+        // Kiểm tra nếu có dữ liệu liên quan trước khi xóa
+        if ($industrialDesignType->industrial_designs()->count() > 0) {
+            return redirect()->route('admin.industrial_design_types.index')->with('error', 'Không thể xoá kiểu dáng này vì nó có dữ liệu liên quan.');
+        }
+        
         $industrialDesignType->delete();
         return redirect()->route('admin.industrial_design_types.index')->with('success', 'Xoá thành công.');
     }
+    
+    
 }

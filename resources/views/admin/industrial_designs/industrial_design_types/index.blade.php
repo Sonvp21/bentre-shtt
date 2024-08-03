@@ -12,12 +12,14 @@
         </span>
         <div class="text-gray-800 text-3xl uppercase font-semibold leading-tight flex">
             <div class="flex ml-auto">
-                <a class="btn btn-outline btn-accent !min-h-9 h-9" href="{{ route('admin.industrial_design_types.create') }}">
+                <a class="btn btn-outline btn-accent !min-h-9 h-9"
+                    href="{{ route('admin.industrial_design_types.create') }}">
                     <i class="fad fa-plus-circle"></i>
                 </a>
             </div>
         </div>
         <x-admin.alerts.success />
+        <x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-5 p-3 text-sm">
             <div class="overflow-x-auto">
                 <div id='recipients' class="lg:mt-0 rounded shadow bg-white">
@@ -34,7 +36,7 @@
                             @foreach ($industrialDesignType as $index => $DesignType)
                                 <tr>
                                     <td class="text-center">{{ $index + 1 }}</td>
-                                    <td class="text-center">{{ $DesignType->name }}</td>
+                                    <td class="text-left">{{ $DesignType->name }}</td>
 
                                     <td class="flex justify-around">
                                         <a href="{{ route('admin.industrial_design_types.edit', $DesignType) }}"

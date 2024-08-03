@@ -23,23 +23,32 @@ class IndustrialDesign extends Model implements HasMedia
         'commune_id',
         'user_id',
         'geom',
-        'lat',
-        'lon',
-        'color',
         'type_id',
+
         'name',
-        'slug',
         'description',
         'owner',
         'address',
-        'application_number',
-        'submission_date',
-        'submission_status',
-        'publication_date',
+
+        'filing_number',
+        'filing_date',
+
         'publication_number',
-        'design_date',
-        'design_out_of_date',
-        'design_status',
+        'publication_date',
+
+        'registration_number',
+        'registration_date',
+        'expiration_date',
+
+        'designer',
+        'designer_address',
+
+        'locarno_classes',
+
+        'representative_name',
+        'representative_address',
+        
+        'status',
     ];
 
     protected $spatialFields = [
@@ -56,7 +65,7 @@ class IndustrialDesign extends Model implements HasMedia
     {
         return $this->hasMany(Document::class);
     }
-    
+
     public function district()
     {
         return $this->belongsTo(District::class);

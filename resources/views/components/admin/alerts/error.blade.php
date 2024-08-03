@@ -1,12 +1,8 @@
-<div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition:leave="transition ease-out duration-1000"
+<div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show" x-transition:leave="transition ease-out duration-1000"
     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-    @if ($errors->any())
-        <div role="alert" class="alert alert-error shadow-lg w-fit ml-auto absolute top-14 right-3">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    @if (session('error'))
+        <div class="alert alert-error shadow-lg w-fit absolute top-40 ml-[20%] h-8 content-center">
+            <strong>Đã có lỗi xảy ra!</strong> {{ session('error') }}
         </div>
     @endif
 </div>
