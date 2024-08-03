@@ -24,7 +24,7 @@ class IndustrialDesignRequest extends FormRequest
             'owner' => 'nullable|string',
             'address' => 'nullable|string',
 
-            'filing_number' => 'nullable|string|max:20',
+            'filing_number' => 'required|string|max:20',
             'filing_date' => 'nullable|date',
             'publication_number' => 'nullable|string|max:20',
             'publication_date' => 'nullable|date',

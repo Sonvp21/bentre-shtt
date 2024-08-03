@@ -17,7 +17,7 @@
             <tr>
                 <td class="text-center">{{ $index + 1 }}</td>
                 <td>{{ $IndustrialDesign->application_number }}</td>
-                <td>{{ $IndustrialDesign->type->name }}</td>
+                <td>{{ $IndustrialDesign->type->name ?? '' }}</td>
                 <td>{{ $IndustrialDesign->name }}</td>
                 <td>{{ $IndustrialDesign->owner }}</td>
                 <td>{{ $IndustrialDesign->submissionAtVi }}</td>

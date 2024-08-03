@@ -149,10 +149,10 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Số đơn gốc</span>
                                 </div>
-                                <input type="text" name="application_number" placeholder="Nhập vào"
-                                    value="{{ old('application_number') }}"
-                                    class="input input-bordered w-full {{ $errors->has('application_number') ? 'input-error' : '' }}" />
-                                @error('application_number')
+                                <input type="text" name="filing_number" placeholder="Nhập vào"
+                                    value="{{ old('filing_number') }}"
+                                    class="input input-bordered w-full {{ $errors->has('filing_number') ? 'input-error' : '' }}" />
+                                @error('filing_number')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
@@ -161,30 +161,24 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày nộp đơn</span>
                                 </div>
-                                <input type="date" name="submission_date" placeholder="Select Submission Date"
-                                    value="{{ old('submission_date') }}"
-                                    class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
-                                @error('submission_date')
+                                <input type="date" name="filing_date" placeholder="Select Submission Date"
+                                    value="{{ old('filing_date') }}"
+                                    class="input input-bordered w-full @error('filing_date') border-red-500 @enderror" />
+                                @error('filing_date')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
 
+                            
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Trạng thái đơn</span>
+                                    <span class="text-sm font-medium text-gray-700">Số công bố</span>
                                 </div>
-                                <select name="submission_status"
-                                    class="input input-bordered w-full @error('submission_status') border-red-500 @enderror">
-                                    <option value="">Lựa chọn</option>
-                                    <option value="1" {{ old('submission_status') == '1' ? 'selected' : '' }}>
-                                        Đang xử lý</option>
-                                    <option value="2" {{ old('submission_status') == '2' ? 'selected' : '' }}>Đã
-                                        cấp</option>
-                                    <option value="3" {{ old('submission_status') == '3' ? 'selected' : '' }}>Bị
-                                        từ chối</option>
-                                </select>
-                                @error('submission_status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                <input type="text" name="publication_number" placeholder="Nhập vào"
+                                    value="{{ old('publication_number') }}"
+                                    class="input input-bordered w-full {{ $errors->has('publication_number') ? 'input-error' : '' }}" />
+                                @error('publication_number')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
 
@@ -202,24 +196,24 @@
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Số đơn công bố</span>
+                                    <span class="text-sm font-medium text-gray-700">Số bằng</span>
                                 </div>
-                                <input type="text" name="publication_number" placeholder="Nhập vào"
-                                    value="{{ old('publication_number') }}"
-                                    class="input input-bordered w-full {{ $errors->has('publication_number') ? 'input-error' : '' }}" />
-                                @error('publication_number')
+                                <input type="text" name="registration_number" placeholder="Nhập vào"
+                                    value="{{ old('registration_number') }}"
+                                    class="input input-bordered w-full {{ $errors->has('registration_number') ? 'input-error' : '' }}" />
+                                @error('registration_number')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Ngày cấp</span>
+                                    <span class="text-sm font-medium text-gray-700">Ngày cấp bằng</span>
                                 </div>
-                                <input type="date" name="design_date" placeholder="Select Publication Date"
-                                    value="{{ old('design_date') }}"
-                                    class="input input-bordered w-full @error('design_date') border-red-500 @enderror" />
-                                @error('design_date')
+                                <input type="date" name="registration_date" placeholder="Select Publication Date"
+                                    value="{{ old('registration_date') }}"
+                                    class="input input-bordered w-full @error('registration_date') border-red-500 @enderror" />
+                                @error('registration_date')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
@@ -229,32 +223,88 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày hết hạn</span>
                                 </div>
-                                <input type="date" name="design_out_of_date"
-                                    placeholder="Select Patent Out of Date" value="{{ old('design_out_of_date') }}"
-                                    class="input input-bordered w-full @error('design_out_of_date') border-red-500 @enderror" />
-                                @error('design_out_of_date')
+                                <input type="date" name="expiration_date"
+                                    placeholder="Select Patent Out of Date" value="{{ old('expiration_date') }}"
+                                    class="input input-bordered w-full @error('expiration_date') border-red-500 @enderror" />
+                                @error('expiration_date')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Trạng thái hiệu lực</span>
+                                    <span class="text-sm font-medium text-gray-700">Người thiết kế</span>
                                 </div>
-                                <select name="design_status"
-                                    class="input input-bordered w-full @error('design_status') border-red-500 @enderror">
-                                    <option value="">Lựa chọn</option>
-                                    <option value="1" {{ old('design_status') == '1' ? 'selected' : '' }}>
-                                        Hiệu lực</option>
-                                    <option value="2" {{ old('design_status') == '2' ? 'selected' : '' }}>Hết hạn
-                                    </option>
-                                    <option value="3" {{ old('design_status') == '3' ? 'selected' : '' }}>Bị huỷ
-                                    </option>
-                                </select>
-                                @error('design_status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                <input type="text" name="designer" placeholder="Nhập địa chỉ"
+                                    value="{{ old('designer') }}"
+                                    class="input input-bordered w-full {{ $errors->has('designer') ? 'input-error' : '' }}" />
+                                @error('designer')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Địa chỉ người thiết kế</span>
+                                </div>
+                                <input type="text" name="designer_adress" placeholder="Nhập địa chỉ"
+                                    value="{{ old('designer_adress') }}"
+                                    class="input input-bordered w-full {{ $errors->has('designer_adress') ? 'input-error' : '' }}" />
+                                @error('designer_adress')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Phân loại locarno</span>
+                                </div>
+                                <input type="text" name="locarno_classes" placeholder="Nhập địa chỉ"
+                                    value="{{ old('locarno_classes') }}"
+                                    class="input input-bordered w-full {{ $errors->has('locarno_classes') ? 'input-error' : '' }}" />
+                                @error('locarno_classes')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Đại diện pháp luật</span>
+                                </div>
+                                <input type="text" name="representative_name" placeholder="Nhập địa chỉ"
+                                    value="{{ old('representative_name') }}"
+                                    class="input input-bordered w-full {{ $errors->has('representative_name') ? 'input-error' : '' }}" />
+                                @error('representative_name')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Địa chỉ Đại diện pháp luật</span>
+                                </div>
+                                <input type="text" name="representative_adress" placeholder="Nhập địa chỉ"
+                                    value="{{ old('representative_adress') }}"
+                                    class="input input-bordered w-full {{ $errors->has('representative_adress') ? 'input-error' : '' }}" />
+                                @error('representative_adress')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Trạng thái</span>
+                                </div>
+                                <select name="status" class="input input-bordered w-full @error('status') border-red-500 @enderror">
+                                    <option value="">Lựa chọn</option>
+                                    <option value="Hết hạn" {{ old('status') == 'Hết hạn' ? 'selected' : '' }}>Hết hạn</option>
+                                    <option value="Đã cấp phép" {{ old('status') == 'Đã cấp phép' ? 'selected' : '' }}>Đã cấp phép</option>
+                                    <option value="Đang chờ xử lý" {{ old('status') == 'Đang chờ xử lý' ? 'selected' : '' }}>Đang chờ xử lý</option>
+                                    <option value="Bị từ chối" {{ old('status') == 'Bị từ chối' ? 'selected' : '' }}>Bị từ chối</option>
+                                    <option value="Đã rút lại" {{ old('status') == 'Đã rút lại' ? 'selected' : '' }}>Đã rút lại</option>
+                                </select>
+                                @error('status')
+                                    <small class="text-red-500">{{ $message }}</small>
+                                @enderror
+                            </label>                            
 
                         </div>
                     </div>

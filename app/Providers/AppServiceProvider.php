@@ -11,7 +11,6 @@ use App\Models\Admin\Patent;
 use App\Models\Admin\Product;
 use App\Models\Admin\Trademark;
 use App\Models\Admin\TrademarkType;
-use App\Observers\IndustrialDesignObserver;
 use App\Observers\IndustrialDesignTypeObserver;
 use App\Observers\InitiativeDossierObserver;
 use App\Observers\InitiativeEvaluateObserver;
@@ -40,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
         Patent::observe(PatentObserver::class);
         TrademarkType::observe(TrademarkTypeObserver::class);
         Trademark::observe(TrademarkObserver::class);
-        IndustrialDesign::observe(IndustrialDesignObserver::class);
         IndustrialDesignType::observe(IndustrialDesignTypeObserver::class);
         Initiative::observe(InitiativeObserver::class);
         InitiativeDossier::observe(InitiativeDossierObserver::class);

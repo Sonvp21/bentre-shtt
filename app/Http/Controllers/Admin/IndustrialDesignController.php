@@ -95,7 +95,8 @@ class IndustrialDesignController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
                 $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
-                $filePath = $file->storeAs('public/industrial_designs/images', $fileName); // Lưu tệp vào thư mục public
+                $directory = 'public/industrial_designs/images/' . $industrialDesign->filing_number; // Tạo thư mục dựa trên filing_number
+                $filePath = $file->storeAs($directory, $fileName); // Lưu tệp vào thư mục
                 Image::create([
                     'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
                     'file_name' => $fileName, // Lưu tên gốc
@@ -103,7 +104,6 @@ class IndustrialDesignController extends Controller
                 ]);
             }
         }
-
 
         return redirect()->route('admin.industrial_designs.index')->with('success', 'Kiểu dáng đã được tạo thành công.');
     }

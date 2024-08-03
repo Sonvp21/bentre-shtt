@@ -10,7 +10,7 @@ class IndustrialDesignType extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'design_types';
+    protected $table = 'industrial_design_types';
 
     protected $fillable = [
         'name'
