@@ -82,6 +82,12 @@ class PatentController extends Controller
         return view('admin.patents.ajax_list', compact('patents'))->render();
     }
 
+    public function getCommunes($district_id)
+    {
+        $communes = Commune::where('district_id', $district_id)->get();
+        return response()->json($communes);
+    }
+
     public function create(): View
     {
         $districts = District::all();
@@ -89,11 +95,6 @@ class PatentController extends Controller
         return view('admin.patents.create', compact('districts', 'communes'));
     }
 
-    public function getCommunes($district_id)
-    {
-        $communes = Commune::where('district_id', $district_id)->get();
-        return response()->json($communes);
-    }
 
     public function store(PatentRequest $request): RedirectResponse
     {
@@ -113,6 +114,13 @@ class PatentController extends Controller
                 ->usingName($imageFile->getClientOriginalName())
                 ->toMediaCollection('patent_image');
         }
+
+        // Cập nhật tọa độ
+        $longitude = $request->input('longitude');
+        $latitude = $request->input('latitude');
+
+        $patent->updateCoordinates($patent->id, $longitude, $latitude);
+
         return redirect()->route('admin.patents.index')->with('success', 'Sáng chế đã được tạo thành công.');
     }
 

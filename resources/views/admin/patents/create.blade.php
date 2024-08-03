@@ -247,8 +247,35 @@
                             </label>
 
                         </div>
-                    </div>
+                        <!-- Tọa độ -->
+                        <!-- Tọa độ -->
+                        <label class="form-control w-[95%]">
+                            <div class="label">
+                                <span class="text-sm font-medium text-gray-700">Kinh độ</span>
+                            </div>
+                            <input type="text" id="longitude" name="longitude" placeholder="Nhập kinh độ"
+                                value="{{ old('longitude') }}"
+                                class="input input-bordered w-full {{ $errors->has('longitude') ? 'input-error' : '' }}" />
+                            @error('longitude')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+                        </label>
 
+                        <label class="form-control w-[95%]">
+                            <div class="label">
+                                <span class="text-sm font-medium text-gray-700">Vĩ độ</span>
+                            </div>
+                            <input type="text" id="latitude" name="latitude" placeholder="Nhập vĩ độ"
+                                value="{{ old('latitude') }}"
+                                class="input input-bordered w-full {{ $errors->has('latitude') ? 'input-error' : '' }}" />
+                            @error('latitude')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+                        </label>
+                    </div>
+                    <div id="map" style="height: 500px; width: 100%;"></div>
+                    <!-- Nút để lấy tọa độ hiện tại của người dùng -->
+                    <button id="getCurrentLocation" type="button">Lấy vị trí hiện tại</button>
                     <div class="flex justify-center pb-3">
                         <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Thêm</button>
                         <a href="{{ route('admin.patents.index') }}" class="btn btn-outline btn-error !min-h-9 h-9">
@@ -269,19 +296,63 @@
             var getCommunesUrl = "{{ route('admin.patents.getCommunes', '') }}";
         </script>
 
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
         <script>
-            var loadFile = function(event) {
-                var input = event.target;
-                var file = input.files[0];
-                var type = file.type;
+            let map;
+            let marker;
 
-                var output = document.getElementById('preview_img');
+            function initMap() {
+                const benTre = {
+                    lat: 10.243,
+                    lng: 106.372
+                }; // Tọa độ trung tâm của Bến Tre
 
-                output.src = URL.createObjectURL(event.target.files[0]);
-                output.onload = function() {
-                    URL.revokeObjectURL(output.src); // free memory
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 10,
+                    center: benTre
+                });
+
+                marker = new google.maps.Marker({
+                    position: benTre,
+                    map: map,
+                    title: 'Bến Tre',
+                    draggable: true // Cho phép kéo thả biểu tượng
+                });
+
+                // Cập nhật tọa độ khi kéo thả biểu tượng
+                google.maps.event.addListener(marker, 'dragend', function(event) {
+                    document.getElementById('latitude').value = event.latLng.lat().toFixed(6); // Cập nhật giá trị vĩ độ
+                    document.getElementById('longitude').value = event.latLng.lng().toFixed(
+                        6); // Cập nhật giá trị kinh độ
+                });
+
+                // Cập nhật tọa độ ban đầu vào các trường
+                document.getElementById('latitude').value = benTre.lat;
+                document.getElementById('longitude').value = benTre.lng;
+            }
+
+            // Xử lý sự kiện nhấp vào nút lấy tọa độ hiện tại của người dùng
+            document.getElementById('getCurrentLocation').addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        const lat = position.coords.latitude.toFixed(6);
+                        const lng = position.coords.longitude.toFixed(6);
+
+                        // Cập nhật tọa độ vào các trường
+                        document.getElementById('latitude').value = lat;
+                        document.getElementById('longitude').value = lng;
+
+                        // Di chuyển marker đến vị trí hiện tại
+                        marker.setPosition(new google.maps.LatLng(lat, lng));
+                        map.setCenter(new google.maps.LatLng(lat, lng));
+                    }, function() {
+                        alert('Không thể lấy vị trí của bạn.');
+                    });
+                } else {
+                    alert('Trình duyệt của bạn không hỗ trợ Geolocation.');
                 }
-            };
+            });
         </script>
     @endpushonce
 
