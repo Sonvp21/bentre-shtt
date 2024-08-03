@@ -23,6 +23,17 @@ class AdvisorySupport extends Model implements HasMedia
     protected $dates = [
         'published_at',
     ];
+    // Các mối quan hệ
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+    
     public function parent()
     {
         return $this->belongsTo(AdvisorySupport::class, 'parent_id');

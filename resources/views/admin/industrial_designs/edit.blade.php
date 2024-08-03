@@ -83,62 +83,78 @@
                                 @enderror
                             </label>
 
-                            <label class="form-control w-full">
+                            <!-- Tệp đính kèm -->
+                            <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Document</span>
+                                    <span class="text-sm font-medium text-gray-700">Tệp đính kèm</span>
                                 </div>
-                                @if ($industrialDesign->hasMedia('document_design'))
-                                    <div>
-                                        <span class="text-sm font-medium text-gray-700">Tệp hiện tại:</span>
-                                        <a id="currentDocumentLink"
-                                            href="{{ $industrialDesign->getFirstMedia('document_design')->getUrl() }}"
-                                            class="text-blue-600 hover:underline">
-                                            {{ $industrialDesign->getFirstMedia('document_design')->file_name }}
-                                        </a>
-                                        <label for="document"
-                                            class="text-sm text-red-600 hover:underline cursor-pointer">
-                                            Đổi tệp
-                                        </label>
-                                        <input id="document" type="file" name="document" style="display: none;"
-                                            onchange="updateDocumentName(event)" />
-                                    </div>
-                                @else
-                                    <input id="document" type="file" name="document"
-                                        class="file-input file-input-bordered file-input-accent w-full" />
-                                    @error('document')
-                                        <small class="text-red-500">{{ $message }}</small>
-                                    @enderror
-                                @endif
+                                <input type="file" id="documents" name="documents[]" multiple
+                                    accept=".pdf, .doc, .docx"
+                                    class="input input-bordered w-full {{ $errors->has('documents') ? 'input-error' : '' }}" />
+                                @error('documents')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                                <div id="documents-preview">
+                                    @foreach ($industrialDesign->documents as $document)
+                                        <div>{{ $document->file_name }}</div>
+                                    @endforeach
+                                </div>
                             </label>
 
+                            <!-- Ảnh -->
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Ảnh</span>
+                                </div>
+                                <input type="file" id="images" name="images[]" multiple accept="image/*"
+                                    class="input input-bordered w-full {{ $errors->has('images') ? 'input-error' : '' }}" />
+                                @error('images')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                                <div id="images-preview">
+                                    @foreach ($industrialDesign->images as $image)
+                                        <img src="{{ asset('storage/' . $image->file_path) }}"
+                                            style="max-width: 150px; margin-right: 10px;"
+                                            alt="{{ $image->file_name }}">
+                                    @endforeach
+                                </div>
+                            </label>
                             <script>
-                                function updateDocumentName(event) {
-                                    const input = event.target;
-                                    const fileName = input.files[0].name;
-                                    const linkElement = document.getElementById('currentDocumentLink');
-                                    linkElement.textContent = fileName;
-                                }
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    document.getElementById('documents').addEventListener('change', function(event) {
+                                        const files = event.target.files;
+                                        const preview = document.getElementById('documents-preview');
+                                        preview.innerHTML = ''; // Xóa nội dung cũ
+                            
+                                        Array.from(files).forEach(file => {
+                                            // Hiển thị tên tất cả các tệp đính kèm
+                                            const fileElement = document.createElement('div');
+                                            fileElement.textContent = file.name;
+                                            preview.appendChild(fileElement);
+                                        });
+                                    });
+                            
+                                    document.getElementById('images').addEventListener('change', function(event) {
+                                        const files = event.target.files;
+                                        const preview = document.getElementById('images-preview');
+                                        preview.innerHTML = ''; // Xóa nội dung cũ
+                            
+                                        Array.from(files).forEach(file => {
+                                            if (file.type.startsWith('image/')) {
+                                                const imgElement = document.createElement('img');
+                                                imgElement.src = URL.createObjectURL(file);
+                                                imgElement.style.maxWidth = '150px'; // Giới hạn kích thước ảnh
+                                                imgElement.style.marginRight = '10px';
+                                                imgElement.alt = file.name;
+                                                preview.appendChild(imgElement);
+                                            } else {
+                                                console.warn('Tệp không phải ảnh:', file.name);
+                                            }
+                                        });
+                                    });
+                                });
                             </script>
-
-
-                            <label class="form-control w-full">
-                                <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Hình ảnh</span>
-                                </div>
-                                <label class="block">
-                                    <span class="sr-only">Chọn ảnh</span>
-                                    <input type="file" name="image" onchange="loadFile(event)"
-                                        class="file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-sm file:font-semibold" />
-                                </label>
-                                <div class="shrink-0">
-                                    @php
-                                        $imageUrl = $industrialDesign->getFirstMediaUrl('design_image');
-                                        $defaultImageUrl = asset('adminpage/image/image_default.png');
-                                    @endphp
-                                    <img id="preview_img" class="h-24 w-28 rounded-md object-cover"
-                                        src="{{ $imageUrl ? $imageUrl : $defaultImageUrl }}" alt="Current photo" />
-                                </div>
-                            </label>
+                            
 
                         </div>
                         {{-- Column 2 --}}
@@ -324,20 +340,7 @@
             var getCommunesUrl = "{{ route('admin.patents.getCommunes', '') }}";
         </script>
 
-        <script>
-            var loadFile = function(event) {
-                var input = event.target;
-                var file = input.files[0];
-                var type = file.type;
 
-                var output = document.getElementById('preview_img');
-
-                output.src = URL.createObjectURL(event.target.files[0]);
-                output.onload = function() {
-                    URL.revokeObjectURL(output.src); // free memory
-                }
-            };
-        </script>
     @endpushonce
 
 </x-admin-layout>

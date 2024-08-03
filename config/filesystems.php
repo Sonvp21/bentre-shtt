@@ -96,14 +96,6 @@ return [
             'throw' => false,
         ],
 
-        'design' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/design'),
-            'url' => env('APP_URL').'/storage/design',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
         'geographical' => [
             'driver' => 'local',
             'root' => storage_path('app/public/geographical'),

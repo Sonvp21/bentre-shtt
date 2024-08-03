@@ -35,7 +35,7 @@ return new class extends Migration
             $table->text('description')->nullable()->comment('Tóm tắt nội dung');
             $table->string('owner')->comment('Tên chủ nhãn hiệu');
             $table->string('address')->nullable()->comment('Địa chỉ');
-            //document and image use laravel media
+            //document and image
 
             $table->string('application_number', 20)->comment('Số đơn gốc');
             $table->dateTime('submission_date')->nullable()->comment('Ngày nộp');

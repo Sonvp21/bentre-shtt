@@ -43,7 +43,17 @@ class Patent extends Model implements HasMedia
     ];
 
     protected $dates = ['deleted_at'];
+    // Các mối quan hệ
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

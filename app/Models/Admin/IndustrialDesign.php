@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 class IndustrialDesign extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
@@ -45,7 +46,17 @@ class IndustrialDesign extends Model implements HasMedia
         'geom',
     ];
     protected $dates = ['deleted_at'];
+    // Các mối quan hệ
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+    
     public function district()
     {
         return $this->belongsTo(District::class);
@@ -107,7 +118,7 @@ class IndustrialDesign extends Model implements HasMedia
             get: fn () => Carbon::parse($this->publication_date)->format('d.m.Y h:i'),
         );
     }
-    
+
     public function getSubmissionStatusTextAttribute()
     {
         $status = [

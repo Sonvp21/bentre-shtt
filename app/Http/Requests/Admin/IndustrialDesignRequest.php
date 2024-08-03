@@ -21,8 +21,6 @@ class IndustrialDesignRequest extends FormRequest
             'lat' => 'nullable|string',
             'lon' => 'nullable|string',
             'color' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'document' => 'nullable|file|mimes:pdf,xlsx,docx|max:2048',
             'type_id' => 'required|exists:design_types,id',
             'name' => 'required|string',
             'description' => 'nullable|string',
@@ -37,6 +35,9 @@ class IndustrialDesignRequest extends FormRequest
             'design_date' => 'nullable|date',
             'design_out_of_date' => 'nullable|date',
             'design_status' => 'nullable|string',
+
+            'documents.*' => 'file|mimes:pdf,doc,docx|max:10240', // Giới hạn kích thước tệp đính kèm là 10MB
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10240', // Giới hạn kích thước hình ảnh là 10MB
         ];
     }
 

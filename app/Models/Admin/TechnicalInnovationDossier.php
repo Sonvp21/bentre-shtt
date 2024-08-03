@@ -42,6 +42,10 @@ class TechnicalInnovationDossier extends Model implements HasMedia
     }
 
     // Relationships
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     public function committees()
     {
         return $this->hasMany(TechnicalInnovationCommittee::class, 'technical_id', 'id');

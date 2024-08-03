@@ -14,7 +14,11 @@ class TechnicalInnovationResult extends Model
         'technical_id', 'year', 'rank', 'status'
     ];
 
-    // Relationships
+    // Các mối quan hệ
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     public function dossier()
     {
         return $this->belongsTo(TechnicalInnovationDossier::class, 'technical_id');

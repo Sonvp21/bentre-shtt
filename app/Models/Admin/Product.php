@@ -40,7 +40,16 @@ class Product extends Model implements HasMedia
             ->useDisk('product')
             ->singleFile();
     }
-    
+    // Các mối quan hệ
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     public function district()
     {
         return $this->belongsTo(District::class);

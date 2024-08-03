@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\IndustrialDesignRequest;
 use App\Models\Admin\Commune;
 use App\Models\Admin\District;
+use App\Models\Admin\Document;
+use App\Models\Admin\Image;
 use App\Models\Admin\IndustrialDesign;
 use App\Models\Admin\IndustrialDesignType;
 use App\Traits\Filterable;
@@ -14,6 +16,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -72,22 +75,39 @@ class IndustrialDesignController extends Controller
 
     public function store(IndustrialDesignRequest $request): RedirectResponse
     {
-        $industrialDesign = IndustrialDesign::create($request->all());
+        $validatedData = $request->validated();
+        $industrialDesign = IndustrialDesign::create($validatedData);
 
-        if ($request->hasFile('document')) {
-            $industrialDesign->clearMediaCollection('document_design');
-            $industrialDesign->addMedia($request->file('document'))->toMediaCollection('document_design');
+        // Lưu các tệp đính kèm
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                $filePath = $file->storeAs('public/industrial_designs/documents', $fileName); // Lưu tệp vào thư mục public
+                Document::create([
+                    'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                    'file_name' => $fileName, // Lưu tên gốc
+                    'industrial_design_id' => $industrialDesign->id,
+                ]);
+            }
         }
-    
-        if ($request->hasFile('image')) {
-            $imageFile = $request->file('image');
-            $industrialDesign->addMedia($imageFile->getRealPath())
-                ->usingFileName($imageFile->getClientOriginalName())
-                ->usingName($imageFile->getClientOriginalName())
-                ->toMediaCollection('design_image');
+
+        // Lưu các ảnh
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                $filePath = $file->storeAs('public/industrial_designs/images', $fileName); // Lưu tệp vào thư mục public
+                Image::create([
+                    'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                    'file_name' => $fileName, // Lưu tên gốc
+                    'industrial_design_id' => $industrialDesign->id,
+                ]);
+            }
         }
-        return redirect()->route('admin.industrial_designs.index')->with('success', 'kiểu dáng đã được tạo thành công.');
+
+
+        return redirect()->route('admin.industrial_designs.index')->with('success', 'Kiểu dáng đã được tạo thành công.');
     }
+
 
     public function edit(IndustrialDesign $industrialDesign): View
     {
@@ -98,26 +118,50 @@ class IndustrialDesignController extends Controller
         return view('admin.industrial_designs.edit', compact('industrialDesign', 'districts', 'communes', 'industrialDesignType'));
     }
 
-    public function update(industrialDesignRequest $request, IndustrialDesign $industrialDesign): RedirectResponse
+    public function update(IndustrialDesignRequest $request, IndustrialDesign $industrialDesign): RedirectResponse
     {
         $validatedData = $request->validated();
-
         $industrialDesign->update($validatedData);
 
-        if ($request->hasFile('document')) {
-            $industrialDesign->clearMediaCollection('document_design');
-            $industrialDesign->addMedia($request->file('document'))->toMediaCollection('document_design');
+        // Xóa các tệp đính kèm và ảnh cũ nếu có
+        if ($request->hasFile('documents')) {
+            // Xóa các tệp đính kèm cũ
+            $industrialDesign->documents()->each(function ($document) {
+                Storage::delete('public/industrial_designs/documents/' . $document->file_path);
+                $document->delete();
+            });
+
+            // Lưu các tệp đính kèm mới
+            foreach ($request->file('documents') as $file) {
+                $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                $filePath = $file->storeAs('public/industrial_designs/documents', $fileName); // Lưu tệp vào thư mục public
+                Document::create([
+                    'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                    'file_name' => $fileName, // Lưu tên gốc
+                    'industrial_design_id' => $industrialDesign->id,
+                ]);
+            }
         }
 
-        if ($request->hasFile('image')) {
-            // Xóa hình ảnh cũ nếu có
-            $industrialDesign->clearMediaCollection('design_image');
-            $imageFile = $request->file('image');
-            $industrialDesign->addMedia($imageFile->getRealPath())
-                ->usingFileName($imageFile->getClientOriginalName())
-                ->usingName($imageFile->getClientOriginalName())
-                ->toMediaCollection('design_image');
+        if ($request->hasFile('images')) {
+            // Xóa các ảnh cũ
+            $industrialDesign->images()->each(function ($image) {
+                Storage::delete('public/industrial_designs/images/' . $image->file_path);
+                $image->delete();
+            });
+
+            // Lưu các ảnh mới
+            foreach ($request->file('images') as $file) {
+                $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                $filePath = $file->storeAs('public/industrial_designs/images', $fileName); // Lưu tệp vào thư mục public
+                Image::create([
+                    'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                    'file_name' => $fileName, // Lưu tên gốc
+                    'industrial_design_id' => $industrialDesign->id,
+                ]);
+            }
         }
+
         return redirect()->route('admin.industrial_designs.index')->with('success', 'Kiểu dáng đã được cập nhật thành công.');
     }
 

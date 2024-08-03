@@ -11,6 +11,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
+
 class InitiativeDossier extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
@@ -23,7 +24,12 @@ class InitiativeDossier extends Model implements HasMedia
         'submission_status',
         'comment',
     ];
+    // Các mối quan hệ
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

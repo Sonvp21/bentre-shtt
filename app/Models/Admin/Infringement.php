@@ -22,7 +22,11 @@ class Infringement extends Model implements HasMedia
         'penalty_amount',
         'status',
     ];
-
+    // Các mối quan hệ
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     // Accessor to format the date
     protected function date(): Attribute
     {

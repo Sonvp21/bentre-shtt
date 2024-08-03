@@ -29,8 +29,17 @@ class GeographicalIndication extends Model implements HasMedia
     protected $casts = [
         'issue_date' => 'date', // hoặc 'datetime' nếu cần
     ];
-    
 
+    // Các mối quan hệ
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     // Mối quan hệ với model District
     public function district()
     {
@@ -54,7 +63,7 @@ class GeographicalIndication extends Model implements HasMedia
     public function getIssueDateAttribute($value)
     {
         return $value ? Carbon::parse($value)->format('Y-m-d') : null;
-    }    
+    }
 
     public function getFormattedIssueDateAttribute(): string
     {

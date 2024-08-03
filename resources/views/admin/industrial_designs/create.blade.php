@@ -77,31 +77,31 @@
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
-                            <label class="form-control w-full">
+                            <!-- Tệp đính kèm -->
+                            <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Tài liệu đính kèm</span>
+                                    <span class="text-sm font-medium text-gray-700">Tệp đính kèm</span>
                                 </div>
-                                <input type="file" name="document" id="document"
-                                    class="file-input file-input-bordered file-input-accent w-full" />
-                                @error('document')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                <input type="file" id="documents" name="documents[]" multiple
+                                    accept=".pdf, .doc, .docx"
+                                    class="input input-bordered w-full {{ $errors->has('documents') ? 'input-error' : '' }}" />
+                                @error('documents')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
+                                <div id="documents-preview"></div>
                             </label>
 
-                            <div class="form-group items-center space-x-6">
+                            <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Hình ảnh</span>
+                                    <span class="text-sm font-medium text-gray-700">Ảnh</span>
                                 </div>
-                                <label class="block">
-                                    <span class="sr-only">Choose photo</span>
-                                    <input type="file" name="image" onchange="loadFile(event)"
-                                        class="file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:px-4 file:py-2 file:text-sm file:font-semibold" />
-                                </label>
-                                <div class="shrink-0 ">
-                                    <img id="preview_img" class="h-24 w-28 rounded-md object-cover"
-                                        src="{{ asset('adminpage/image/image_default.png') }}" alt="Current photo" />
-                                </div>
-                            </div>
+                                <input type="file" id="images" name="images[]" multiple accept="image/*"
+                                    class="input input-bordered w-full {{ $errors->has('images') ? 'input-error' : '' }}" />
+                                @error('images')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                                <div id="images-preview"></div>
+                            </label>
                         </div>
                         {{-- Cột 2 --}}
                         <div>
@@ -246,8 +246,10 @@
                                     <option value="">Lựa chọn</option>
                                     <option value="1" {{ old('design_status') == '1' ? 'selected' : '' }}>
                                         Hiệu lực</option>
-                                    <option value="2" {{ old('design_status') == '2' ? 'selected' : '' }}>Hết hạn</option>
-                                    <option value="3" {{ old('design_status') == '3' ? 'selected' : '' }}>Bị huỷ</option>
+                                    <option value="2" {{ old('design_status') == '2' ? 'selected' : '' }}>Hết hạn
+                                    </option>
+                                    <option value="3" {{ old('design_status') == '3' ? 'selected' : '' }}>Bị huỷ
+                                    </option>
                                 </select>
                                 @error('design_status')
                                     <small class="text-red-500">{{ $message }}</small>
@@ -277,18 +279,38 @@
         </script>
 
         <script>
-            var loadFile = function(event) {
-                var input = event.target;
-                var file = input.files[0];
-                var type = file.type;
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('documents').addEventListener('change', function(event) {
+                    const files = event.target.files;
+                    const preview = document.getElementById('documents-preview');
+                    preview.innerHTML = ''; // Xóa nội dung cũ
 
-                var output = document.getElementById('preview_img');
+                    Array.from(files).forEach(file => {
+                        const fileElement = document.createElement('div');
+                        fileElement.textContent = file.name; // Hiển thị tên tệp
 
-                output.src = URL.createObjectURL(event.target.files[0]);
-                output.onload = function() {
-                    URL.revokeObjectURL(output.src); // free memory
-                }
-            };
+                        preview.appendChild(fileElement);
+                    });
+                });
+
+                document.getElementById('images').addEventListener('change', function(event) {
+                    const files = event.target.files;
+                    const preview = document.getElementById('images-preview');
+                    preview.innerHTML = ''; // Xóa nội dung cũ
+
+                    Array.from(files).forEach(file => {
+                        if (file.type.startsWith('image/')) {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = URL.createObjectURL(file);
+                            imgElement.style.maxWidth = '150px'; // Giới hạn kích thước ảnh
+                            imgElement.style.marginRight = '10px';
+                            imgElement.alt = file.name;
+
+                            preview.appendChild(imgElement);
+                        }
+                    });
+                });
+            });
         </script>
     @endpushonce
 

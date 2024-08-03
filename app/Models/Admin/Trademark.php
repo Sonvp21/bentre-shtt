@@ -48,7 +48,16 @@ class Trademark extends Model implements HasMedia
         'geom',
     ];
     protected $dates = ['deleted_at'];
+    // Các mối quan hệ
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     public function district()
     {
         return $this->belongsTo(District::class);
@@ -103,7 +112,7 @@ class Trademark extends Model implements HasMedia
     //         get: fn () => Carbon::parse($this->submission_date)->format('d.m.Y h:i'),
     //     );
     // }
-    
+
     public function getSubmissionStatusTextAttribute()
     {
         $status = [
@@ -115,4 +124,3 @@ class Trademark extends Model implements HasMedia
         return $status[$this->submission_status] ?? '';
     }
 }
-
