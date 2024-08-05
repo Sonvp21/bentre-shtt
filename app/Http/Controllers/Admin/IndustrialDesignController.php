@@ -34,7 +34,7 @@ class IndustrialDesignController extends Controller
             ->toArray();
 
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'filing_number', 'owner', 'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -56,7 +56,7 @@ class IndustrialDesignController extends Controller
     public function ajaxList(Request $request)
     {
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'filing_number', 'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -226,7 +226,7 @@ class IndustrialDesignController extends Controller
     public function ajaxExport(Request $request)
     {
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'filing_number', 'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -246,7 +246,7 @@ class IndustrialDesignController extends Controller
             ->toArray();
 
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'filing_number', 'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
