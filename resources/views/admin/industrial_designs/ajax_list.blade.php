@@ -15,7 +15,7 @@
     <tbody>
         @foreach ($IndustrialDesigns as $index => $IndustrialDesign)
             <tr>
-                <td class="text-center">{{ $index + 1 }}</td>
+                <td class="text-center">{{ ($IndustrialDesigns->currentPage() - 1) * $IndustrialDesigns->perPage() + $loop->iteration }}</td>
                 <td>{{ $IndustrialDesign->filing_number }}</td>
                 <td class="text-justify">{{ $IndustrialDesign->type->name ?? '' }}</td>
                 <td class="text-justify">{{ $IndustrialDesign->name }}</td>
