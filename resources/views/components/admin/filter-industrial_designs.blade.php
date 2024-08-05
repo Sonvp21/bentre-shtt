@@ -1,7 +1,7 @@
 <div class="col-span-2 flex flex-col md:flex-row justify-between">
     <form method="POST" action="{{ $action }}" id="filterForm" class="flex flex-col md:flex-row items-center">
         @csrf
-        <div class="form-control mx-1 w-full">
+        <div class="form-control mx-1 w-auto">
             <label class="label">
                 <span class="label-text">Tìm kiếm</span>
             </label>

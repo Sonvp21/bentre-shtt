@@ -57,13 +57,22 @@
 
                 <th>Số đơn gốc</th>
                 <th>Ngày nộp đơn</th>
-                <th>Trạng thái đơn</th>
 
-                <th>Ngày công bố</th>
                 <th>Số công bố</th>
+                <th>Ngày công bố</th>
 
-                <th>Ngày cấp</th>
-                <th>Ngày hết hạn</th>
+                <th>Số bằng</th>
+                <th>Ngày cấp bằng</th>
+                <th>Ngày hết hạn bằng</th>
+
+                <th>Người thiết kế</th>
+                <th>Địa chỉ người thiết kế</th>
+
+                <th>Đại diện pháp luật</th>
+                <th>Địa chỉ đại diện pháp luật</th>
+
+                <th>Phân loại locarno</th>
+                
                 <th>Trạng thái</th>
             </tr>
         </thead>
@@ -79,16 +88,25 @@
                     <td>{{ $IndustrialDesign['owner'] }}</td>
                     <td>{{ $IndustrialDesign['address'] }}</td>
 
-                    <td>{{ $IndustrialDesign['application_number'] }}</td>
-                    <td>{{ $IndustrialDesign['submission_date'] }}</td>
-                    <td>{{ $IndustrialDesign['submission_status_text'] }}</td>
-
-                    <td>{{ $IndustrialDesign['publication_date'] }}</td>
+                    <td>{{ $IndustrialDesign['filing_number'] }}</td>
+                    <td>{{ $IndustrialDesign['filing_date'] }}</td>
                     <td>{{ $IndustrialDesign['publication_number'] }}</td>
 
-                    <td>{{ $IndustrialDesign['design_date'] }}</td>
-                    <td>{{ $IndustrialDesign['design_out_of_date'] }}</td>
-                    <td>{{ $IndustrialDesign['design_status_text'] }}</td>
+                    <td>{{ $IndustrialDesign['publication_date'] }}</td>
+                    <td>{{ $IndustrialDesign['registration_number'] }}</td>
+
+                    <td>{{ $IndustrialDesign['registration_date'] }}</td>
+                    <td>{{ $IndustrialDesign['expiration_date'] }}</td>
+                    
+                    <td>{{ $IndustrialDesign['designer'] }}</td>
+                    <td>{{ $IndustrialDesign['designer_address'] }}</td>
+
+                    <td>{{ $IndustrialDesign['representative_name'] }}</td>
+                    <td>{{ $IndustrialDesign['representative_address'] }}</td>
+
+                    <td>{{ $IndustrialDesign['locarno_classes'] }}</td>
+
+                    <td>{{ $IndustrialDesign['status'] }}</td>
                 </tr>
             @endforeach
         </tbody>

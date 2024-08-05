@@ -3,11 +3,11 @@
     <thead>
         <tr class="text-sm">
             <th>STT</th>
-            <th>Số đơn</th>
+            <th>Số đơn gốc</th>
             <th>Nhóm ngành</th>
             <th>Tên kiểu dáng</th>
             <th>Chủ kiểu dáng</th>
-            <th>Ngày nộp đơn</th>
+            <th>Ngày công bố</th>
             <th>Trạng thái</th>
             <th>Thao tác</th>
         </tr>
@@ -17,10 +17,10 @@
             <tr>
                 <td class="text-center">{{ $index + 1 }}</td>
                 <td>{{ $IndustrialDesign->filing_number }}</td>
-                <td>{{ $IndustrialDesign->type->name ?? '' }}</td>
-                <td>{{ $IndustrialDesign->name }}</td>
+                <td class="text-justify">{{ $IndustrialDesign->type->name ?? '' }}</td>
+                <td class="text-justify">{{ $IndustrialDesign->name }}</td>
                 <td>{{ $IndustrialDesign->owner }}</td>
-                <td>{{ $IndustrialDesign->filing_date }}</td>
+                <td>{{ $IndustrialDesign->publication_date }}</td>
                 <td class="text-center">{!! $IndustrialDesign->status !!}</td>
                 <td class="flex justify-around">
                     <a href="{{ route('admin.industrial_designs.edit', $IndustrialDesign) }}" type="button"><i

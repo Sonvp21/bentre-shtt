@@ -34,7 +34,7 @@ class IndustrialDesignController extends Controller
             ->toArray();
 
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'application_number', 'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -56,7 +56,7 @@ class IndustrialDesignController extends Controller
     public function ajaxList(Request $request)
     {
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'application_number', 'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -195,7 +195,6 @@ class IndustrialDesignController extends Controller
         return redirect()->route('admin.industrial_designs.index')->with('success', 'Kiểu dáng đã được cập nhật thành công.');
     }
 
-
     public function destroy(IndustrialDesign $industrialDesign): RedirectResponse
     {
         $industrialDesign->clearMediaCollection('document_design');
@@ -227,7 +226,7 @@ class IndustrialDesignController extends Controller
     public function ajaxExport(Request $request)
     {
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'application_number', 'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -247,7 +246,7 @@ class IndustrialDesignController extends Controller
             ->toArray();
 
         $query = IndustrialDesign::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'application_number', 'publication_date',];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name',  'publication_date',];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order

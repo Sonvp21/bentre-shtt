@@ -30,16 +30,26 @@ class IndustrialDesignsExport implements FromCollection, WithHeadings
                 'Chủ sở hữu' => $IndustrialDesign['owner'] ?? null,
                 'Địa chỉ' => $IndustrialDesign['address'] ?? null,
 
-                'Số đơn gốc' => $IndustrialDesign['application_number'] ?? null,
-                'Ngày nộp đơn' => $IndustrialDesign['submission_date'] ?? null,
-                'Trạng thái đơn' => $IndustrialDesign['submission_status_text'] ?? null,
+                'Số đơn gốc' => $IndustrialDesign['filing_number'] ?? null,
+                'Ngày nộp đơn' => $IndustrialDesign['filing_date'] ?? null,
 
-                'Ngày công bố' => $IndustrialDesign['publication_date'] ?? null,
                 'Số công bố' => $IndustrialDesign['publication_number'] ?? null,
+                'Ngày công bố' => $IndustrialDesign['publication_date'] ?? null,
 
-                'Ngày cấp' => $IndustrialDesign['design_date'] ?? null,
-                'Ngày hết hạn' => $IndustrialDesign['design_out_of_date'] ?? null,
-                'Trạng thái' => $IndustrialDesign['design_status_text'] ?? null,
+                'Số bằng' => $IndustrialDesign['registration_number'] ?? null,
+                'Ngày cấp bằng' => $IndustrialDesign['registration_date'] ?? null,
+                'Ngày hết hạn bằng' => $IndustrialDesign['expiration_date'] ?? null,
+
+
+                'Người thiết kế' => $IndustrialDesign['designer'] ?? null,
+                'Địa chỉ người thiết kế' => $IndustrialDesign['designer_address'] ?? null,
+
+                'Đại diện pháp luật' => $IndustrialDesign['representative_name'] ?? null,
+                'Địa chỉ đại diện pháp luật' => $IndustrialDesign['representative_address'] ?? null,
+
+                'Phân loại locarno' => $IndustrialDesign['locarno_classes'] ?? null,
+
+                'Trạng thái' => $IndustrialDesign['status'] ?? null,
             ];
         }
 
@@ -59,13 +69,22 @@ class IndustrialDesignsExport implements FromCollection, WithHeadings
 
             'Số đơn gốc',
             'Ngày nộp đơn',
-            'Trạng thái đơn',
 
-            'Ngày công bố',
             'Số công bố',
+            'Ngày công bố',
 
-            'Ngày cấp',
-            'Ngày hết hạn',
+            'Số bằng',
+            'Ngày cấp bằng',
+            'Ngày hết hạn bằng',
+
+            'Người thiết kế',
+            'Địa chỉ người thiết kế',
+
+            'Đại diện pháp luật',
+            'Địa chỉ đại diện pháp luật',
+
+            'Phân loại locarno',
+
             'Trạng thái',
         ];
     }

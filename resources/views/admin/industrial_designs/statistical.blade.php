@@ -16,7 +16,7 @@
                 'action' => route('admin.industrial_designs.index'),
                 'ajaxRoute' => route('admin.industrial_designs.ajax_list'),
                 'filters' => [
-                    ['name' => 'publication_date', 'label' => 'Năm cấp', 'options' => $uniqueIssueYears],
+                    ['name' => 'publication_date', 'label' => 'Năm công bố', 'options' => $uniqueIssueYears],
                     ['name' => 'type_id', 'label' => 'Nhóm ngành', 'options' => $types],
                     ['name' => 'district_id', 'label' => 'Huyện', 'options' => $districts],
                     ['name' => 'commune_id', 'label' => 'Xã', 'options' => []],

@@ -13,13 +13,22 @@
 
             <th>Số đơn gốc</th>
             <th>Ngày nộp đơn</th>
-            <th>Trạng thái đơn</th>
 
-            <th>Ngày công bố</th>
             <th>Số công bố</th>
+            <th>Ngày công bố</th>
 
-            <th>Ngày cấp</th>
-            <th>Ngày hết hạn</th>
+            <th>Số bằng</th>
+            <th>Ngày cấp bằng</th>
+            <th>Ngày hết hạn bằng</th>
+
+            <th>Người thiết kế</th>
+            <th>Địa chỉ người thiết kế</th>
+
+            <th>Đại diện pháp luật</th>
+            <th>Địa chỉ đại diện pháp luật</th>
+
+            <th>Phân loại locarno</th>
+            
             <th>Trạng thái</th>
         </tr>
     </thead>
@@ -35,16 +44,25 @@
                 <td>{{ $IndustrialDesign->owner ?? null }}</td>
                 <td>{{ $IndustrialDesign->address ?? null }}</td>
 
-                <td>{{ $IndustrialDesign->application_number ?? null }}</td>
-                <td>{{ $IndustrialDesign->submission_date ?? null }}</td>
-                <td>{!! $IndustrialDesign->submission_status_text ?? null !!}</td>
-
+                <td>{{ $IndustrialDesign->filing_number ?? null }}</td>
+                <td>{{ $IndustrialDesign->filing_date ?? null }}</td>
+                
+                <td>{!! $IndustrialDesign->publication_number ?? null !!}</td>
                 <td>{{ $IndustrialDesign->publication_date ?? null }}</td>
-                <td>{{ $IndustrialDesign->publication_number ?? null }}</td>
 
-                <td>{{ $IndustrialDesign->design_date ?? null }}</td>
-                <td>{{ $IndustrialDesign->design_out_of_date ?? null }}</td>
-                <td>{!! $IndustrialDesign->design_status_text ?? null !!}</td>
+                <td>{{ $IndustrialDesign->registration_number ?? null }}</td>
+                <td>{{ $IndustrialDesign->registration_date ?? null }}</td>
+                <td>{{ $IndustrialDesign->expiration_date ?? null }}</td>
+
+                <td>{!! $IndustrialDesign->designer ?? null !!}</td>
+                <td>{{ $IndustrialDesign->designer_address ?? null }}</td>
+
+                <td>{{ $IndustrialDesign->representative_name ?? null }}</td>
+                <td>{{ $IndustrialDesign->representative_address ?? null }}</td>
+
+                <td>{{ $IndustrialDesign->locarno_classes ?? null }}</td>
+
+                <td>{!! $IndustrialDesign->status ?? null !!}</td>
             </tr>
         @endforeach
     </tbody>

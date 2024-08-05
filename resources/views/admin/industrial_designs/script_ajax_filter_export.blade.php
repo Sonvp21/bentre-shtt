@@ -21,16 +21,24 @@
                         owner: row.querySelector('td:nth-child(7)').innerText.trim(),
                         address: row.querySelector('td:nth-child(8)').innerText.trim(),
 
-                        application_number: row.querySelector('td:nth-child(9)').innerText.trim(),
-                        submission_date: row.querySelector('td:nth-child(10)').innerText.trim(),
-                        submission_status_text: row.querySelector('td:nth-child(11)').innerText.trim(),
-
+                        filing_number: row.querySelector('td:nth-child(9)').innerText.trim(),
+                        filing_date: row.querySelector('td:nth-child(10)').innerText.trim(),
+                        publication_number: row.querySelector('td:nth-child(11)').innerText.trim(),
                         publication_date: row.querySelector('td:nth-child(12)').innerText.trim(),
-                        publication_number: row.querySelector('td:nth-child(13)').innerText.trim(),
 
-                        design_date: row.querySelector('td:nth-child(14)').innerText.trim(),
-                        design_out_of_date: row.querySelector('td:nth-child(15)').innerText.trim(),
-                        design_status_text: row.querySelector('td:nth-child(16)').innerText.trim(),
+                        registration_number: row.querySelector('td:nth-child(13)').innerText.trim(),
+                        registration_date: row.querySelector('td:nth-child(14)').innerText.trim(),
+                        expiration_date: row.querySelector('td:nth-child(15)').innerText.trim(),
+
+                        designer: row.querySelector('td:nth-child(16)').innerText.trim(),
+                        designer_address: row.querySelector('td:nth-child(17)').innerText.trim(),
+
+                        representative_name: row.querySelector('td:nth-child(18)').innerText.trim(),
+                        representative_address: row.querySelector('td:nth-child(19)').innerText.trim(),
+
+                        locarno_classes: row.querySelector('td:nth-child(20)').innerText.trim(),
+
+                        status: row.querySelector('td:nth-child(21)').innerText.trim(),
                     };
                     data.push(rowData);
                 });
