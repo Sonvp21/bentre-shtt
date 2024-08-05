@@ -8,7 +8,7 @@
             <th>Tên kiểu dáng</th>
             <th>Chủ kiểu dáng</th>
             <th>Ngày nộp đơn</th>
-            <th>Trạng thái đơn</th>
+            <th>Trạng thái</th>
             <th>Thao tác</th>
         </tr>
     </thead>
@@ -16,12 +16,12 @@
         @foreach ($IndustrialDesigns as $index => $IndustrialDesign)
             <tr>
                 <td class="text-center">{{ $index + 1 }}</td>
-                <td>{{ $IndustrialDesign->application_number }}</td>
+                <td>{{ $IndustrialDesign->filing_number }}</td>
                 <td>{{ $IndustrialDesign->type->name ?? '' }}</td>
                 <td>{{ $IndustrialDesign->name }}</td>
                 <td>{{ $IndustrialDesign->owner }}</td>
-                <td>{{ $IndustrialDesign->submissionAtVi }}</td>
-                <td class="text-center">{!! $IndustrialDesign->submission_status_text !!}</td>
+                <td>{{ $IndustrialDesign->filing_date }}</td>
+                <td class="text-center">{!! $IndustrialDesign->status !!}</td>
                 <td class="flex justify-around">
                     <a href="{{ route('admin.industrial_designs.edit', $IndustrialDesign) }}" type="button"><i
                             class="fa fa-edit text-yellow-600"></i></a>

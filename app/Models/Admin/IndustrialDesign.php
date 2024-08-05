@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -47,13 +48,10 @@ class IndustrialDesign extends Model implements HasMedia
 
         'representative_name',
         'representative_address',
-        
+
         'status',
     ];
 
-    protected $spatialFields = [
-        'geom',
-    ];
     protected $dates = ['deleted_at'];
     // Các mối quan hệ
     public function images()
@@ -85,68 +83,63 @@ class IndustrialDesign extends Model implements HasMedia
     {
         return $this->belongsTo(IndustrialDesignType::class, 'type_id');
     }
-
-    public function registerMediaConversions(?Media $media = null): void
+    //ngày nộp đơn
+    public function getFilingDateAttribute($value)
     {
-        $this->addMediaConversion('lg')
-            ->crop(900, 800)
-            ->sharpen(5)
-            ->format('jpg')
-            ->performOnCollections('design_image');
-
-        $this->addMediaConversion('md')
-            ->crop(541, 320)
-            ->sharpen(5)
-            ->format('jpg')
-            ->performOnCollections('design_image');
-
-        $this->addMediaConversion('thumb')
-            ->crop(368, 276)
-            ->sharpen(10)
-            ->format('jpg')
-            ->performOnCollections('design_image');
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
+    }
+    //ngày công bố
+    public function getPublicationDateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
+    }
+    //ngày cấp bằng
+    public function getRegistrationDateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
+    }
+    //ngày hết hạn
+    public function getExpirationDateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
     }
 
-    public function registerMediaCollections(): void
+    // Phương thức cập nhật tọa độ
+    public function updateCoordinates($id, $longitude, $latitude, $z = 0)
     {
-        $this->addMediaCollection('design_image')
-            ->singleFile()
-            ->useDisk('design');
+        // Đảm bảo rằng các giá trị tọa độ là số
+        if (is_numeric($longitude) && is_numeric($latitude)) {
+            $affectedRows = DB::table($this->table)
+                ->where('id', $id)
+                ->update([
+                    'geom' => DB::raw("ST_SetSRID(ST_MakePoint($longitude, $latitude), 4326)")
+                ]);
+
+            return $affectedRows > 0;
+        }
+
+        return false;
     }
 
-    protected function submissionAtVi(): Attribute
+    // Lấy kinh độ từ trường geom
+    public function getLongitude($id)
     {
-        return Attribute::make(
-            get: fn () => Carbon::parse($this->submission_date)->format('d.m.Y h:i'),
-        );
+        $result = DB::table($this->table)
+            ->select(DB::raw('ST_X(geom) as longitude'))
+            ->where('id', $id)
+            ->first();
+
+        return $result ? $result->longitude : null;
     }
 
-    protected function publicationAtVi(): Attribute
+    // Lấy vĩ độ từ trường geom
+    public function getLatitude($id)
     {
-        return Attribute::make(
-            get: fn () => Carbon::parse($this->publication_date)->format('d.m.Y h:i'),
-        );
-    }
+        $result = DB::table($this->table)
+            ->select(DB::raw('ST_Y(geom) as latitude'))
+            ->where('id', $id)
+            ->first();
 
-    public function getSubmissionStatusTextAttribute()
-    {
-        $status = [
-            1 => '<span class="text-black">Đang xử lý</span>',
-            2 => '<span class="text-green-500">Đã cấp</span>',
-            3 => '<span class="text-red-500">Bị từ chối</span>',
-        ];
-
-        return $status[$this->submission_status] ?? '';
-    }
-
-    public function getDesignStatusTextAttribute()
-    {
-        $status = [
-            1 => '<span class="text-black">Hiệu lực</span>',
-            2 => '<span class="text-yellow-400">Hết hạn</span>',
-            3 => '<span class="text-red-500">Bị huỷ</span>',
-        ];
-
-        return $status[$this->design_status] ?? '';
+        return $result ? $result->latitude : null;
     }
 }

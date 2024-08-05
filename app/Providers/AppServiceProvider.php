@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Admin\IndustrialDesign;
 use App\Models\Admin\IndustrialDesignType;
 use App\Models\Admin\Initiative;
 use App\Models\Admin\InitiativeDossier;

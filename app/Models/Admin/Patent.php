@@ -98,14 +98,7 @@ class Patent extends Model implements HasMedia
             ->singleFile()
             ->useDisk('patent');
     }
-
-    // protected function submissionAtVi(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn () => Carbon::parse($this->submission_date)->format('d.m.Y'),
-    //     );
-    // }
-
+    
     // Accessor cho submission_date
     public function getSubmissionDateAttribute($value)
     {

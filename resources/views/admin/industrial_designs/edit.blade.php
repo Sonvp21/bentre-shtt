@@ -53,20 +53,10 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Chủ kiểu dáng</span>
                                 </div>
-                                <input type="text" name="owner" placeholder="Nhập vào"
+                                <input type="text" name="owner" placeholder="..."
                                     value="{{ old('owner', $industrialDesign->owner) }}"
                                     class="input input-bordered w-full {{ $errors->has('owner') ? 'input-error' : '' }}" />
                                 @error('owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
-                                @enderror
-                            </label>
-                            <label class="form-control w-[95%]">
-                                <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Mô tả</span>
-                                </div>
-                                <textarea name="description" id="description"
-                                    class="form-textarea input input-bordered w-full @error('description') border-red-500 @enderror" rows="4">{{ old('description', $industrialDesign->description) }}</textarea>
-                                @error('description')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
@@ -82,80 +72,62 @@
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
-
-                            <!-- Tệp đính kèm -->
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Tệp đính kèm</span>
+                                    <span class="text-sm font-medium text-gray-700">Người thiết kế</span>
                                 </div>
-                                <input type="file" id="documents" name="documents[]" multiple
-                                    accept=".pdf, .doc, .docx"
-                                    class="input input-bordered w-full {{ $errors->has('documents') ? 'input-error' : '' }}" />
-                                @error('documents')
+                                <input type="text" name="designer" placeholder=""
+                                    value="{{ old('designer', $industrialDesign->designer) }}"
+                                    class="input input-bordered w-full {{ $errors->has('designer') ? 'input-error' : '' }}" />
+                                @error('designer')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
-                                <div id="documents-preview">
-                                    @foreach ($industrialDesign->documents as $document)
-                                        <div>{{ $document->file_name }}</div>
-                                    @endforeach
-                                </div>
                             </label>
-
-                            <!-- Ảnh -->
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Ảnh</span>
+                                    <span class="text-sm font-medium text-gray-700">Địa chỉ người thiết kế</span>
                                 </div>
-                                <input type="file" id="images" name="images[]" multiple accept="image/*"
-                                    class="input input-bordered w-full {{ $errors->has('images') ? 'input-error' : '' }}" />
-                                @error('images')
+                                <input type="text" name="designer_address" placeholder="Nhập địa chỉ"
+                                    value="{{ old('designer_address', $industrialDesign->designer_address) }}"
+                                    class="input input-bordered w-full {{ $errors->has('designer_address') ? 'input-error' : '' }}" />
+                                @error('designer_address')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
-                                <div id="images-preview">
-                                    @foreach ($industrialDesign->images as $image)
-                                        <img src="{{ asset('storage/' . $image->file_path) }}"
-                                            style="max-width: 150px; margin-right: 10px;"
-                                            alt="{{ $image->file_name }}">
-                                    @endforeach
-                                </div>
                             </label>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    document.getElementById('documents').addEventListener('change', function(event) {
-                                        const files = event.target.files;
-                                        const preview = document.getElementById('documents-preview');
-                                        preview.innerHTML = ''; // Xóa nội dung cũ
-                            
-                                        Array.from(files).forEach(file => {
-                                            // Hiển thị tên tất cả các tệp đính kèm
-                                            const fileElement = document.createElement('div');
-                                            fileElement.textContent = file.name;
-                                            preview.appendChild(fileElement);
-                                        });
-                                    });
-                            
-                                    document.getElementById('images').addEventListener('change', function(event) {
-                                        const files = event.target.files;
-                                        const preview = document.getElementById('images-preview');
-                                        preview.innerHTML = ''; // Xóa nội dung cũ
-                            
-                                        Array.from(files).forEach(file => {
-                                            if (file.type.startsWith('image/')) {
-                                                const imgElement = document.createElement('img');
-                                                imgElement.src = URL.createObjectURL(file);
-                                                imgElement.style.maxWidth = '150px'; // Giới hạn kích thước ảnh
-                                                imgElement.style.marginRight = '10px';
-                                                imgElement.alt = file.name;
-                                                preview.appendChild(imgElement);
-                                            } else {
-                                                console.warn('Tệp không phải ảnh:', file.name);
-                                            }
-                                        });
-                                    });
-                                });
-                            </script>
-                            
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Đại diện pháp luật</span>
+                                </div>
+                                <input type="text" name="representative_name" placeholder=""
+                                    value="{{ old('representative_name', $industrialDesign->representative_name) }}"
+                                    class="input input-bordered w-full {{ $errors->has('representative_name') ? 'input-error' : '' }}" />
+                                @error('representative_name')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Địa chỉ Đại diện pháp luật</span>
+                                </div>
+                                <input type="text" name="representative_address" placeholder="..."
+                                    value="{{ old('representative_address', $industrialDesign->representative_address) }}"
+                                    class="input input-bordered w-full {{ $errors->has('representative_address') ? 'input-error' : '' }}" />
+                                @error('representative_address')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
 
+                            <label class="form-control w-full">
+                                <div class="label">
+                                    <span class="label-text">Mô tả</span>
+                                </div>
+                                <textarea name="description" id="description"
+                                    class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('description') ? 'input-error' : '' }}"
+                                    rows="1">{!! old('description', $industrialDesign->description) !!}</textarea>
+                                @error('description')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
                         </div>
                         {{-- Column 2 --}}
                         <div>
@@ -203,10 +175,10 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Số đơn gốc</span>
                                 </div>
-                                <input type="text" name="application_number" placeholder="Nhập vào"
-                                    value="{{ old('application_number', $industrialDesign->application_number) }}"
-                                    class="input input-bordered w-full {{ $errors->has('application_number') ? 'input-error' : '' }}" />
-                                @error('application_number')
+                                <input type="text" name="filing_number" placeholder="Nhập vào"
+                                    value="{{ old('filing_number', $industrialDesign->filing_number) }}"
+                                    class="input input-bordered w-full {{ $errors->has('filing_number') ? 'input-error' : '' }}" />
+                                @error('filing_number')
                                     <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </label>
@@ -215,47 +187,10 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày nộp đơn</span>
                                 </div>
-                                <input type="date" name="submission_date" placeholder="Select Submission Date"
-                                    value="{{ old('submission_date', $industrialDesign->submission_date ? \Carbon\Carbon::parse($industrialDesign->submission_date)->format('Y-m-d') : '') }}"
-                                    class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
-                                @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
-                                @enderror
-                            </label>
-
-
-                            <label class="form-control w-[95%]">
-                                <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Trạng thái đơn</span>
-                                </div>
-                                <select name="submission_status"
-                                    class="input input-bordered w-full @error('submission_status') border-red-500 @enderror">
-                                    <option value="">Lựa chọn</option>
-                                    <option value="1"
-                                        {{ old('submission_status', $industrialDesign->submission_status) == '1' ? 'selected' : '' }}>
-                                        Đang xử lý</option>
-                                    <option value="2"
-                                        {{ old('submission_status', $industrialDesign->submission_status) == '2' ? 'selected' : '' }}>
-                                        Đã
-                                        cấp</option>
-                                    <option value="3"
-                                        {{ old('submission_status', $industrialDesign->submission_status) == '3' ? 'selected' : '' }}>
-                                        Bị
-                                        từ chối</option>
-                                </select>
-                                @error('submission_status')
-                                    <small class="text-red-500">{{ $message }}</small>
-                                @enderror
-                            </label>
-
-                            <label class="form-control w-[95%]">
-                                <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Ngày công bố</span>
-                                </div>
-                                <input type="date" name="publication_date" placeholder="Select Publication Date"
-                                    value="{{ old('publication_date', $industrialDesign->publication_date ? \Carbon\Carbon::parse($industrialDesign->publication_date)->format('Y-m-d') : '') }}"
-                                    class="input input-bordered w-full @error('publication_date') border-red-500 @enderror" />
-                                @error('publication_date')
+                                <input type="date" name="filing_date" placeholder="Select Submission Date"
+                                    value="{{ old('filing_date', $industrialDesign->filing_date ? \Carbon\Carbon::parse($industrialDesign->filing_date)->format('Y-m-d') : '') }}"
+                                    class="input input-bordered w-full @error('filing_date') border-red-500 @enderror" />
+                                @error('filing_date')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
@@ -274,12 +209,36 @@
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Ngày cấp</span>
+                                    <span class="text-sm font-medium text-gray-700">Ngày công bố</span>
                                 </div>
-                                <input type="date" name="design_date" placeholder="Select Publication Date"
-                                    value="{{ old('design_date', $industrialDesign->design_date ? \Carbon\Carbon::parse($industrialDesign->design_date)->format('Y-m-d') : '') }}"
-                                    class="input input-bordered w-full @error('design_date') border-red-500 @enderror" />
-                                @error('design_date')
+                                <input type="date" name="publication_date" placeholder="Select Publication Date"
+                                    value="{{ old('publication_date', $industrialDesign->publication_date ? \Carbon\Carbon::parse($industrialDesign->publication_date)->format('Y-m-d') : '') }}"
+                                    class="input input-bordered w-full @error('publication_date') border-red-500 @enderror" />
+                                @error('publication_date')
+                                    <small class="text-red-500">{{ $message }}</small>
+                                @enderror
+                            </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Số bằng</span>
+                                </div>
+                                <input type="text" name="registration_number" placeholder="..."
+                                    value="{{ old('registration_number', $industrialDesign->registration_number) }}"
+                                    class="input input-bordered w-full {{ $errors->has('registration_number') ? 'input-error' : '' }}" />
+                                @error('registration_number')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Ngày cấp bằng</span>
+                                </div>
+                                <input type="date" name="registration_date" placeholder="Select Publication Date"
+                                    value="{{ old('registration_date', $industrialDesign->registration_date ? \Carbon\Carbon::parse($industrialDesign->registration_date)->format('Y-m-d') : '') }}"
+                                    class="input input-bordered w-full @error('registration_date') border-red-500 @enderror" />
+                                @error('registration_date')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
@@ -288,41 +247,128 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày hết hạn</span>
                                 </div>
-                                <input type="date" name="out_of_date"
+                                <input type="date" name="expiration_date"
                                     placeholder="Select industrialDesign Out of Date"
-                                    value="{{ old('out_of_date', $industrialDesign->out_of_date ? \Carbon\Carbon::parse($industrialDesign->out_of_date)->format('Y-m-d') : '') }}"
-                                    class="input input-bordered w-full @error('out_of_date') border-red-500 @enderror" />
-                                @error('out_of_date')
+                                    value="{{ old('expiration_date', $industrialDesign->expiration_date ? \Carbon\Carbon::parse($industrialDesign->expiration_date)->format('Y-m-d') : '') }}"
+                                    class="input input-bordered w-full @error('expiration_date') border-red-500 @enderror" />
+                                @error('expiration_date')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Trạng thái hiệu lực</span>
+                                    <span class="text-sm font-medium text-gray-700">Phân loại locarno</span>
                                 </div>
-                                <select name="design_status"
-                                    class="input input-bordered w-full @error('design_status') border-red-500 @enderror">
+                                <input type="text" name="locarno_classes" placeholder=""
+                                    value="{{ old('locarno_classes', $industrialDesign->locarno_classes) }}"
+                                    class="input input-bordered w-full {{ $errors->has('locarno_classes') ? 'input-error' : '' }}" />
+                                @error('locarno_classes')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                            </label>
+
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Trạng thái</span>
+                                </div>
+                                <select name="status"
+                                    class="input input-bordered w-full @error('status') border-red-500 @enderror">
                                     <option value="">Lựa chọn</option>
-                                    <option value="1"
-                                        {{ old('design_status', $industrialDesign->design_status) == '1' ? 'selected' : '' }}>
-                                        Hiệu lực</option>
-                                    <option value="2"
-                                        {{ old('design_status', $industrialDesign->design_status) == '2' ? 'selected' : '' }}>
+                                    <option value="Hết hạn"
+                                        {{ old('status', $industrialDesign->status) == 'Hết hạn' ? 'selected' : '' }}>
                                         Hết hạn</option>
-                                    <option value="3"
-                                        {{ old('design_status', $industrialDesign->design_status) == '3' ? 'selected' : '' }}>
-                                        Bị huỷ</option>
+                                    <option value="Đã cấp phép"
+                                        {{ old('status', $industrialDesign->status) == 'Đã cấp phép' ? 'selected' : '' }}>
+                                        Đã cấp phép</option>
+                                    <option value="Đang chờ xử lý"
+                                        {{ old('status, $industrialDesign->status') == 'Đang chờ xử lý' ? 'selected' : '' }}>
+                                        Đang chờ xử lý</option>
+                                    <option value="Bị từ chối"
+                                        {{ old('status', $industrialDesign->status) == 'Bị từ chối' ? 'selected' : '' }}>
+                                        Bị từ chối</option>
+                                    <option value="Đã rút lại"
+                                        {{ old('status', $industrialDesign->status) == 'Đã rút lại' ? 'selected' : '' }}>
+                                        Đã rút lại</option>
                                 </select>
-                                @error('design_status')
+                                @error('status')
                                     <small class="text-red-500">{{ $message }}</small>
                                 @enderror
                             </label>
 
+                            <!-- Tệp đính kèm -->
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Tệp đính kèm (tối đa 10MB)</span>
+                                </div>
+                                <input type="file" id="documents" name="documents[]" multiple
+                                    accept=".pdf, .doc, .docx"
+                                    class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('documents') ? 'input-error' : '' }}" />
+                                @error('documents')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                                <div id="documents-preview">
+                                    @foreach ($industrialDesign->documents as $document)
+                                        <div>{{ $document->file_name }}</div>
+                                    @endforeach
+                                </div>
+                            </label>
+
+                            <!-- Ảnh -->
+                            <label class="form-control w-[95%]">
+                                <div class="label">
+                                    <span class="text-sm font-medium text-gray-700">Ảnh (tối đa 10MB)</span>
+                                </div>
+                                <input type="file" id="images" name="images[]" multiple accept="image/*"
+                                    class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('images') ? 'input-error' : '' }}" />
+                                @error('images')
+                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                @enderror
+                                <div id="images-preview" class="grid grid-cols-2 gap-4 mt-4">
+                                    @foreach ($industrialDesign->images as $image)
+                                        <div class="flex justify-center items-center">
+                                            <img src="{{ asset('storage/' . $image->file_path) }}"
+                                                style="max-width: 150px; border-radius: 30px; padding: 10px;"
+                                                alt="{{ $image->file_name }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </label>
+
+
                         </div>
+                        <!-- Tọa độ -->
+                        <label class="form-control w-[95%]">
+                            <div class="label">
+                                <span class="text-sm font-medium text-gray-700">Kinh độ</span>
+                            </div>
+                            <input type="text" id="longitude" name="longitude" placeholder="Nhập kinh độ"
+                                value="{{ old('longitude', $industrialDesign->getLongitude($industrialDesign->id)) }}"
+                                class="input input-bordered w-full {{ $errors->has('longitude') ? 'input-error' : '' }}" />
+                            @error('longitude')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+                        </label>
+
+                        <label class="form-control w-[95%]">
+                            <div class="label">
+                                <span class="text-sm font-medium text-gray-700">Vĩ độ</span>
+                            </div>
+                            <input type="text" id="latitude" name="latitude" placeholder="Nhập vĩ độ"
+                                value="{{ old('latitude', $industrialDesign->getLatitude($industrialDesign->id)) }}"
+                                class="input input-bordered w-full {{ $errors->has('latitude') ? 'input-error' : '' }}" />
+                            @error('latitude')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+                        </label>
                     </div>
+                    <div id="map" style="height: 500px; width: 100%;"></div>
+
+                    <!-- Nút để lấy tọa độ hiện tại của người dùng -->
+                    <button id="getCurrentLocation" class="btn btn-link float-left !m-0" type="button">Lấy vị trí
+                        hiện tại</button>
                 </div>
-                <div class="flex gap-4 justify-center">
+                <div class="flex gap-4 justify-center p-6">
                     <a href="{{ route('admin.industrial_designs.index') }}"
                         class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
                     <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
@@ -333,6 +379,7 @@
     </div>
 
     @pushonce('bottom_scripts')
+        <x-admin.forms.tinymce-config column="description" model="IndustrialDesign" />
         {{-- Get communes based on district --}}
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src='{{ asset('adminpage/get_communes.js') }}'></script>
@@ -340,7 +387,80 @@
             var getCommunesUrl = "{{ route('admin.patents.getCommunes', '') }}";
         </script>
 
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
+        <script src='{{ asset('adminpage/map/getlocation_edit.js') }}'></script>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+                // Kiểm tra kích thước tài liệu
+                document.getElementById('documents').addEventListener('change', function(event) {
+                    const files = event.target.files;
+                    const preview = document.getElementById('documents-preview');
+                    preview.innerHTML = ''; // Xóa nội dung cũ
+
+                    Array.from(files).forEach(file => {
+                        if (file.size > MAX_FILE_SIZE) {
+                            alert(`Tệp ${file.name} vượt quá kích thước tối đa 10MB.`);
+                            event.target.value = ''; // Xóa tệp đã chọn
+                            return;
+                        }
+                        const fileElement = document.createElement('div');
+                        fileElement.textContent = file.name; // Hiển thị tên tệp
+
+                        preview.appendChild(fileElement);
+                    });
+                });
+
+                // Kiểm tra kích thước hình ảnh
+                document.getElementById('images').addEventListener('change', function(event) {
+                    const files = event.target.files;
+                    const preview = document.getElementById('images-preview');
+
+                    // Tạo một mảng để chứa các phần tử hình ảnh
+                    const imageElements = [];
+
+                    Array.from(files).forEach(file => {
+                        if (file.size > MAX_FILE_SIZE) {
+                            alert(`Hình ảnh ${file.name} vượt quá kích thước tối đa 10MB.`);
+                            event.target.value = ''; // Xóa hình ảnh đã chọn
+                            return;
+                        }
+                        if (file.type.startsWith('image/')) {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = URL.createObjectURL(file);
+                            imgElement.style.maxWidth = '150px';
+                            imgElement.style.borderRadius = '18px';
+                            imgElement.style.padding = '10px'; // Padding cho ảnh
+                            imgElement.alt = file.name;
+
+                            // Tạo một container cho ảnh và thêm vào danh sách
+                            const imageContainer = document.createElement('div');
+                            imageContainer.className =
+                            'flex justify-center items-center'; // Center the image
+                            imageContainer.appendChild(imgElement);
+
+                            // Thêm phần tử vào đầu mảng
+                            imageElements.unshift(imageContainer);
+                        }
+                    });
+
+                    // Xóa các ảnh hiện tại trong preview
+                    preview.innerHTML = '';
+
+                    // Cập nhật preview với các ảnh đã sắp xếp
+                    imageElements.forEach((element) => {
+                        preview.appendChild(element);
+                    });
+
+                    // Xác định số cột cho lưới
+                    const numberOfRows = Math.ceil(imageElements.length / 2);
+                    preview.className = `grid grid-cols-${numberOfRows} gap-4 mt-4`;
+                });
+            });
+        </script>
     @endpushonce
 
 </x-admin-layout>

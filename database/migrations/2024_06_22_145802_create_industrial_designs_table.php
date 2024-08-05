@@ -43,10 +43,10 @@ return new class extends Migration
             $table->dateTime('expiration_date')->nullable()->comment('Ngày hết hạn');
 
             $table->string('designer')->nullable()->comment('Người thiết kế');
-            $table->string('designer_adress')->nullable()->comment('Địa chỉ người thiết kế');
+            $table->string('designer_address')->nullable()->comment('Địa chỉ người thiết kế');
             $table->string('locarno_classes')->nullable()->comment('Phân loại locarno');
             $table->string('representative_name')->nullable()->comment('Tên đại diện pháp luật');
-            $table->string('representative_adress')->nullable()->comment('Địa chỉ đại diện pháp luật');
+            $table->string('representative_address')->nullable()->comment('Địa chỉ đại diện pháp luật');
 
             // $table->string('status')->nullable()->comment('Trạng thái: Expired, GRANTED, Pending, Rejected, Withdrawn');
             $table->string('status')->nullable()->comment('Trạng thái: Hết hạn, Đã cấp phép, Đang chờ xử lý, Bị từ chối, Đã rút lại');
