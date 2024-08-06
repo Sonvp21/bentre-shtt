@@ -369,10 +369,6 @@
             var getCommunesUrl = "{{ route('admin.patents.getCommunes', '') }}";
         </script>
 
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
-        <script src='{{ asset('adminpage/map/getlocation_create.js') }}'></script>
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -421,7 +417,7 @@
                             // Tạo một container cho ảnh và thêm vào danh sách
                             const imageContainer = document.createElement('div');
                             imageContainer.className =
-                            'flex justify-center items-center'; // Center the image
+                                'flex justify-center items-center'; // Center the image
                             imageContainer.appendChild(imgElement);
                             imageElements.unshift(imageContainer); // Thêm vào đầu danh sách
                         }
@@ -438,6 +434,12 @@
                 });
             });
         </script>
+        {{-- lấy toạ độ create --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
+        <script src='{{ asset('adminpage/map/getlocation_create.js') }}'></script>
+
     @endpushonce
 
 </x-admin-layout>

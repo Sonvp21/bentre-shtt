@@ -38,7 +38,7 @@ class IndustrialDesignController extends Controller
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
-        $IndustrialDesigns = $query->with('commune.district')->orderBy('updated_at', 'desc')->paginate(10);
+        $IndustrialDesigns = $query->with('commune.district')->first()->paginate(10);
 
         if ($request->ajax()) {
             return view('admin.industrial_designs.ajax_list', compact('IndustrialDesigns'))->render();
@@ -60,7 +60,7 @@ class IndustrialDesignController extends Controller
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
-        $IndustrialDesigns = $query->with('commune.district')->orderBy('updated_at', 'desc')->paginate(10);
+        $IndustrialDesigns = $query->with('commune.district', 'images')->first()->paginate(10);
 
         return view('admin.industrial_designs.ajax_list', compact('IndustrialDesigns'))->render();
     }
@@ -129,37 +129,39 @@ class IndustrialDesignController extends Controller
         // Cập nhật thông tin cơ bản
         $validatedData = $request->validated();
         $industrialDesign->update($validatedData);
-
+    
         // Cập nhật tọa độ
         $longitude = $request->input('longitude');
         $latitude = $request->input('latitude');
         $industrialDesign->updateCoordinates($industrialDesign->id, $longitude, $latitude);
-
-        // Xóa các bản ghi cũ trong cơ sở dữ liệu và thư mục lưu trữ
+    
+        // Chỉ xóa các tài liệu và ảnh cũ nếu có tệp đính kèm mới
         $documentsDirectory = 'public/industrial_designs/documents/' . $industrialDesign->filing_number;
         $imagesDirectory = 'public/industrial_designs/images/' . $industrialDesign->filing_number;
-
-        // Xóa các tài liệu cũ trong cơ sở dữ liệu và thư mục lưu trữ
-        $industrialDesign->documents()->each(function ($document) use ($documentsDirectory) {
-            Storage::delete($documentsDirectory . '/' . $document->file_name);
-            $document->delete();
-        });
-
-        // Xóa các ảnh cũ trong cơ sở dữ liệu và thư mục lưu trữ
-        $industrialDesign->images()->each(function ($image) use ($imagesDirectory) {
-            Storage::delete($imagesDirectory . '/' . $image->file_name);
-            $image->delete();
-        });
-
-        // Xóa thư mục cũ nếu rỗng
-        if (Storage::exists($documentsDirectory)) {
-            Storage::deleteDirectory($documentsDirectory);
+    
+        if ($request->hasFile('documents') || $request->hasFile('images')) {
+            // Xóa các tài liệu cũ trong cơ sở dữ liệu và thư mục lưu trữ
+            $industrialDesign->documents()->each(function ($document) use ($documentsDirectory) {
+                Storage::delete($documentsDirectory . '/' . $document->file_name);
+                $document->delete();
+            });
+    
+            // Xóa các ảnh cũ trong cơ sở dữ liệu và thư mục lưu trữ
+            $industrialDesign->images()->each(function ($image) use ($imagesDirectory) {
+                Storage::delete($imagesDirectory . '/' . $image->file_name);
+                $image->delete();
+            });
+    
+            // Xóa thư mục cũ nếu rỗng
+            if (Storage::exists($documentsDirectory)) {
+                Storage::deleteDirectory($documentsDirectory);
+            }
+    
+            if (Storage::exists($imagesDirectory)) {
+                Storage::deleteDirectory($imagesDirectory);
+            }
         }
-
-        if (Storage::exists($imagesDirectory)) {
-            Storage::deleteDirectory($imagesDirectory);
-        }
-
+    
         // Lưu các tệp đính kèm mới
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as $file) {
@@ -175,7 +177,7 @@ class IndustrialDesignController extends Controller
                 }
             }
         }
-
+    
         // Lưu các ảnh mới
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
@@ -191,9 +193,10 @@ class IndustrialDesignController extends Controller
                 }
             }
         }
-
+    
         return redirect()->route('admin.industrial_designs.index')->with('success', 'Kiểu dáng đã được cập nhật thành công.');
     }
+    
 
     public function destroy(IndustrialDesign $industrialDesign): RedirectResponse
     {

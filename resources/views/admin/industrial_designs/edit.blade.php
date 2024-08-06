@@ -380,16 +380,12 @@
 
     @pushonce('bottom_scripts')
         <x-admin.forms.tinymce-config column="description" model="IndustrialDesign" />
-        {{-- Get communes based on district --}}
+        {{-- Lấy xã theo huyện --}}
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src='{{ asset('adminpage/get_communes.js') }}'></script>
         <script>
             var getCommunesUrl = "{{ route('admin.patents.getCommunes', '') }}";
         </script>
-
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
-        <script src='{{ asset('adminpage/map/getlocation_edit.js') }}'></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -439,7 +435,7 @@
                             // Tạo một container cho ảnh và thêm vào danh sách
                             const imageContainer = document.createElement('div');
                             imageContainer.className =
-                            'flex justify-center items-center'; // Center the image
+                                'flex justify-center items-center'; // Center the image
                             imageContainer.appendChild(imgElement);
 
                             // Thêm phần tử vào đầu mảng
@@ -461,6 +457,12 @@
                 });
             });
         </script>
+
+        {{-- lấy toạ độ  --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
+        <script src='{{ asset('adminpage/map/getlocation_edit.js') }}'></script>
     @endpushonce
 
 </x-admin-layout>
