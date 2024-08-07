@@ -56,7 +56,7 @@ class TrademarkController extends Controller
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
-        $trademarks = $query->with('commune.district')->orderBy('updated_at', 'desc')->paginate(10);
+        $trademarks = $query->with('commune.district')->orderBy('updated_at', 'asc')->paginate(10);
 
         if ($request->ajax()) {
             return view('admin.trademarks.ajax_list', compact('trademarks'))->render();
@@ -79,7 +79,7 @@ class TrademarkController extends Controller
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
-        $trademarks = $query->with('commune.district')->orderBy('updated_at', 'desc')->paginate(10);
+        $trademarks = $query->with('commune.district')->orderBy('updated_at', 'asc')->paginate(10);
 
         return view('admin.trademarks.ajax_list', compact('trademarks'))->render();
     }
@@ -155,41 +155,28 @@ class TrademarkController extends Controller
         // Cập nhật thông tin cơ bản
         $validatedData = $request->validated();
         $trademark->update($validatedData);
-
+    
         // Cập nhật tọa độ
         $longitude = $request->input('longitude');
         $latitude = $request->input('latitude');
         $trademark->updateCoordinates($trademark->id, $longitude, $latitude);
-
-        // Chỉ xóa các tài liệu và ảnh cũ nếu có tệp đính kèm mới
-        $documentsDirectory = 'public/trademarks/documents/' . $trademark->filing_number;
-        $imagesDirectory = 'public/trademarks/images/' . $trademark->filing_number;
-
-        if ($request->hasFile('documents') || $request->hasFile('images')) {
+    
+        // Chỉ xóa các tài liệu cũ nếu có tệp đính kèm mới
+        if ($request->hasFile('documents')) {
+            $documentsDirectory = 'public/trademarks/documents/' . $trademark->filing_number;
+    
             // Xóa các tài liệu cũ trong cơ sở dữ liệu và thư mục lưu trữ
             $trademark->documents()->each(function ($document) use ($documentsDirectory) {
                 Storage::delete($documentsDirectory . '/' . $document->file_name);
                 $document->delete();
             });
-
-            // Xóa các ảnh cũ trong cơ sở dữ liệu và thư mục lưu trữ
-            $trademark->images()->each(function ($image) use ($imagesDirectory) {
-                Storage::delete($imagesDirectory . '/' . $image->file_name);
-                $image->delete();
-            });
-
+    
             // Xóa thư mục cũ nếu rỗng
             if (Storage::exists($documentsDirectory)) {
                 Storage::deleteDirectory($documentsDirectory);
             }
-
-            if (Storage::exists($imagesDirectory)) {
-                Storage::deleteDirectory($imagesDirectory);
-            }
-        }
-
-        // Lưu các tệp đính kèm mới
-        if ($request->hasFile('documents')) {
+    
+            // Lưu các tệp đính kèm mới
             foreach ($request->file('documents') as $file) {
                 if ($file->isValid()) {
                     $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
@@ -203,9 +190,23 @@ class TrademarkController extends Controller
                 }
             }
         }
-
-        // Lưu các ảnh mới
+    
+        // Chỉ xóa các ảnh cũ nếu có ảnh mới
         if ($request->hasFile('images')) {
+            $imagesDirectory = 'public/trademarks/images/' . $trademark->filing_number;
+    
+            // Xóa các ảnh cũ trong cơ sở dữ liệu và thư mục lưu trữ
+            $trademark->images()->each(function ($image) use ($imagesDirectory) {
+                Storage::delete($imagesDirectory . '/' . $image->file_name);
+                $image->delete();
+            });
+    
+            // Xóa thư mục cũ nếu rỗng
+            if (Storage::exists($imagesDirectory)) {
+                Storage::deleteDirectory($imagesDirectory);
+            }
+    
+            // Lưu các ảnh mới
             foreach ($request->file('images') as $file) {
                 if ($file->isValid()) {
                     $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
@@ -219,10 +220,9 @@ class TrademarkController extends Controller
                 }
             }
         }
-
+    
         return redirect()->route('admin.trademarks.index')->with('success', 'Kiểu dáng đã được cập nhật thành công.');
-    }
-
+    }    
 
     public function destroy(Trademark $trademark): RedirectResponse
     {

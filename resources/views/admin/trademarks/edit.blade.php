@@ -420,9 +420,9 @@
                         hiện tại</button>
                 </div>
                 <div class="flex gap-4 justify-center p-3">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
                     <a href="{{ route('admin.trademarks.index') }}"
                         class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
                 </div>
 
             </form>
