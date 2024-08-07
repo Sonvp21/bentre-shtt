@@ -15,7 +15,7 @@
     <tbody>
         @foreach ($trademarks as $index => $trademark)
             <tr>
-                <td class="text-center">{{ $index + 1 }}</td>
+                <td class="text-center">{{ ($trademarks->currentPage() - 1) * $trademarks->perPage() + $loop->iteration }}</td>
                 <td>{{ $trademark->filing_number }}</td>
                 <td>{{ $trademark->type->name ?? '' }}</td>
                 <td>{{ $trademark->mark }}</td>
