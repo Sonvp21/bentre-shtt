@@ -370,9 +370,9 @@
                         hiện tại</button>
                 </div>
                 <div class="flex gap-4 justify-center p-6">
+                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
                     <a href="{{ route('admin.industrial_designs.index') }}"
                         class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                    <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
                 </div>
             </form>
 
