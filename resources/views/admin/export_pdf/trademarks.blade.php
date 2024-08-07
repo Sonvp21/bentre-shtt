@@ -50,17 +50,31 @@
                 <th>Huyện</th>
                 <th>Xã</th>
                 <th>Nhóm ngành</th>
+
                 <th>Tên nhãn hiệu</th>
+                <th>Màu nhãn hiệu</th>
+                <th>Kiểu mẫu nhãn</th>
+                <th>Phân loại hình</th>
+                <th>Yếu tố loại trừ</th>
                 <th>Chủ nhãn hiệu</th>
-                <th>Mô tả</th>
                 <th>Địa chỉ</th>
-                <th>Liên hệ</th>
+                <th>Tên chủ khác</th>
+
+                <th>Loại đơn</th>
                 <th>Số đơn</th>
                 <th>Ngày nộp đơn</th>
-                <th>Trạng thái đơn</th>
+
                 <th>Số công bố</th>
                 <th>Ngày công bố</th>
+
+                <th>Số bằng</th>
+                <th>Ngày cấp bằng</th>
                 <th>Ngày hết hạn</th>
+
+                <th>Đại diện pháp luật</th>
+                <th>Địa chỉ đại diện</th>
+
+                <th>Trạng thái</th>
             </tr>
         </thead>
         <tbody>
@@ -70,17 +84,31 @@
                     <td>{{ $trademark['district_name'] }}</td>
                     <td>{{ $trademark['commune_name'] }}</td>
                     <td>{{ $trademark['type_name'] }}</td>
-                    <td>{{ $trademark['name'] }}</td>
+
+                    <td>{{ $trademark['mark'] }}</td>
+                    <td>{{ $trademark['mark_colors'] }}</td>
+                    <td>{{ $trademark['mark_feature'] }}</td>
+                    <td>{{ $trademark['vienna_classes'] }}</td>
+                    <td>{{ $trademark['disclaimer'] }}</td>
                     <td>{{ $trademark['owner'] }}</td>
-                    <td>{{ $trademark['description'] }}</td>
                     <td>{{ $trademark['address'] }}</td>
-                    <td>{{ $trademark['contact'] }}</td>
-                    <td>{{ $trademark['application_number'] }}</td>
-                    <td>{{ $trademark['submission_date'] }}</td>
-                    <td>{{ $trademark['submission_status_text'] }}</td>
+                    <td>{{ $trademark['other_owner'] }}</td>
+
+                    <td>{{ $trademark['application_type'] }}</td>
+                    <td>{{ $trademark['filing_number'] }}</td>
+                    <td>{{ $trademark['filing_date'] }}</td>
+
                     <td>{{ $trademark['publication_number'] }}</td>
                     <td>{{ $trademark['publication_date'] }}</td>
-                    <td>{{ $trademark['out_of_date'] }}</td>
+
+                    <td>{{ $trademark['registration_number'] }}</td>
+                    <td>{{ $trademark['registration_date'] }}</td>
+                    <td>{{ $trademark['expiration_date'] }}</td>
+
+                    <td>{{ $trademark['representative_name'] }}</td>
+                    <td>{{ $trademark['representative_address'] }}</td>
+
+                    <td>{{ $trademark['status'] }}</td>
                 </tr>
             @endforeach
         </tbody>

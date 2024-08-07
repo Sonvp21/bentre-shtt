@@ -8,7 +8,7 @@
             <th>Tên nhãn hiệu</th>
             <th>Chủ nhãn hiệu</th>
             <th>Ngày nộp đơn</th>
-            <th>Trạng thái đơn</th>
+            <th>Trạng thái</th>
             <th>Thao tác</th>
         </tr>
     </thead>
@@ -16,12 +16,12 @@
         @foreach ($trademarks as $index => $trademark)
             <tr>
                 <td class="text-center">{{ $index + 1 }}</td>
-                <td>{{ $trademark->application_number }}</td>
+                <td>{{ $trademark->filing_number }}</td>
                 <td>{{ $trademark->type->name ?? '' }}</td>
                 <td>{{ $trademark->mark }}</td>
                 <td>{{ $trademark->owner }}</td>
-                <td class="text-center">{{ $trademark->submission_date }}</td>
-                <td class="text-center">{!! $trademark->submission_status_text !!}</td>
+                <td class="text-center">{{ $trademark->filing_date }}</td>
+                <td class="text-center">{{ $trademark->status }}</td>
                 <td class="flex justify-around">
                     <a href="{{ route('admin.trademarks.edit', $trademark) }}" type="button"><i
                             class="fa fa-edit text-yellow-600"></i></a>

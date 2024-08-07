@@ -25,17 +25,31 @@ class TrademarksExport implements FromCollection, WithHeadings
                 'Huyện' => $trademark['district_name'] ?? null,
                 'Xã' => $trademark['commune_name'] ?? null,
                 'Nhóm ngành' => $trademark['type_name'] ?? null,
-                'Tên nhãn hiệu' => $trademark['name'] ?? null,
+
+                'Tên nhãn hiệu' => $trademark['mark'] ?? null,
+                'Màu nhãn hiệu' => $trademark['mark_colors'] ?? null,
+                'Kiểu mẫu nhãn' => $trademark['mark_feature'] ?? null,
+                'Phân loại hình' => $trademark['vienna_classes'] ?? null,
+                'Yếu tố loại trừ' => $trademark['disclaimer'] ?? null,
                 'Chủ nhãn hiệu' => $trademark['owner'] ?? null,
-                'Mô tả' => $trademark['description'] ?? null,
                 'Địa chỉ' => $trademark['address'] ?? null,
-                'Liên hệ' => $trademark['contact'] ?? null,
-                'Số đơn' => $trademark['application_number'] ?? null,
-                'Ngày nộp đơn' => $trademark['submission_date'] ?? null,
-                'Trạng thái đơn' => $trademark['submission_status_text'] ?? null,
+                'Tên chủ khác' => $trademark['other_owner'] ?? null,
+
+                'Loại đơn' => $trademark['application_type'] ?? null,
+                'Số đơn' => $trademark['filing_number'] ?? null,
+                'Ngày nộp đơn' => $trademark['filing_date'] ?? null,
+
                 'Số công bố' => $trademark['publication_number'] ?? null,
                 'Ngày công bố' => $trademark['publication_date'] ?? null,
-                'Ngày hết hạn' => $trademark['out_of_date'] ?? null,
+
+                'Số bằng' => $trademark['registration_number'] ?? null,
+                'Ngày cấp bằng' => $trademark['registration_date'] ?? null,
+                'Ngày hết hạn' => $trademark['expiration_date'] ?? null,
+
+                'Đại diện pháp luật' => $trademark['representative_name'] ?? null,
+                'Địa chỉ đại diện' => $trademark['representative_address'] ?? null,
+
+                'Trạng thái' => $trademark['status'] ?? null,
             ];
         }
 
@@ -48,17 +62,31 @@ class TrademarksExport implements FromCollection, WithHeadings
             'Huyện',
             'Xã',
             'Nhóm ngành',
+
             'Tên nhãn hiệu',
-            'Chủ nhãn hiệu' ,
-            'Mô tả',
+            'Màu nhãn hiệu',
+            'Kiểu mẫu nhãn',
+            'Phân loại hình',
+            'Yếu tố loại trừ',
+            'Chủ nhãn hiệu',
             'Địa chỉ',
-            'Liên hệ',
+            'Tên chủ khác',
+
+            'Loại đơn',
             'Số đơn',
-            'Ngày nộp đơn' ,
-            'Trạng thái đơn',
+            'Ngày nộp đơn',
+
             'Số công bố',
             'Ngày công bố',
+
+            'Số bằng',
+            'Ngày cấp bằng',
             'Ngày hết hạn',
+
+            'Đại diện pháp luật',
+            'Địa chỉ đại diện',
+
+            'Trạng thái',
         ];
     }
 }

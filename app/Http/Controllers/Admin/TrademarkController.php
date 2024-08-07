@@ -28,29 +28,31 @@ class TrademarkController extends Controller
         $districts = District::pluck('name', 'id')->toArray();
         $communes = Commune::pluck('name', 'id')->toArray();
         $types = TrademarkType::pluck('name', 'id')->toArray();
-        $uniqueNames = Trademark::select('mark')->distinct()->pluck('mark')->toArray();
-        $uniqueSubmissionStatuses = Trademark::select('status')->distinct()->pluck('status')->toArray();
+        $uniqueStatuses = Trademark::select('status')->distinct()->pluck('status')->toArray();
         $uniquePublicationYears = Trademark::select(DB::raw('DISTINCT EXTRACT(YEAR FROM publication_date) as year'))
             ->orderBy('year')
             ->pluck('year')
             ->toArray();
         // Ánh xạ các giá trị trạng thái với các văn bản mô tả
-        $submissionStatusMap = [
-            1 => 'Đang xử lý',
-            2 => 'Đã cấp',
-            3 => 'Bị từ chối',
+        $statusMap = [
+            'Đang giải quyết' => 'Đang giải quyết',
+            'Cấp bằng' => 'Cấp bằng',
+            'Hết hạn' => 'Hết hạn',
+            'Rút đơn' => 'Rút đơn',
+            'Từ bỏ' => 'Từ bỏ',
+            'Từ chối' => 'Từ chối',
         ];
 
         // Tạo mảng các tùy chọn trạng thái
-        $uniqueSubmissionStatus = [];
-        foreach ($uniqueSubmissionStatuses as $status) {
-            if (isset($submissionStatusMap[$status])) {
-                $uniqueSubmissionStatus[$status] = $submissionStatusMap[$status];
+        $uniqueStatus = [];
+        foreach ($uniqueStatuses as $status) {
+            if (isset($statusMap[$status])) {
+                $uniqueStatus[$status] = $statusMap[$status];
             }
         }
 
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'status', 'publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'mark', 'owner', 'status', 'filing_number', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -65,8 +67,7 @@ class TrademarkController extends Controller
             'districts',
             'communes',
             'types',
-            'uniqueNames',
-            'uniqueSubmissionStatus',
+            'uniqueStatus',
             'uniquePublicationYears'
         ));
     }
@@ -74,7 +75,7 @@ class TrademarkController extends Controller
     public function ajaxList(Request $request)
     {
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'mark', 'owner', 'status', 'publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'mark', 'owner', 'status', 'filing_number', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -279,7 +280,7 @@ class TrademarkController extends Controller
     public function ajaxExport(Request $request)
     {
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'status', 'publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'mark', 'owner', 'status', 'filing_number', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -293,29 +294,31 @@ class TrademarkController extends Controller
         $districts = District::pluck('name', 'id')->toArray();
         $communes = Commune::pluck('name', 'id')->toArray();
         $types = TrademarkType::pluck('name', 'id')->toArray();
-        $uniqueNames = Trademark::select('name')->distinct()->pluck('name')->toArray();
-        $uniqueSubmissionStatuses = Trademark::select('status')->distinct()->pluck('status')->toArray();
+        $uniqueStatuses = Trademark::select('status')->distinct()->pluck('status')->toArray();
         $uniquePublicationYears = Trademark::select(DB::raw('DISTINCT EXTRACT(YEAR FROM publication_date) as year'))
             ->orderBy('year')
             ->pluck('year')
             ->toArray();
         // Ánh xạ các giá trị trạng thái với các văn bản mô tả
-        $submissionStatusMap = [
-            1 => 'Đang xử lý',
-            2 => 'Đã cấp',
-            3 => 'Bị từ chối',
+        $statusMap = [
+            'Đang giải quyết' => 'Đang giải quyết',
+            'Cấp bằng' => 'Cấp bằng',
+            'Hết hạn' => 'Hết hạn',
+            'Rút đơn' => 'Rút đơn',
+            'Từ bỏ' => 'Từ bỏ',
+            'Từ chối' => 'Từ chối',
         ];
 
         // Tạo mảng các tùy chọn trạng thái
-        $uniqueSubmissionStatus = [];
-        foreach ($uniqueSubmissionStatuses as $status) {
-            if (isset($submissionStatusMap[$status])) {
-                $uniqueSubmissionStatus[$status] = $submissionStatusMap[$status];
+        $uniqueStatus = [];
+        foreach ($uniqueStatuses as $status) {
+            if (isset($statusMap[$status])) {
+                $uniqueStatus[$status] = $statusMap[$status];
             }
         }
 
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'status', 'publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'mark', 'owner', 'status', 'filing_number', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -330,8 +333,7 @@ class TrademarkController extends Controller
             'districts',
             'communes',
             'types',
-            'uniqueNames',
-            'uniqueSubmissionStatus',
+            'uniqueStatus',
             'uniquePublicationYears'
         ));
     }

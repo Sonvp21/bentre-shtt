@@ -9,7 +9,7 @@
                 class="input input-sm input-bordered w-32">
         </div>
         @foreach ($filters as $filter)
-            <div class="form-control mx-1 w-full md:w-1/4 @if (!in_array($filter['name'], ['publication_date','district_id', 'type_id', 'submission_status'])) hidden @endif">
+            <div class="form-control mx-1 w-full md:w-1/4 @if (!in_array($filter['name'], ['publication_date','district_id', 'type_id', 'status'])) hidden @endif">
                 <label class="label w-32">
                     <span class="label-text">{{ $filter['label'] }}</span>
                 </label>
@@ -17,7 +17,7 @@
                     class="input input-bordered !h-8 !p-1 text-sm">
                     <option value="">Tất cả</option>
                     @foreach ($filter['options'] as $key => $option)
-                        @if ($filter['name'] == 'district_id' || $filter['name'] == 'commune_id' || $filter['name'] == 'type_id' || $filter['name'] == 'submission_status')
+                        @if ($filter['name'] == 'district_id' || $filter['name'] == 'commune_id' || $filter['name'] == 'type_id' || $filter['name'] == 'status')
                             <option value="{{ $key }}"
                                 {{ request($filter['name']) == $key ? 'selected' : '' }}>
                                 {{ $option }}

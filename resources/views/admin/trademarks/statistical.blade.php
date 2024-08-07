@@ -18,7 +18,7 @@
                 'filters' => [
                     ['name' => 'publication_date', 'label' => 'Năm công bố', 'options' => $uniquePublicationYears],
                     ['name' => 'type_id', 'label' => 'Nhóm ngành', 'options' => $types],
-                    ['name' => 'submission_status', 'label' => 'Trạng thái đơn', 'options' => $uniqueSubmissionStatus],
+                    ['name' => 'status', 'label' => 'Trạng thái đơn', 'options' => $uniqueStatus],
                     ['name' => 'district_id', 'label' => 'Huyện', 'options' => $districts],
                     ['name' => 'commune_id', 'label' => 'Xã', 'options' => []],
                 ],
