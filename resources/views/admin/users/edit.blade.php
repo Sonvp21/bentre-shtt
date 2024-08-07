@@ -8,6 +8,7 @@
                 </ul>
         </div>
         <x-admin.alerts.success />
+<x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
             <div class="p-5 overflow-x-auto">
                 <form action="{{ route('admin.users.update', $user) }}" method="POST" enctype="multipart/form-data">

@@ -88,14 +88,6 @@ return [
             'throw' => false,
         ],
 
-        'trademark' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/trademark'),
-            'url' => env('APP_URL').'/storage/trademark',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
         'geographical' => [
             'driver' => 'local',
             'root' => storage_path('app/public/geographical'),

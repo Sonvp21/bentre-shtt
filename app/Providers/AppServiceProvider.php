@@ -16,7 +16,6 @@ use App\Observers\InitiativeEvaluateObserver;
 use App\Observers\InitiativeObserver;
 use App\Observers\PatentObserver;
 use App\Observers\ProductObserver;
-use App\Observers\TrademarkObserver;
 use App\Observers\TrademarkTypeObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,7 +36,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Patent::observe(PatentObserver::class);
         TrademarkType::observe(TrademarkTypeObserver::class);
-        Trademark::observe(TrademarkObserver::class);
         IndustrialDesignType::observe(IndustrialDesignTypeObserver::class);
         Initiative::observe(InitiativeObserver::class);
         InitiativeDossier::observe(InitiativeDossierObserver::class);

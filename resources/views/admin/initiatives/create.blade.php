@@ -7,6 +7,7 @@
             </ul>
         </div>
         <x-admin.alerts.success />
+<x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
 
             <form action="{{ route('admin.initiatives.store') }}" method="POST" enctype="multipart/form-data">

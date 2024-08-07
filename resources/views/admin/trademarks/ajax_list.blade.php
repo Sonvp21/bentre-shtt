@@ -17,8 +17,8 @@
             <tr>
                 <td class="text-center">{{ $index + 1 }}</td>
                 <td>{{ $trademark->application_number }}</td>
-                <td>{{ $trademark->type->name }}</td>
-                <td>{{ $trademark->name }}</td>
+                <td>{{ $trademark->type->name ?? '' }}</td>
+                <td>{{ $trademark->mark }}</td>
                 <td>{{ $trademark->owner }}</td>
                 <td class="text-center">{{ $trademark->submission_date }}</td>
                 <td class="text-center">{!! $trademark->submission_status_text !!}</td>

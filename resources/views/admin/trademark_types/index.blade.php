@@ -22,6 +22,7 @@
             </div>
         </div>
         <x-admin.alerts.success />
+<x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-5 p-3 text-sm">
             <div class="overflow-x-auto">
                 <div id='recipients' class="lg:mt-0 rounded shadow bg-white">

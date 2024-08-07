@@ -7,6 +7,7 @@
                 </ul>
         </div>
         <x-admin.alerts.success />
+<x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
             <div class="overflow-x-auto p-5">
                 <form action="{{ route('admin.advisory_supports.store') }}" method="POST" enctype="multipart/form-data">

@@ -26,7 +26,7 @@
                 <td>{{ $trademark->district->name ?? null }}</td>
                 <td>{{ $trademark->commune->name ?? null}}</td>
                 <td>{{ $trademark->type->name ?? null}}</td>
-                <td>{{ $trademark->name ?? null}}</td>
+                <td>{{ $trademark->mark ?? null}}</td>
                 <td>{{ $trademark->owner ?? null}}</td>
                 <td>{{ $trademark->description ?? null}}</td>
                 <td>{{ $trademark->address ?? null}}</td>

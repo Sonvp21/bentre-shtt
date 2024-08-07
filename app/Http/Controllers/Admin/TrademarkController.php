@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TrademarkRequest;
 use App\Models\Admin\Commune;
 use App\Models\Admin\District;
+use App\Models\Admin\Document;
+use App\Models\Admin\Image;
 use App\Models\Admin\Trademark;
 use App\Traits\Filterable;
 use App\Models\Admin\TrademarkType;
@@ -14,6 +16,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -25,8 +28,8 @@ class TrademarkController extends Controller
         $districts = District::pluck('name', 'id')->toArray();
         $communes = Commune::pluck('name', 'id')->toArray();
         $types = TrademarkType::pluck('name', 'id')->toArray();
-        $uniqueNames = Trademark::select('name')->distinct()->pluck('name')->toArray();
-        $uniqueSubmissionStatuses = Trademark::select('submission_status')->distinct()->pluck('submission_status')->toArray();
+        $uniqueNames = Trademark::select('mark')->distinct()->pluck('mark')->toArray();
+        $uniqueSubmissionStatuses = Trademark::select('status')->distinct()->pluck('status')->toArray();
         $uniquePublicationYears = Trademark::select(DB::raw('DISTINCT EXTRACT(YEAR FROM publication_date) as year'))
             ->orderBy('year')
             ->pluck('year')
@@ -47,7 +50,7 @@ class TrademarkController extends Controller
         }
 
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'submission_status', 'publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'status', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -71,7 +74,7 @@ class TrademarkController extends Controller
     public function ajaxList(Request $request)
     {
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'submission_status', 'publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'mark', 'owner', 'status', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -95,23 +98,46 @@ class TrademarkController extends Controller
     }
 
 
-    public function store(trademarkRequest $request): RedirectResponse
+    public function store(trademarkRequest $request, Trademark $trademark): RedirectResponse
     {
         $validatedData = $request->validated();
-        $trademark = trademark::create($validatedData);
+        
+        $trademark = Trademark::create($validatedData);
 
-        if ($request->hasFile('document')) {
-            $trademark->clearMediaCollection('document_trademark');
-            $trademark->addMedia($request->file('document'))->toMediaCollection('document_trademark');
+        // Lưu các tệp đính kèm
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                $directory = 'public/trademarks/documents/' . $trademark->filing_number;
+                $filePath = $file->storeAs($directory, $fileName); // Lưu tệp vào thư mục public
+                Document::create([
+                    'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                    'file_name' => $fileName, // Lưu tên gốc
+                    'trademark_id' => $trademark->id,
+                ]);
+            }
         }
-        if ($request->hasFile('image')) {
-            $imageFile = $request->file('image');
-            $trademark->addMedia($imageFile->getRealPath())
-                ->usingFileName($imageFile->getClientOriginalName())
-                ->usingName($imageFile->getClientOriginalName())
-                ->toMediaCollection('trademark_image');
+
+        // Lưu các ảnh
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                $directory = 'public/trademarks/images/' . $trademark->filing_number; // Tạo thư mục dựa trên filing_number
+                $filePath = $file->storeAs($directory, $fileName); // Lưu tệp vào thư mục
+                Image::create([
+                    'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                    'file_name' => $fileName, // Lưu tên gốc
+                    'trademark_id' => $trademark->id,
+                ]);
+            }
         }
-        return redirect()->route('admin.trademarks.index')->with('success', 'Sáng chế đã được tạo thành công.');
+        // Cập nhật tọa độ
+        $longitude = $request->input('longitude');
+        $latitude = $request->input('latitude');
+
+        $trademark->updateCoordinates($trademark->id, $longitude, $latitude);
+
+        return redirect()->route('admin.trademarks.index')->with('success', 'Kiểu dáng đã được tạo thành công.');
     }
 
     public function edit(trademark $trademark): View
@@ -123,35 +149,110 @@ class TrademarkController extends Controller
         return view('admin.trademarks.edit', compact('trademark', 'districts', 'communes', 'trademark_types'));
     }
 
-    public function update(trademarkRequest $request, trademark $trademark): RedirectResponse
+    public function update(trademarkRequest $request, Trademark $trademark): RedirectResponse
     {
+        // Cập nhật thông tin cơ bản
         $validatedData = $request->validated();
-
         $trademark->update($validatedData);
 
-        if ($request->hasFile('document')) {
-            $trademark->clearMediaCollection('document_trademark');
-            $trademark->addMedia($request->file('document'))->toMediaCollection('document_trademark');
+        // Cập nhật tọa độ
+        $longitude = $request->input('longitude');
+        $latitude = $request->input('latitude');
+        $trademark->updateCoordinates($trademark->id, $longitude, $latitude);
+
+        // Chỉ xóa các tài liệu và ảnh cũ nếu có tệp đính kèm mới
+        $documentsDirectory = 'public/trademarks/documents/' . $trademark->filing_number;
+        $imagesDirectory = 'public/trademarks/images/' . $trademark->filing_number;
+
+        if ($request->hasFile('documents') || $request->hasFile('images')) {
+            // Xóa các tài liệu cũ trong cơ sở dữ liệu và thư mục lưu trữ
+            $trademark->documents()->each(function ($document) use ($documentsDirectory) {
+                Storage::delete($documentsDirectory . '/' . $document->file_name);
+                $document->delete();
+            });
+
+            // Xóa các ảnh cũ trong cơ sở dữ liệu và thư mục lưu trữ
+            $trademark->images()->each(function ($image) use ($imagesDirectory) {
+                Storage::delete($imagesDirectory . '/' . $image->file_name);
+                $image->delete();
+            });
+
+            // Xóa thư mục cũ nếu rỗng
+            if (Storage::exists($documentsDirectory)) {
+                Storage::deleteDirectory($documentsDirectory);
+            }
+
+            if (Storage::exists($imagesDirectory)) {
+                Storage::deleteDirectory($imagesDirectory);
+            }
         }
 
-        if ($request->hasFile('image')) {
-            // Xóa hình ảnh cũ nếu có
-            $trademark->clearMediaCollection('trademark_image');
-            $imageFile = $request->file('image');
-            $trademark->addMedia($imageFile->getRealPath())
-                ->usingFileName($imageFile->getClientOriginalName())
-                ->usingName($imageFile->getClientOriginalName())
-                ->toMediaCollection('trademark_image');
+        // Lưu các tệp đính kèm mới
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                if ($file->isValid()) {
+                    $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                    $directory = 'public/trademarks/documents/' . $trademark->filing_number;
+                    $filePath = $file->storeAs($directory, $fileName); // Lưu tệp vào thư mục public
+                    Document::create([
+                        'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                        'file_name' => $fileName, // Lưu tên gốc
+                        'trademark_id' => $trademark->id,
+                    ]);
+                }
+            }
         }
-        return redirect()->route('admin.trademarks.index')->with('success', 'Sáng chế đã được cập nhật thành công.');
+
+        // Lưu các ảnh mới
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                if ($file->isValid()) {
+                    $fileName = $file->getClientOriginalName(); // Lấy tên gốc của tệp
+                    $directory = 'public/trademarks/images/' . $trademark->filing_number; // Tạo thư mục dựa trên filing_number
+                    $filePath = $file->storeAs($directory, $fileName); // Lưu tệp vào thư mục public
+                    Image::create([
+                        'file_path' => str_replace('public/', '', $filePath), // Lưu đường dẫn lưu trữ
+                        'file_name' => $fileName, // Lưu tên gốc
+                        'trademark_id' => $trademark->id,
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('admin.trademarks.index')->with('success', 'Kiểu dáng đã được cập nhật thành công.');
     }
 
 
-    public function destroy(trademark $trademark): RedirectResponse
+    public function destroy(Trademark $trademark): RedirectResponse
     {
-        $trademark->clearMediaCollection('document_trademark');
-        $trademark->clearMediaCollection('trademark_image');
+        // Đường dẫn tới thư mục lưu trữ tài liệu và hình ảnh
+        $documentsDirectory = 'public/trademarks/documents/' . $trademark->filing_number;
+        $imagesDirectory = 'public/trademarks/images/' . $trademark->filing_number;
+    
+        // Xóa các tài liệu trong cơ sở dữ liệu và thư mục lưu trữ
+        $trademark->documents()->each(function ($document) use ($documentsDirectory) {
+            Storage::delete($documentsDirectory . '/' . $document->file_name);
+            $document->delete();
+        });
+    
+        // Xóa các hình ảnh trong cơ sở dữ liệu và thư mục lưu trữ
+        $trademark->images()->each(function ($image) use ($imagesDirectory) {
+            Storage::delete($imagesDirectory . '/' . $image->file_name);
+            $image->delete();
+        });
+    
+        // Xóa thư mục cũ nếu rỗng
+        if (Storage::exists($documentsDirectory)) {
+            Storage::deleteDirectory($documentsDirectory);
+        }
+    
+        if (Storage::exists($imagesDirectory)) {
+            Storage::deleteDirectory($imagesDirectory);
+        }
+    
+        // Xóa nhãn hiệu
         $trademark->delete();
+    
         return redirect()->route('admin.trademarks.index')->with('success', 'Xoá thành công.');
     }
 
@@ -178,7 +279,7 @@ class TrademarkController extends Controller
     public function ajaxExport(Request $request)
     {
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'submission_status','publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'status', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -193,11 +294,11 @@ class TrademarkController extends Controller
         $communes = Commune::pluck('name', 'id')->toArray();
         $types = TrademarkType::pluck('name', 'id')->toArray();
         $uniqueNames = Trademark::select('name')->distinct()->pluck('name')->toArray();
-        $uniqueSubmissionStatuses = Trademark::select('submission_status')->distinct()->pluck('submission_status')->toArray();
+        $uniqueSubmissionStatuses = Trademark::select('status')->distinct()->pluck('status')->toArray();
         $uniquePublicationYears = Trademark::select(DB::raw('DISTINCT EXTRACT(YEAR FROM publication_date) as year'))
-        ->orderBy('year')
-        ->pluck('year')
-        ->toArray();
+            ->orderBy('year')
+            ->pluck('year')
+            ->toArray();
         // Ánh xạ các giá trị trạng thái với các văn bản mô tả
         $submissionStatusMap = [
             1 => 'Đang xử lý',
@@ -214,7 +315,7 @@ class TrademarkController extends Controller
         }
 
         $query = Trademark::query();
-        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'submission_status', 'publication_date'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'name', 'owner', 'status', 'publication_date'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order

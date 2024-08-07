@@ -19,6 +19,7 @@
             </div>
         </div>
         <x-admin.alerts.success />
+<x-admin.alerts.error />
         <div class="p-3 overflow-hidden text-sm bg-white shadow-sm sm:rounded-lg">
             <div class="overflow-x-auto">
                 <div id='recipients' class="bg-white rounded shadow lg:mt-0">

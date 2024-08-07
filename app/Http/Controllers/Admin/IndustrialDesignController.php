@@ -200,9 +200,34 @@ class IndustrialDesignController extends Controller
 
     public function destroy(IndustrialDesign $industrialDesign): RedirectResponse
     {
-        $industrialDesign->clearMediaCollection('document_design');
-        $industrialDesign->clearMediaCollection('design_image');
+        // Đường dẫn tới thư mục lưu trữ tài liệu và hình ảnh
+        $documentsDirectory = 'public/industrial_designs/documents/' . $industrialDesign->filing_number;
+        $imagesDirectory = 'public/industrial_designs/images/' . $industrialDesign->filing_number;
+    
+        // Xóa các tài liệu trong cơ sở dữ liệu và thư mục lưu trữ
+        $industrialDesign->documents()->each(function ($document) use ($documentsDirectory) {
+            Storage::delete($documentsDirectory . '/' . $document->file_name);
+            $document->delete();
+        });
+    
+        // Xóa các hình ảnh trong cơ sở dữ liệu và thư mục lưu trữ
+        $industrialDesign->images()->each(function ($image) use ($imagesDirectory) {
+            Storage::delete($imagesDirectory . '/' . $image->file_name);
+            $image->delete();
+        });
+    
+        // Xóa thư mục cũ nếu rỗng
+        if (Storage::exists($documentsDirectory)) {
+            Storage::deleteDirectory($documentsDirectory);
+        }
+    
+        if (Storage::exists($imagesDirectory)) {
+            Storage::deleteDirectory($imagesDirectory);
+        }
+    
+        // Xóa nhãn hiệu
         $industrialDesign->delete();
+    
         return redirect()->route('admin.industrial_designs.index')->with('success', 'Xoá thành công.');
     }
 

@@ -4,6 +4,7 @@
             Thống kê kết quả sáng tạo kỹ thuật
         </span>
         <x-admin.alerts.success />
+<x-admin.alerts.error />
         <div class="justify-between w-max ml-auto self-center mt-10 ">
             <a class="btn btn-outline btn-accent !min-h-9 h-9"
                 href="{{ route('admin.technical_innovation_results.index') }}">

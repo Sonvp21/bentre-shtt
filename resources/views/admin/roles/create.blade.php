@@ -7,6 +7,7 @@
             </ul>
         </div>
         <x-admin.alerts.success />
+<x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-3">
             <div class="overflow-x-auto p-3 pt-0">
                 <form action="{{ route('admin.roles.store') }}" method="POST" enctype="multipart/form-data">

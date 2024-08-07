@@ -14,6 +14,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Haruncpi\LaravelUserActivity\Traits\Loggable;
+use Illuminate\Support\Facades\DB;
 
 class Trademark extends Model implements HasMedia
 {
@@ -25,30 +26,39 @@ class Trademark extends Model implements HasMedia
         'district_id',
         'commune_id',
         'user_id',
-        'geom',
-        'lat',
-        'lon',
-        'color',
-        'name',
-        'slug',
-        'description',
         'type_id',
+        'geom',
+
+        'mark',
+        'mark_colors',
+        'mark_feature',
+        'vienna_classes',
+        'disclaimer',
+        'description',
         'owner',
         'address',
-        'contact',
-        'application_number',
-        'submission_date',
-        'submission_status',
+        'other_owner',
+
+        'application_type',
+        'filing_number',
+        'filing_date',
+
         'publication_number',
         'publication_date',
-        'out_of_date',
-    ];
 
-    protected $spatialFields = [
-        'geom',
+        'registration_number',
+        'registration_date',
+        'expiration_date',
+
+        'representative_name',
+        'representative_address',
+
+        'status',
     ];
+    
     protected $dates = ['deleted_at'];
-    // Các mối quan hệ
+
+    // Relationships
     public function images()
     {
         return $this->hasMany(Image::class);
@@ -58,6 +68,7 @@ class Trademark extends Model implements HasMedia
     {
         return $this->hasMany(Document::class);
     }
+
     public function district()
     {
         return $this->belongsTo(District::class);
@@ -78,49 +89,63 @@ class Trademark extends Model implements HasMedia
         return $this->belongsTo(TrademarkType::class, 'type_id');
     }
 
-    public function registerMediaConversions(?Media $media = null): void
+    //ngày nộp đơn
+    public function getFilingDateAttribute($value)
     {
-        $this->addMediaConversion('lg')
-            ->crop(900, 800)
-            ->sharpen(5)
-            ->format('jpg')
-            ->performOnCollections('trademark_image');
-
-        $this->addMediaConversion('md')
-            ->crop(541, 320)
-            ->sharpen(5)
-            ->format('jpg')
-            ->performOnCollections('trademark_image');
-
-        $this->addMediaConversion('thumb')
-            ->crop(368, 276)
-            ->sharpen(10)
-            ->format('jpg')
-            ->performOnCollections('trademark_image');
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
+    }
+    //ngày công bố
+    public function getPublicationDateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
+    }
+    //ngày cấp bằng
+    public function getRegistrationDateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
+    }
+    //ngày hết hạn
+    public function getExpirationDateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
     }
 
-    public function registerMediaCollections(): void
+    // Phương thức cập nhật tọa độ
+    public function updateCoordinates($id, $longitude, $latitude, $z = 0)
     {
-        $this->addMediaCollection('trademark_image')
-            ->singleFile()
-            ->useDisk('trademark');
+        // Đảm bảo rằng các giá trị tọa độ là số
+        if (is_numeric($longitude) && is_numeric($latitude)) {
+            $affectedRows = DB::table($this->table)
+                ->where('id', $id)
+                ->update([
+                    'geom' => DB::raw("ST_SetSRID(ST_MakePoint($longitude, $latitude), 4326)")
+                ]);
+
+            return $affectedRows > 0;
+        }
+
+        return false;
     }
 
-    // protected function submissionAtVi(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn () => Carbon::parse($this->submission_date)->format('d.m.Y h:i'),
-    //     );
-    // }
-
-    public function getSubmissionStatusTextAttribute()
+    // Lấy kinh độ từ trường geom
+    public function getLongitude($id)
     {
-        $status = [
-            1 => '<span class="text-black">Đang xử lý</span>',
-            2 => '<span class="text-green-500">Đã cấp</span>',
-            3 => '<span class="text-red-500">Bị từ chối</span>',
-        ];
+        $result = DB::table($this->table)
+            ->select(DB::raw('ST_X(geom) as longitude'))
+            ->where('id', $id)
+            ->first();
 
-        return $status[$this->submission_status] ?? '';
+        return $result ? $result->longitude : null;
+    }
+
+    // Lấy vĩ độ từ trường geom
+    public function getLatitude($id)
+    {
+        $result = DB::table($this->table)
+            ->select(DB::raw('ST_Y(geom) as latitude'))
+            ->where('id', $id)
+            ->first();
+
+        return $result ? $result->latitude : null;
     }
 }
