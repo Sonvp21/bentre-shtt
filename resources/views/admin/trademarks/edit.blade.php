@@ -365,8 +365,9 @@
                                 <select name="status"
                                     class="input input-bordered w-full @error('status') border-red-500 @enderror">
                                     <option value="">Lựa chọn</option>
-                                    <option value="Cấp bằng" {{ old('status') == 'Cấp bằng' ? 'selected' : '' }}>
-                                        Cấp bằng</option>
+                                    <option value="Cấp bằng" {{ old('status' , $trademark->status) == 'Cấp bằng' ? 'selected' : '' }}>
+                                        Cấp bằng
+                                    </option>
                                     <option value="Đang giải quyết" {{ old('status' , $trademark->status) == 'Đang giải quyết' ? 'selected' : '' }}>
                                         Đang giải quyết
                                     </option>
