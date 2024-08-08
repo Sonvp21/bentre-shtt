@@ -13,7 +13,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 10px; /* Giảm kích thước phông chữ */
+            font-size: 8px; /* Giảm kích thước phông chữ */
         }
         table, th, td {
             border: 1px solid black;
@@ -38,36 +38,66 @@
                 <th>STT</th>
                 <th>Huyện</th>
                 <th>Xã</th>
-                <th>Mã</th>
+                <th>Lĩnh vực</th>
+
                 <th>Tên sáng chế</th>
-                <th>Đại diện pháp luật</th>
+                <th>Phân loại IPC</th>
+                <th>Chủ đơn</th>
+                <th>Địa chỉ chủ đơn</th>
+                <th>Tác giả</th>
+                <th>Địa chỉ tác giả</th>
+                <th>Tác giả khác</th>
+                <th>Địa chỉ tác giả khác</th>
+
+                <th>Loại đơn</th>
                 <th>Số đơn</th>
                 <th>Ngày nộp đơn</th>
-                <th>Trạng thái đơn</th>
+
+                <th>Số công bố</th>
                 <th>Ngày công bố</th>
+
                 <th>Số bằng</th>
                 <th>Ngày cấp bằng</th>
-                <th>Ngày hết hạn bằng</th>
-                <th>Trạng thái bằng</th>
+                <th>Ngày hết hạn</th>
+
+                <th>Đại diện pháp luật</th>
+                <th>Địa chỉ đại diện</th>
+
+                <th>Trạng thái</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($patents as $index => $patent)
+            @foreach ($patents as $index => $patent)
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $patent['district_name'] }}</td>
                     <td>{{ $patent['commune_name'] }}</td>
-                    <td>{{ $patent['code'] }}</td>
-                    <td>{{ $patent['name'] }}</td>
-                    <td>{{ $patent['legal_representative'] }}</td>
-                    <td>{{ $patent['application_number'] }}</td>
-                    <td>{{ $patent['submission_date'] }}</td>
-                    <td>{{ $patent['submission_status_text'] }}</td>
+                    <td>{{ $patent['type_name'] }}</td>
+
+                    <td>{{ $patent['title'] }}</td>
+                    <td>{{ $patent['ipc_classes'] }}</td>
+                    <td>{{ $patent['applicant'] }}</td>
+                    <td>{{ $patent['applicant_address'] }}</td>
+                    <td>{{ $patent['inventor'] }}</td>
+                    <td>{{ $patent['inventor_address'] }}</td>
+                    <td>{{ $patent['other_inventor'] }}</td>
+                    <td>{{ $patent['abstract'] }}</td>
+
+                    <td>{{ $patent['application_type'] }}</td>
+                    <td>{{ $patent['filing_number'] }}</td>
+                    <td>{{ $patent['filing_date'] }}</td>
+
+                    <td>{{ $patent['publication_number'] }}</td>
                     <td>{{ $patent['publication_date'] }}</td>
-                    <td>{{ $patent['number_patent'] }}</td>
-                    <td>{{ $patent['patent_date'] }}</td>
-                    <td>{{ $patent['patent_out_of_date'] }}</td>
-                    <td>{{ $patent['patent_status_text'] }}</td>
+
+                    <td>{{ $patent['registration_number'] }}</td>
+                    <td>{{ $patent['registration_date'] }}</td>
+                    <td>{{ $patent['expiration_date'] }}</td>
+
+                    <td>{{ $patent['representative_name'] }}</td>
+                    <td>{{ $patent['representative_address'] }}</td>
+
+                    <td>{{ $patent['status'] }}</td>
                 </tr>
             @endforeach
         </tbody>

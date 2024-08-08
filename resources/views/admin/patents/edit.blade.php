@@ -249,10 +249,12 @@
                                 <select name="application_type"
                                     class="input input-bordered w-full @error('application_type') border-red-500 @enderror">
                                     <option value="">Lựa chọn</option>
-                                    <option value="non - PCT SC" {{ old('application_type', $patent->application_type) == 'non - PCT SC' ? 'selected' : '' }}>
+                                    <option value="non - PCT SC"
+                                        {{ old('application_type', $patent->application_type) == 'non - PCT SC' ? 'selected' : '' }}>
                                         non - PCT SC
                                     </option>
-                                    <option value="non-PCT Utility" {{ old('application_type', $patent->application_type) == 'non-PCT Utility' ? 'selected' : '' }}>
+                                    <option value="non-PCT Utility"
+                                        {{ old('application_type', $patent->application_type) == 'non-PCT Utility' ? 'selected' : '' }}>
                                         non-PCT Utility
                                     </option>
                                 </select>
@@ -341,8 +343,8 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ngày hết hạn bằng</span>
                                 </div>
-                                <input type="date" name="expiration_date"
-                                    placeholder="Select Patent Out of Date" value="{{ old('expiration_date', $patent->expiration_date ? \Carbon\Carbon::parse($patent->expiration_date)->format('Y-m-d') : '') }}"
+                                <input type="date" name="expiration_date" placeholder="Select Patent Out of Date"
+                                    value="{{ old('expiration_date', $patent->expiration_date ? \Carbon\Carbon::parse($patent->expiration_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('expiration_date') border-red-500 @enderror" />
                                 @error('expiration_date')
                                     <small class="text-red-500">{{ $message }}</small>
@@ -357,25 +359,32 @@
                                 <select name="status"
                                     class="input input-bordered w-full @error('status') border-red-500 @enderror">
                                     <option value="">Lựa chọn</option>
-                                    <option value="Chờ chia đơn ND" {{ old('status', $patent->status) == 'Chờ chia đơn ND' ? 'selected' : '' }}>
+                                    <option value="Chờ chia đơn ND"
+                                        {{ old('status', $patent->status) == 'Chờ chia đơn ND' ? 'selected' : '' }}>
                                         Chờ chia đơn ND
                                     </option>
-                                    <option value="Chờ duyệt CV" {{ old('status', $patent->status) == 'Chờ duyệt CV' ? 'selected' : '' }}>
+                                    <option value="Chờ duyệt CV"
+                                        {{ old('status', $patent->status) == 'Chờ duyệt CV' ? 'selected' : '' }}>
                                         Chờ duyệt CV
                                     </option>
-                                    <option value="Chờ thẩm định nội dung" {{ old('status', $patent->status) == 'Chờ thẩm định nội dung' ? 'selected' : '' }}>
+                                    <option value="Chờ thẩm định nội dung"
+                                        {{ old('status', $patent->status) == 'Chờ thẩm định nội dung' ? 'selected' : '' }}>
                                         Chờ thẩm định nội dung
                                     </option>
-                                    <option value="Đã cập nhật Bản mô tả" {{ old('status', $patent->status) == 'Đã cập nhật Bản mô tả' ? 'selected' : '' }}>
+                                    <option value="Đã cập nhật Bản mô tả"
+                                        {{ old('status', $patent->status) == 'Đã cập nhật Bản mô tả' ? 'selected' : '' }}>
                                         Đã cập nhật Bản mô tả
                                     </option>
-                                    <option value="Đã công bố" {{ old('status', $patent->status) == 'Đã công bố' ? 'selected' : '' }}>
+                                    <option value="Đã công bố"
+                                        {{ old('status', $patent->status) == 'Đã công bố' ? 'selected' : '' }}>
                                         Đã công bố
                                     </option>
-                                    <option value="Hết hạn hiệu lực VBBH" {{ old('status', $patent->status) == 'Hết hạn hiệu lực VBBH' ? 'selected' : '' }}>
+                                    <option value="Hết hạn hiệu lực VBBH"
+                                        {{ old('status', $patent->status) == 'Hết hạn hiệu lực VBBH' ? 'selected' : '' }}>
                                         Hết hạn hiệu lực VBBH
                                     </option>
-                                    <option value="Từ chối cấp VBBH" {{ old('status', $patent->status) == 'Từ chối cấp VBBH' ? 'selected' : '' }}>
+                                    <option value="Từ chối cấp VBBH"
+                                        {{ old('status', $patent->status) == 'Từ chối cấp VBBH' ? 'selected' : '' }}>
                                         Từ chối cấp VBBH
                                     </option>
                                 </select>
@@ -429,7 +438,7 @@
     </div>
 
     @pushonce('bottom_scripts')
-    <x-admin.forms.tinymce-config column="abstract" model="Patent" />
+        <x-admin.forms.tinymce-config column="abstract" model="Patent" />
         {{-- Get communes based on district --}}
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src='{{ asset('adminpage/get_communes.js') }}'></script>
@@ -438,20 +447,78 @@
         </script>
 
         <script>
-            var loadFile = function(event) {
-                var input = event.target;
-                var file = input.files[0];
-                var type = file.type;
+            document.addEventListener('DOMContentLoaded', function() {
+                const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
-                var output = document.getElementById('preview_img');
+                // Kiểm tra kích thước tài liệu
+                document.getElementById('documents').addEventListener('change', function(event) {
+                    const files = event.target.files;
+                    const preview = document.getElementById('documents-preview');
+                    preview.innerHTML = ''; // Xóa nội dung cũ
 
-                output.src = URL.createObjectURL(event.target.files[0]);
-                output.onload = function() {
-                    URL.revokeObjectURL(output.src); // free memory
-                }
-            };
+                    Array.from(files).forEach(file => {
+                        if (file.size > MAX_FILE_SIZE) {
+                            alert(`Tệp ${file.name} vượt quá kích thước tối đa 10MB.`);
+                            event.target.value = ''; // Xóa tệp đã chọn
+                            return;
+                        }
+                        const fileElement = document.createElement('div');
+                        fileElement.textContent = file.name; // Hiển thị tên tệp
+
+                        preview.appendChild(fileElement);
+                    });
+                });
+
+                // Kiểm tra kích thước hình ảnh
+                document.getElementById('images').addEventListener('change', function(event) {
+                    const files = event.target.files;
+                    const preview = document.getElementById('images-preview');
+
+                    // Tạo một mảng để chứa các phần tử hình ảnh
+                    const imageElements = [];
+
+                    Array.from(files).forEach(file => {
+                        if (file.size > MAX_FILE_SIZE) {
+                            alert(`Hình ảnh ${file.name} vượt quá kích thước tối đa 10MB.`);
+                            event.target.value = ''; // Xóa hình ảnh đã chọn
+                            return;
+                        }
+                        if (file.type.startsWith('image/')) {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = URL.createObjectURL(file);
+                            imgElement.style.maxWidth = '150px';
+                            imgElement.style.borderRadius = '18px';
+                            imgElement.style.padding = '10px'; // Padding cho ảnh
+                            imgElement.alt = file.name;
+
+                            // Tạo một container cho ảnh và thêm vào danh sách
+                            const imageContainer = document.createElement('div');
+                            imageContainer.className =
+                                'flex justify-center items-center'; // Center the image
+                            imageContainer.appendChild(imgElement);
+
+                            // Thêm phần tử vào đầu mảng
+                            imageElements.unshift(imageContainer);
+                        }
+                    });
+
+                    // Xóa các ảnh hiện tại trong preview
+                    preview.innerHTML = '';
+
+                    // Cập nhật preview với các ảnh đã sắp xếp
+                    imageElements.forEach((element) => {
+                        preview.appendChild(element);
+                    });
+
+                    // Xác định số cột cho lưới
+                    const numberOfRows = Math.ceil(imageElements.length / 2);
+                    preview.className = `grid grid-cols-${numberOfRows} gap-4 mt-4`;
+                });
+            });
         </script>
 
+        {{-- lấy toạ độ  --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRbbI-IH80_-AgZbiq1lKAkcOoavIWTEc&callback=initMap"></script>
         <script src='{{ asset('adminpage/map/getlocation_edit.js') }}'></script>

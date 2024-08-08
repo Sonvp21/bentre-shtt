@@ -16,8 +16,8 @@
                 'action' => route('admin.patents.index'),
                 'ajaxRoute' => route('admin.patents.ajax_list'),
                 'filters' => [
+                    ['name' => 'type_id', 'label' => 'Lĩnh vực', 'options' => $types],
                     ['name' => 'publication_date', 'label' => 'Năm công bố', 'options' => $uniquePublicationYears],
-                    ['name' => 'submission_status', 'label' => 'Trạng thái đơn', 'options' => $uniqueSubmissionStatus],
                     ['name' => 'district_id', 'label' => 'Huyện', 'options' => $districts],
                     ['name' => 'commune_id', 'label' => 'Xã', 'options' => []],
                     

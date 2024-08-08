@@ -15,17 +15,31 @@
                     const rowData = {
                         district_name: row.querySelector('td:nth-child(2)').innerText.trim(),
                         commune_name: row.querySelector('td:nth-child(3)').innerText.trim(),
-                        code: row.querySelector('td:nth-child(4)').innerText.trim(),
-                        name: row.querySelector('td:nth-child(5)').innerText.trim(),
-                        legal_representative: row.querySelector('td:nth-child(6)').innerText.trim(),
-                        application_number: row.querySelector('td:nth-child(7)').innerText.trim(),
-                        submission_date: row.querySelector('td:nth-child(8)').innerText.trim(),
-                        submission_status_text: row.querySelector('td:nth-child(9)').innerText.trim(),
-                        publication_date: row.querySelector('td:nth-child(10)').innerText.trim(),
-                        number_patent: row.querySelector('td:nth-child(11)').innerText.trim(),
-                        patent_date: row.querySelector('td:nth-child(12)').innerText.trim(),
-                        patent_out_of_date: row.querySelector('td:nth-child(13)').innerText.trim(),
-                        patent_status_text: row.querySelector('td:nth-child(14)').innerText.trim()
+                        type_name: row.querySelector('td:nth-child(4)').innerText.trim(),
+
+                        title: row.querySelector('td:nth-child(5)').innerText.trim(),
+                        ipc_classes: row.querySelector('td:nth-child(6)').innerText.trim(),
+                        applicant: row.querySelector('td:nth-child(7)').innerText.trim(),
+                        applicant_address: row.querySelector('td:nth-child(8)').innerText.trim(),
+                        inventor: row.querySelector('td:nth-child(9)').innerText.trim(),
+                        inventor_address: row.querySelector('td:nth-child(10)').innerText.trim(),
+                        other_inventor: row.querySelector('td:nth-child(11)').innerText.trim(),
+                        abstract: row.querySelector('td:nth-child(12)').innerText.trim(),
+
+                        application_type: row.querySelector('td:nth-child(13)').innerText.trim(),
+                        filing_number: row.querySelector('td:nth-child(14)').innerText.trim(),
+                        filing_date: row.querySelector('td:nth-child(15)').innerText.trim(),
+
+                        publication_number: row.querySelector('td:nth-child(16)').innerText.trim(),
+                        publication_date: row.querySelector('td:nth-child(17)').innerText.trim(),
+
+                        registration_number: row.querySelector('td:nth-child(18)').innerText.trim(),
+                        registration_date: row.querySelector('td:nth-child(19)').innerText.trim(),
+                        expiration_date: row.querySelector('td:nth-child(20)').innerText.trim(),
+                        
+                        representative_name: row.querySelector('td:nth-child(21)').innerText.trim(),
+                        representative_address: row.querySelector('td:nth-child(22)').innerText.trim(),
+                        status: row.querySelector('td:nth-child(23)').innerText.trim()
                     };
                     data.push(rowData);
                 });

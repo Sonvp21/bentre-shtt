@@ -35,7 +35,7 @@ class PatentController extends Controller
             ->toArray();
 
         $query = Patent::query();
-        $filters = ['district_id', 'commune_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -57,7 +57,7 @@ class PatentController extends Controller
     public function ajaxList(Request $request)
     {
         $query = Patent::query();
-        $filters = ['district_id', 'commune_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -262,7 +262,7 @@ class PatentController extends Controller
     public function ajaxExport(Request $request)
     {
         $query = Patent::query();
-        $filters = ['district_id', 'commune_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order
@@ -283,7 +283,7 @@ class PatentController extends Controller
             ->toArray();
 
         $query = Patent::query();
-        $filters = ['district_id', 'commune_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
+        $filters = ['district_id', 'commune_id', 'type_id', 'filing_number', 'title', 'applicant_address', 'inventor', 'other_inventor', 'publication_date',  'status'];
         $query = $this->applyFilters($request, $query, $filters);
 
         // Order by updated_at in descending order

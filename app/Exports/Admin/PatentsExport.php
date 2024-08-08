@@ -24,17 +24,32 @@ class PatentsExport implements FromCollection, WithHeadings
             $data[] = [
                 'Huyện' => $patent['district_name'] ?? null,
                 'Xã' => $patent['commune_name'] ?? null,
-                'Mã' => $patent['code'] ?? null,
-                'Tên sáng chế' => $patent['name'] ?? null,
-                'Đại diện pháp luật' => $patent['legal_representative'] ?? null,
-                'Số đơn' => $patent['application_number'] ?? null,
-                'Ngày nộp đơn' => $patent['submission_date'] ?? null,
-                'Trạng thái đơn' => $patent['submission_status_text'] ?? null,
+                'Lĩnh vực' => $patent['type_name'] ?? null,
+
+                'Tên sáng chế' => $patent['title'] ?? null,
+                'Phân loại IPC' => $patent['ipc_classes'] ?? null,
+                'Chủ đơn' => $patent['applicant'] ?? null,
+                'Địa chỉ chủ đơn' => $patent['applicant_address'] ?? null,
+                'Tác giả' => $patent['inventor'] ?? null,
+                'Địa chỉ tác giả' => $patent['inventor_address'] ?? null,
+                'Tác giả khác' => $patent['other_inventor'] ?? null,
+                'Địa chỉ tác giả khác' => $patent['abstract'] ?? null,
+
+                'Loại đơn' => $patent['application_type'] ?? null,
+                'Số đơn' => $patent['filing_number'] ?? null,
+                'Ngày nộp đơn' => $patent['filing_date'] ?? null,
+
+                'Số công bố' => $patent['publication_number'] ?? null,
                 'Ngày công bố' => $patent['publication_date'] ?? null,
-                'Số bằng' => $patent['number_patent'] ?? null,
-                'Ngày cấp bằng' => $patent['patent_date'] ?? null,
-                'Ngày hết hạn bằng' => $patent['patent_out_of_date'] ?? null,
-                'Trạng thái bằng' => $patent['patent_status_text'] ?? null,
+
+                'Số bằng' => $patent['registration_number'] ?? null,
+                'Ngày cấp bằng' => $patent['registration_date'] ?? null,
+                'Ngày hết hạn' => $patent['expiration_date'] ?? null,
+
+                'Đại diện pháp luật' => $patent['representative_name'] ?? null,
+                'Địa chỉ đại diện' => $patent['representative_address'] ?? null,
+
+                'Trạng thái' => $patent['status'] ?? null,
             ];
         }
 
@@ -46,17 +61,32 @@ class PatentsExport implements FromCollection, WithHeadings
         return [
             'Huyện',
             'Xã',
-            'Mã',
+            'Lĩnh vực',
+
             'Tên sáng chế',
-            'Đại diện pháp luật',
+            'Phân loại IPC',
+            'Chủ đơn',
+            'Địa chỉ chủ đơn',
+            'Tác giả',
+            'Địa chỉ tác giả',
+            'Tác giả khác',
+            'Địa chỉ tác giả khác',
+
+            'Loại đơn',
             'Số đơn',
             'Ngày nộp đơn',
-            'Trạng thái đơn',
+
+            'Số công bố',
             'Ngày công bố',
+
             'Số bằng',
             'Ngày cấp bằng',
-            'Ngày hết hạn bằng',
-            'Trạng thái bằng',
+            'Ngày hết hạn',
+
+            'Đại diện pháp luật',
+            'Địa chỉ đại diện',
+
+            'Trạng thái',
         ];
     }
 }
