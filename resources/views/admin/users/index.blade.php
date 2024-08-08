@@ -12,7 +12,7 @@
         <span class="text-3xl uppercase font-semibold">
             Danh sách tài khoản
         </span>
-        <div class="breadcrumbs text-sm">
+        <div class="breadcrumbs text-sm mt-8">
             <div class="flex ml-auto">
                 <a class="btn btn-outline btn-accent !min-h-9 h-9 ml-auto" href="{{ route('admin.users.create') }}">
                     <i class="fad fa-plus-circle"></i>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <x-admin.alerts.success />
-<x-admin.alerts.error />
+        <x-admin.alerts.error />
         <div class="p-3 overflow-hidden text-sm bg-white shadow-sm sm:rounded-lg">
             <div class="overflow-x-auto">
                 <div id='recipients' class="bg-white rounded shadow lg:mt-0">

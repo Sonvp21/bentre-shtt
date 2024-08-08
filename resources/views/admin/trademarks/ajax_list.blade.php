@@ -12,6 +12,7 @@
             <th>Thao tác</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach ($trademarks as $index => $trademark)
             <tr>
@@ -27,7 +28,8 @@
                     <div class="flex justify-center items-center">
                         @if ($trademark->images->isNotEmpty())
                             <img src="{{ asset('storage/' . $trademark->images->first()->file_path) }}"
-                                style="width: 50px; border-radius: 5px;" alt="{{ $trademark->images->first()->file_name }}">
+                                style="width: 50px; border-radius: 5px;"
+                                alt="{{ $trademark->images->first()->file_name }}">
                         @else
                             <span>No image</span>
                         @endif
@@ -35,10 +37,10 @@
                 </td>
                 <td class="text-center">{{ $trademark->filing_date }}</td>
                 <td class="text-center">{{ $trademark->status }}</td>
-                <td class="flex justify-around">
+                <td class="text-center">
                     <a href="{{ route('admin.trademarks.edit', $trademark) }}" type="button"><i
                             class="fa fa-edit text-yellow-600"></i></a>
-                    <form id="delete-form-{{ $trademark->id }}"
+                    <form id="delete-form-{{ $trademark->id }}" class="mt-3"
                         action="{{ route('admin.trademarks.destroy', $trademark) }}" method="POST">
                         @csrf
                         @method('DELETE')

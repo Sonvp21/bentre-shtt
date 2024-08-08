@@ -25,6 +25,7 @@ class GeographicalIndication extends Model implements HasMedia
         'content',
         'authorized_unit',
         'status',
+        'view_count',
     ];
     protected $casts = [
         'issue_date' => 'date', // hoặc 'datetime' nếu cần
