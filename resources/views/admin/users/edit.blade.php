@@ -1,14 +1,13 @@
 <x-admin-layout>
     <div class="flex-grow w-full p-5 text-center">
         <div class="breadcrumbs text-sm">
-            
-                <ul>
-                    <li><a href="{{ route('admin.users.index') }}">Danh sách tài khoản</a></li>
-                    <li><a class="text-teal-600">Thêm mới</a></li>
-                </ul>
+            <ul>
+                <li><a href="{{ route('admin.users.index') }}">Danh sách tài khoản</a></li>
+                <li><a class="text-teal-600">Thêm mới</a></li>
+            </ul>
         </div>
         <x-admin.alerts.success />
-<x-admin.alerts.error />
+        <x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
             <div class="p-5 overflow-x-auto">
                 <form action="{{ route('admin.users.update', $user) }}" method="POST" enctype="multipart/form-data">
@@ -340,11 +339,13 @@
 
 
                         </div>
+                    </div>
+                    <div class="flex gap-4 justify-center p-3">
+                        <a href="{{ route('admin.users.index') }}"
+                            class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
+                        <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
+                    </div>
 
-                        <div class="flex gap-4 justify-center p-3">
-                            <a href="{{ route('admin.users.index') }}" class="btn btn-outline btn-error !min-h-9 h-9">Huỷ</a>
-                            <button type="submit" class="btn btn-outline btn-accent !min-h-9 h-9 mx-4">Lưu</button>
-                        </div>
                 </form>
             </div>
         </div>

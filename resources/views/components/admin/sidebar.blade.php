@@ -39,10 +39,29 @@
                     </ul>
                 </details>
             </li>
-            <li><a {{ Request::routeIs('admin.patents.*') ? 'open' : '' }} href="{{ route('admin.patents.index') }}"
-                    class="group font-bold {{ Request::routeIs('admin.patents.*') ? 'active' : '' }}">
-                    <i class="fab fa-creative-commons-remix"></i>Sáng chế toàn văn
-                </a>
+            <li>
+                <details
+                    {{ Request::routeIs('admin.patents.*') || Request::routeIs('admin.patent_types.*') ? 'open' : '' }}>
+                    <summary class="font-semibold group">
+                        <i class="fab fa-creative-commons-remix"></i>Sáng chế toàn văn
+                    </summary>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.patents.index') }}"
+                                class="group font-bold {{ Request::routeIs('admin.patents.*') ? 'active' : '' }}">
+                                <i class="fad fa-registered"></i>
+                                Danh sách sáng chế
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.patent_types.index') }}"
+                                class="group font-bold {{ Request::routeIs('admin.patent_types.*') ? 'active' : '' }}">
+                                <i class="fad fa-bookmark"></i>
+                                Lĩnh vực
+                            </a>
+                        </li>
+                    </ul>
+                </details>
             </li>
             <li>
                 <details
@@ -178,8 +197,7 @@
             </li>
 
             <li>
-                <details
-                    {{ Request::routeIs('admin.advisory_supports.*') ? 'open' : '' }}>
+                <details {{ Request::routeIs('admin.advisory_supports.*') ? 'open' : '' }}>
                     <summary class="font-semibold group">
                         <i class="fad fa-bezier-curve"></i>Thông tin hỗ trợ, tư vấn
                     </summary>

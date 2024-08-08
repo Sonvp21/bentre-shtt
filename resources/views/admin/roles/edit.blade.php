@@ -41,12 +41,12 @@
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 text-left">
                         <label>
                             <input type="checkbox" class="checkall checkbox checkbox-accent"> Tất cả
                         </label>
                         {{-- Cột 2 --}}
-                        <div class="grid grid-cols-2 gap-2">
+                        <div class="grid md:grid-cols-1 xl:grid-cols-2 gap-2 px-10">
                             @foreach ($permissionsParent as $permissionsParentItem)
                                 <div class="card border-primary mb-3 mt-3">
                                     <div class="p-2">

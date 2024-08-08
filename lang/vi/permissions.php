@@ -13,6 +13,7 @@ return [
         'initiative_dossier' => 'Hồ sơ sáng kiến',
         'initiative_evaluate' => 'Hội đồng thông qua - sáng kiến',
         'patent' => 'Sáng chế',
+        'patent_types' => 'Lĩnh vực - Sáng chế',
         'permission' => 'Quyền hạn',
         'product' => 'Sản phẩm',
         'role' => 'Vai trò',

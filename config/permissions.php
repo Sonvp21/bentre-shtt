@@ -13,6 +13,7 @@ return [
         'initiative_dossier',
         'initiative_evaluate',
         'patent',
+        'patent_types',
         'permission',
         'product',
         'role',

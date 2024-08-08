@@ -23,23 +23,33 @@ class Patent extends Model implements HasMedia
         'district_id',
         'commune_id',
         'user_id',
+        'type_id',
         'geom',
-        'lat',
-        'lon',
-        'code',
-        'name',
-        'slug',
-        'description',
-        'legal_representative',
-        'document',
-        'application_number',
-        'submission_date',
-        'submission_status',
+
+        'title',
+        'ipc_classes',
+        'applicant',
+        'applicant_address',
+        'inventor',
+        'inventor_address',
+        'other_inventor',
+        'abstract',
+
+        'application_type',
+        'filing_number',
+        'filing_date',
+
+        'publication_number',
         'publication_date',
-        'number_patent',
-        'patent_date',
-        'patent_out_of_date',
-        'patent_status',
+
+        'registration_number',
+        'registration_date',
+        'expiration_date',
+
+        'representative_name',
+        'representative_address',
+
+        'status',
     ];
 
     protected $dates = ['deleted_at'];
@@ -53,7 +63,7 @@ class Patent extends Model implements HasMedia
     {
         return $this->hasMany(Document::class);
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -71,77 +81,30 @@ class Patent extends Model implements HasMedia
         return $this->belongsTo(Commune::class);
     }
 
-    public function registerMediaConversions(?Media $media = null): void
+    public function type()
     {
-        $this->addMediaConversion('lg')
-            ->crop(900, 800)
-            ->sharpen(5)
-            ->format('jpg')
-            ->performOnCollections('patent_image');
-
-        $this->addMediaConversion('md')
-            ->crop(541, 320)
-            ->sharpen(5)
-            ->format('jpg')
-            ->performOnCollections('patent_image');
-
-        $this->addMediaConversion('thumb')
-            ->crop(368, 276)
-            ->sharpen(10)
-            ->format('jpg')
-            ->performOnCollections('patent_image');
+        return $this->belongsTo(PatentType::class, 'type_id');
     }
 
-    public function registerMediaCollections(): void
+    //ngày nộp đơn
+    public function getFilingDateAttribute($value)
     {
-        $this->addMediaCollection('patent_image')
-            ->singleFile()
-            ->useDisk('patent');
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
     }
-    
-    // Accessor cho submission_date
-    public function getSubmissionDateAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format('d.m.Y h:i') : null;
-    }
-    // Accessor cho publication_date
+    //ngày công bố
     public function getPublicationDateAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format('d.m.Y h:i') : null;
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
     }
-
-    // Accessor cho patent_date
-    public function getPatentDateAttribute($value)
+    //ngày cấp bằng
+    public function getRegistrationDateAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format('d.m.Y h:i') : null;
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
     }
-
-    // Accessor cho patent_out_of_date
-    public function getPatentOutOfDateAttribute($value)
+    //ngày hết hạn
+    public function getExpirationDateAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format('d.m.Y h:i') : null;
-    }
-    public function getSubmissionStatusTextAttribute()
-    {
-        $status = [
-            1 => '<span class="text-black">Đang xử lý</span>',
-            2 => '<span class="text-green-500">Đã cấp</span>',
-            3 => '<span class="text-red-500">Bị từ chối</span>',
-        ];
-
-        return $status[$this->submission_status] ?? '';
-    }
-
-    // Accessor for patent_status
-    public function getPatentStatusTextAttribute()
-    {
-        $status = [
-            1 => '<span class="text-black">Hiệu lực</span>',
-            2 => '<span class="text-yellow-400">Hết hạn</span>',
-            3 => '<span class="text-red-500">Bị huỷ</span>',
-        ];
-
-        return $status[$this->patent_status] ?? '';
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
     }
 
     // Phương thức cập nhật tọa độ

@@ -99,7 +99,7 @@ class TrademarkController extends Controller
     }
 
 
-    public function store(trademarkRequest $request, Trademark $trademark): RedirectResponse
+    public function store(TrademarkRequest $request, Trademark $trademark): RedirectResponse
     {
         $validatedData = $request->validated();
         
@@ -141,7 +141,7 @@ class TrademarkController extends Controller
         return redirect()->route('admin.trademarks.index')->with('success', 'Kiểu dáng đã được tạo thành công.');
     }
 
-    public function edit(trademark $trademark): View
+    public function edit(Trademark $trademark): View
     {
         $districts = District::all();
         $communes = Commune::where('district_id', $trademark->district_id)->get();
@@ -150,7 +150,7 @@ class TrademarkController extends Controller
         return view('admin.trademarks.edit', compact('trademark', 'districts', 'communes', 'trademark_types'));
     }
 
-    public function update(trademarkRequest $request, Trademark $trademark): RedirectResponse
+    public function update(TrademarkRequest $request, Trademark $trademark): RedirectResponse
     {
         // Cập nhật thông tin cơ bản
         $validatedData = $request->validated();

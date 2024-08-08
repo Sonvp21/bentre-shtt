@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\InitiativeController;
 use App\Http\Controllers\Admin\InitiativeDossierController;
 use App\Http\Controllers\Admin\InitiativeEvaluateController;
 use App\Http\Controllers\Admin\PatentController;
+use App\Http\Controllers\Admin\PatentTypeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
@@ -32,7 +33,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Admin\TechnicalInnovationResult;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function () {
+Route::get('/admin', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -74,6 +75,14 @@ Route::middleware('auth')->group(function () {
         Route::post('communes/export_pdf', [CommuneController::class, 'exportPdf'])->name('communes.export_pdf');
 
     ////Sáng chế shtt
+        //lĩnh vực 
+        Route::get('patent_types', [PatentTypeController::class, 'index'])->middleware('can:index,App\Models\Admin\PatentType')->name('patent_types.index');
+        Route::get('patent_types/create', [PatentTypeController::class, 'create'])->middleware('can:create,App\Models\Admin\PatentType')->name('patent_types.create');
+        Route::post('patent_types', [PatentTypeController::class, 'store'])->middleware('can:create,App\Models\Admin\PatentType')->name('patent_types.store');
+        Route::get('patent_types/{patent_type}/edit', [PatentTypeController::class, 'edit'])->middleware('can:edit,App\Models\Admin\PatentType')->name('patent_types.edit');
+        Route::put('patent_types/{patent_type}', [PatentTypeController::class, 'update'])->middleware('can:edit,App\Models\Admin\PatentType')->name('patent_types.update');
+        Route::delete('patent_types/{patent_type}', [PatentTypeController::class, 'destroy'])->middleware('can:destroy,App\Models\Admin\PatentType')->name('patent_types.destroy');
+
         // Route::resource('patents', PatentController::class);
         Route::get('patents', [PatentController::class, 'index'])->middleware('can:index,App\Models\Admin\Patent')->name('patents.index');
         Route::get('patents/create', [PatentController::class, 'create'])->middleware('can:create,App\Models\Admin\Patent')->name('patents.create');

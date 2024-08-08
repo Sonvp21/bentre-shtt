@@ -12,6 +12,7 @@ use App\Policies\InitiativeDossierPolicy;
 use App\Policies\InitiativeEvaluatePolicy;
 use App\Policies\InitiativePolicy;
 use App\Policies\PatentPolicy;
+use App\Policies\PatentTypePolicy;
 use App\Policies\PermissionPolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\QuestionPolicy;
@@ -45,6 +46,7 @@ return Application::configure(basePath: dirname(__DIR__))
     
 // Đăng ký các policies và gates sau khi tạo ứng dụng
 Gate::resource('patents', PatentPolicy::class); //patent-index, patent-create, patent-edit, patent-destroy cho App\Policies\PatentPolicy
+Gate::resource('patent_types', PatentTypePolicy::class);
 // Gate::define('index', 'App\Policies\PatentPolicy@index');
 // Gate::define('create', 'App\Policies\PatentPolicy@create');
 // Gate::define('edit', 'App\Policies\PatentPolicy@edit');
