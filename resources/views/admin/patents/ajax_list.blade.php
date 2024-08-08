@@ -7,7 +7,7 @@
             <th>Lĩnh vực</th>
             <th>Sáng chế/Chủ đơn/Địa chỉ</th>
             <th>Hình ảnh</th>
-            <th>Ngày nộp đơn</th>
+            <th>Ngày công bố</th>
             <th>Trạng thái đơn</th>
             <th>Thao tác</th>
         </tr>
@@ -26,14 +26,13 @@
                     <div class="flex justify-center items-center">
                         @if ($patent->images->isNotEmpty())
                             <img src="{{ asset('storage/' . $patent->images->first()->file_path) }}"
-                                style="width: 50px; border-radius: 5px;"
-                                alt="{{ $patent->images->first()->file_name }}">
+                                style="width: 50px; border-radius: 5px;" alt="{{ $patent->images->first()->file_name }}">
                         @else
                             <span>No image</span>
                         @endif
                     </div>
                 </td>
-                <td class="text-center">{{ $patent->filing_date }}</td>
+                <td class="text-center">{{ $patent->publication_date }}</td>
                 <td class="text-center">{!! $patent->status !!}</td>
                 <td class="flex justify-around">
                     <a href="{{ route('admin.patents.edit', $patent) }}" type="button"><i

@@ -10,31 +10,21 @@
         body {
             font-family: 'DejaVu Sans', sans-serif;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 10px;
-            /* Giảm kích thước phông chữ */
+            font-size: 8px; /* Giảm kích thước phông chữ */
         }
-
-        table,
-        th,
-        td {
+        table, th, td {
             border: 1px solid black;
         }
-
-        th,
-        td {
-            padding: 4px;
-            /* Giảm độ đệm */
+        th, td {
+            padding: 4px; /* Giảm độ đệm */
             text-align: left;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
         .page-break {
             page-break-after: always;
         }

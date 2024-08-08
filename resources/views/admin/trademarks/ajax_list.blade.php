@@ -5,8 +5,8 @@
             <th>STT</th>
             <th>Số đơn</th>
             <th>Nhóm ngành</th>
-            <th>Tên nhãn hiệu</th>
-            <th>Chủ nhãn hiệu</th>
+            <th>Tên nhãn hiệu/ Chủ đơn/Địa chỉ</th>
+            <th>Hình ảnh</th>
             <th>Ngày nộp đơn</th>
             <th>Trạng thái</th>
             <th>Thao tác</th>
@@ -15,11 +15,24 @@
     <tbody>
         @foreach ($trademarks as $index => $trademark)
             <tr>
-                <td class="text-center">{{ ($trademarks->currentPage() - 1) * $trademarks->perPage() + $loop->iteration }}</td>
+                <td class="text-center">
+                    {{ ($trademarks->currentPage() - 1) * $trademarks->perPage() + $loop->iteration }}</td>
                 <td>{{ $trademark->filing_number }}</td>
                 <td>{{ $trademark->type->name ?? '' }}</td>
-                <td>{{ $trademark->mark }}</td>
-                <td>{{ $trademark->owner }}</td>
+                <td>{{ $trademark->mark }}<br>
+                    <span style="font-weight: 700">{{ $trademark->owner }}</span> <br>
+                    {{ $trademark->address }}
+                </td>
+                <td>
+                    <div class="flex justify-center items-center">
+                        @if ($trademark->images->isNotEmpty())
+                            <img src="{{ asset('storage/' . $trademark->images->first()->file_path) }}"
+                                style="width: 50px; border-radius: 5px;" alt="{{ $trademark->images->first()->file_name }}">
+                        @else
+                            <span>No image</span>
+                        @endif
+                    </div>
+                </td>
                 <td class="text-center">{{ $trademark->filing_date }}</td>
                 <td class="text-center">{{ $trademark->status }}</td>
                 <td class="flex justify-around">
