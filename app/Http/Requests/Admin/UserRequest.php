@@ -20,6 +20,7 @@ class UserRequest extends FormRequest
             'category_id' => 'nullable|exists:user_categories,id',
             'district_id' => 'nullable|exists:districts,id',
             'commune_id' => 'nullable|exists:communes,id',
+            'role_id' => 'nullable|exists:communes,id',
             'name' => 'required|string|max:255',
             'full_name' => 'nullable|string|max:50',
             'phone' => 'nullable|string|max:20',

@@ -15,7 +15,7 @@
     <tbody>
         @foreach ($patents as $index => $patent)
             <tr>
-                <td class="text-center">{{ $index + 1 }}</td>
+                <td class="text-center">{{ ($patents->currentPage() - 1) * $patents->perPage() + $loop->iteration }}</td>
                 <td>{{ $patent->filing_number }}</td>
                 <td>{{ $patent->type->name }}</td>
                 <td>{{ $patent->title }}<br>
@@ -34,11 +34,11 @@
                 </td>
                 <td class="text-center">{{ $patent->publication_date }}</td>
                 <td class="text-center">{!! $patent->status !!}</td>
-                <td class="flex justify-around">
+                <td class="text-center">
                     <a href="{{ route('admin.patents.edit', $patent) }}" type="button"><i
                             class="fa fa-edit text-yellow-600"></i></a>
                     <form id="delete-form-{{ $patent->id }}" action="{{ route('admin.patents.destroy', $patent) }}"
-                        method="POST">
+                        method="POST" class="mt-3">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Bạn có chắc muốn xoá sáng chế này?')"
@@ -53,5 +53,5 @@
 </table>
 
 <div class="p-3">
-    {{ $patents->links('vendor.pagination.custom-pagination') }}
+    {{ $patents->render('vendor.pagination.custom-pagination') }}
 </div>

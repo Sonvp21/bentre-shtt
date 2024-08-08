@@ -1,7 +1,7 @@
 <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition:leave="transition ease-out duration-1000"
     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
     @if (session('success'))
-        <div class="alert alert-success shadow-lg w-fit absolute top-40 mx-[20%] h-8 content-center text-white bg-green-500">
+        <div class="alert alert-success shadow-lg w-fit absolute top-40 mx-[30%] h-8 content-center text-white bg-green-500">
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     class="stroke-current flex-shrink-0 w-6 h-6">

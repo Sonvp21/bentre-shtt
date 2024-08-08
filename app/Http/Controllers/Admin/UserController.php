@@ -41,6 +41,9 @@ class UserController extends Controller
     public function store(UserRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
+        if (isset($validatedData['password'])) {
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        }
         $user = User::create($validatedData);
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
