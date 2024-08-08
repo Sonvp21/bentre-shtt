@@ -12,6 +12,7 @@
             <th>Thao tác</th>
         </tr>
     </thead>
+    
     <tbody>
         @foreach ($trademarks as $index => $trademark)
             <tr>
