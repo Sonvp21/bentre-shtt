@@ -34,19 +34,19 @@
                                     @endforeach
                                 </select>
                                 @error('type_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Tên nhãn hiệu</span>
+                                    <span class="text-sm font-medium text-gray-700">Tên nhãn hiệu  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="mark" placeholder="Nhập vào"
                                     value="{{ old('mark', $trademark->mark) }}"
                                     class="input input-bordered w-full {{ $errors->has('mark') ? 'input-error' : '' }}" />
                                 @error('mark')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -57,7 +57,7 @@
                                 <input type="text" name="mark_colors" placeholder="..." value="{{ old('mark_colors', $trademark->mark_colors) }}"
                                     class="input input-bordered w-full {{ $errors->has('mark_colors') ? 'input-error' : '' }}" />
                                 @error('mark_colors')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             
@@ -78,7 +78,7 @@
                                     </option>
                                 </select>
                                 @error('mark_feature')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -89,7 +89,7 @@
                                     value="{{ old('vienna_classes', $trademark->vienna_classes) }}"
                                     class="input input-bordered w-full {{ $errors->has('vienna_classes') ? 'input-error' : '' }}" />
                                 @error('vienna_classes')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -101,19 +101,19 @@
                                     value="{{ old('disclaimer', $trademark->disclaimer) }}"
                                     class="input input-bordered w-full {{ $errors->has('disclaimer') ? 'input-error' : '' }}" />
                                 @error('disclaimer')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Chủ nhãn hiệu</span>
+                                    <span class="text-sm font-medium text-gray-700">Chủ nhãn hiệu  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="owner"
                                     value="{{ old('owner', $trademark->owner) }}"
                                     class="input input-bordered w-full {{ $errors->has('owner') ? 'input-error' : '' }}" />
                                 @error('owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -125,7 +125,7 @@
                                     value="{{ old('address', $trademark->address) }}"
                                     class="input input-bordered w-full {{ $errors->has('address') ? 'input-error' : '' }}" />
                                 @error('address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             
@@ -138,7 +138,7 @@
                                     value="{{ old('other_owner', $trademark->other_owner) }}"
                                     class="input input-bordered w-full {{ $errors->has('other_owner') ? 'input-error' : '' }}" />
                                 @error('other_owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -150,7 +150,7 @@
                                     value="{{ old('representative_name', $trademark->representative_name) }}"
                                     class="input input-bordered w-full {{ $errors->has('representative_name') ? 'input-error' : '' }}" />
                                 @error('representative_name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -162,7 +162,7 @@
                                     value="{{ old('representative_address', $trademark->representative_address) }}"
                                     class="input input-bordered w-full {{ $errors->has('representative_address') ? 'input-error' : '' }}" />
                                 @error('representative_address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -175,7 +175,7 @@
                                     accept=".pdf, .doc, .docx"
                                     class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('documents') ? 'input-error' : '' }}" />
                                 @error('documents')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                                 <div id="documents-preview">
                                     @foreach ($trademark->documents as $document)
@@ -192,7 +192,7 @@
                                 <input type="file" id="images" name="images[]" multiple accept="image/*"
                                     class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('images') ? 'input-error' : '' }}" />
                                 @error('images')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                                 <div id="images-preview" class="grid grid-cols-2 gap-4 mt-4">
                                     @foreach ($trademark->images as $image)
@@ -226,7 +226,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -246,7 +246,7 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -270,19 +270,19 @@
                                     </option>
                                 </select>
                                 @error('application_type')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Số đơn</span>
+                                    <span class="text-sm font-medium text-gray-700">Số đơn  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="filing_number" placeholder="Nhập vào"
                                     value="{{ old('filing_number', $trademark->filing_number) }}"
                                     class="input input-bordered w-full {{ $errors->has('filing_number') ? 'input-error' : '' }}" />
                                 @error('filing_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -294,7 +294,7 @@
                                     value="{{ old('filing_date', $trademark->filing_date ? \Carbon\Carbon::parse($trademark->filing_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('filing_date') border-red-500 @enderror" />
                                 @error('filing_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -306,7 +306,7 @@
                                     value="{{ old('publication_number', $trademark->publication_number) }}"
                                     class="input input-bordered w-full {{ $errors->has('publication_number') ? 'input-error' : '' }}" />
                                 @error('publication_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -318,7 +318,7 @@
                                     value="{{ old('publication_date', $trademark->publication_date ? \Carbon\Carbon::parse($trademark->publication_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('publication_date') border-red-500 @enderror" />
                                 @error('publication_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -330,7 +330,7 @@
                                     value="{{ old('registration_number', $trademark->registration_number) }}"
                                     class="input input-bordered w-full {{ $errors->has('registration_number') ? 'input-error' : '' }}" />
                                 @error('registration_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -342,7 +342,7 @@
                                     value="{{ old('registration_date', $trademark->registration_date ? \Carbon\Carbon::parse($trademark->registration_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('registration_date') border-red-500 @enderror" />
                                 @error('registration_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -354,7 +354,7 @@
                                     value="{{ old('expiration_date', $trademark->expiration_date ? \Carbon\Carbon::parse($trademark->expiration_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('expiration_date') border-red-500 @enderror" />
                                 @error('expiration_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -385,7 +385,7 @@
                                     </option>
                                 </select>
                                 @error('status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -399,7 +399,7 @@
                                 value="{{ old('longitude', $trademark->getLongitude($trademark->id)) }}"
                                 class="input input-bordered w-full {{ $errors->has('longitude') ? 'input-error' : '' }}" />
                             @error('longitude')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
 
@@ -411,7 +411,7 @@
                                 value="{{ old('latitude', $trademark->getLatitude($trademark->id)) }}"
                                 class="input input-bordered w-full {{ $errors->has('latitude') ? 'input-error' : '' }}" />
                             @error('latitude')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
                     </div>

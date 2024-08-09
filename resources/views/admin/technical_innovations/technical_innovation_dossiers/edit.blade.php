@@ -28,7 +28,7 @@
                                     value="{{ old('unit_name', $technicalInnovationDossier->unit_name) }}"
                                     class="input input-bordered w-full {{ $errors->has('unit_name') ? 'input-error' : '' }}" />
                                 @error('unit_name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -39,7 +39,7 @@
                                     value="{{ old('field', $technicalInnovationDossier->field) }}"
                                     class="input input-bordered w-full {{ $errors->has('field') ? 'input-error' : '' }}" />
                                 @error('field')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -50,7 +50,7 @@
                                     value="{{ old('name', $technicalInnovationDossier->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -63,7 +63,7 @@
                                     value="{{ old('submission_date', $technicalInnovationDossier->submission_date ? \Carbon\Carbon::parse($technicalInnovationDossier->submission_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
                                 @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -86,7 +86,7 @@
                                         từ chối</option>
                                 </select>
                                 @error('submission_status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="w-full form-control">
@@ -112,7 +112,7 @@
                                     <input id="document" type="file" name="document"
                                         class="w-full max-w-xs file-input file-input-bordered file-input-accent" />
                                     @error('document')
-                                        <small class="text-red-500">{{ $message }}</small>
+                                        <small class="text-red-500 text-left">{{ $message }}</small>
                                     @enderror
                                 @endif
                             </label>

@@ -32,7 +32,7 @@
                                     @endforeach
                                 </select>
                                 @error('question_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -51,7 +51,7 @@
                                         Chưa phê duyệt</option>
                                 </select>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -64,7 +64,7 @@
                             value="{{ old('responder', $answer->responder) }}"
                             class="input input-bordered w-full {{ $errors->has('responder') ? 'input-error' : '' }}" />
                         @error('responder')
-                            <span class="text-xs text-red-500">{{ $message }}</span>
+                            <small class="text-red-500 text-left">{{ $message }}</small>
                         @enderror
                     </label>
 
@@ -76,7 +76,7 @@
                             class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('answer') ? 'input-error' : '' }}"
                             rows="1">{{ old('answer', $answer->answer) }}</textarea>
                         @error('answer')
-                            <span class="text-xs text-red-500">{{ $message }}</span>
+                            <small class="text-red-500 text-left">{{ $message }}</small>
                         @enderror
                     </label>
                 </div>

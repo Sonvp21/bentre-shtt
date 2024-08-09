@@ -24,7 +24,7 @@
                                 <input type="text" name="name" placeholder="Nhập vào" value="{{ old('name', $infringement->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -35,7 +35,7 @@
                                     class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('content') ? 'input-error' : '' }}"
                                     rows="1">{{ old('content', $infringement->content) }}</textarea>
                                 @error('content')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -50,7 +50,7 @@
                                     value="{{ old('date', $infringement->date ? \Carbon\Carbon::parse($infringement->date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('date') border-red-500 @enderror" />
                                 @error('date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -61,7 +61,7 @@
                                     value="{{ old('penalty_amount', $infringement->penalty_amount_for_input) }}"
                                     class="input input-bordered w-full @error('penalty_amount') border-red-500 @enderror" />
                                 @error('penalty_amount')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -73,7 +73,7 @@
                                     {{ old('status', $infringement->status) }}
                                 </textarea>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="w-full form-control">
@@ -97,7 +97,7 @@
                                     <input id="document" type="file" name="document"
                                         class="w-full max-w-xs file-input file-input-bordered file-input-accent" />
                                     @error('document')
-                                        <small class="text-red-500">{{ $message }}</small>
+                                        <small class="text-red-500 text-left">{{ $message }}</small>
                                     @enderror
                                 @endif
                             </label>

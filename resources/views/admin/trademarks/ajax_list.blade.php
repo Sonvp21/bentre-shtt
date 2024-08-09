@@ -7,7 +7,7 @@
             <th>Nhóm ngành</th>
             <th>Tên nhãn hiệu/ Chủ đơn/Địa chỉ</th>
             <th>Hình ảnh</th>
-            <th>Ngày nộp đơn</th>
+            <th>Ngày công bố</th>
             <th>Trạng thái</th>
             <th>Thao tác</th>
         </tr>
@@ -35,7 +35,7 @@
                         @endif
                     </div>
                 </td>
-                <td class="text-center">{{ $trademark->filing_date }}</td>
+                <td class="text-center">{{ $trademark->publication_date }}</td>
                 <td class="text-center">{{ $trademark->status }}</td>
                 <td class="text-center">
                     <a href="{{ route('admin.trademarks.edit', $trademark) }}" type="button"><i

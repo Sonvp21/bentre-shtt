@@ -28,7 +28,7 @@
                                     value="{{ old('name', $initiative->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -39,7 +39,7 @@
                                     value="{{ old('author', $initiative->author) }}"
                                     class="input input-bordered w-full {{ $errors->has('author') ? 'input-error' : '' }}" />
                                 @error('author')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -50,7 +50,7 @@
                                     value="{{ old('owner', $initiative->owner) }}"
                                     class="input input-bordered w-full {{ $errors->has('owner') ? 'input-error' : '' }}" />
                                 @error('owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -61,7 +61,7 @@
                                     value="{{ old('address', $initiative->address) }}"
                                     class="input input-bordered w-full {{ $errors->has('address') ? 'input-error' : '' }}" />
                                 @error('address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -72,7 +72,7 @@
                                     value="{{ old('fields', $initiative->fields) }}"
                                     class="input input-bordered w-full {{ $errors->has('fields') ? 'input-error' : '' }}" />
                                 @error('fields')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -93,7 +93,7 @@
                                     @endfor
                                 </select>
                                 @error('recognition_year')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -129,7 +129,7 @@
                                     </option>
                                 </select>
                                 @error('status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

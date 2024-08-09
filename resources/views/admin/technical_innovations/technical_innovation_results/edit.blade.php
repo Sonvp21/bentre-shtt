@@ -32,7 +32,7 @@
                                     @endforeach
                                 </select>
                                 @error('technical_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -50,7 +50,7 @@
                                     @endfor
                                 </select>
                                 @error('year')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -61,7 +61,7 @@
                                     value="{{ $technicalInnovationResult->rank }}"
                                     class="input input-bordered w-full @error('rank') border-red-500 @enderror" />
                                 @error('rank')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -71,7 +71,7 @@
                                 <textarea name="status" id="status" placeholder="..."
                                     class="h-auto form-textarea input input-bordered w-full @error('status') border-red-500 @enderror">{{ $technicalInnovationResult->status }}</textarea>
                                 @error('status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

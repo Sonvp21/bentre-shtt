@@ -20,7 +20,7 @@ class TrademarkRequest extends FormRequest
             'type_id' => 'nullable|exists:trademark_types,id',
             'geom' => 'nullable',
 
-            'mark' => 'nullable|string',
+            'mark' => 'required|string',
             'mark_colors' => 'nullable|string',
             'mark_feature' => 'nullable|string',
             'vienna_classes' => 'nullable|string',

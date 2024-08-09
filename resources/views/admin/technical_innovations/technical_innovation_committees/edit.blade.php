@@ -28,7 +28,7 @@
                                     value="{{ old('name', $technicalInnovationCommittee->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -46,7 +46,7 @@
                                     @endforeach
                                 </select>
                                 @error('technical_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -57,7 +57,7 @@
                                     value="{{ old('score', $technicalInnovationCommittee->score) }}"
                                     class="input input-bordered w-full {{ $errors->has('score') ? 'input-error' : '' }}" />
                                 @error('score')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -72,7 +72,7 @@
                                     value="{{ old('date', $technicalInnovationCommittee->date ? \Carbon\Carbon::parse($technicalInnovationCommittee->date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('date') border-red-500 @enderror" />
                                 @error('date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -84,7 +84,7 @@
                                     {{ old('status', $technicalInnovationCommittee->status) }}
                                 </textarea>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

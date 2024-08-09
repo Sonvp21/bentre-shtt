@@ -23,7 +23,7 @@
                                 <input type="text" name="name" placeholder="Nhập vào" value="{{ old('name') }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -34,7 +34,7 @@
                                     class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('content') ? 'input-error' : '' }}"
                                     rows="1">{{ old('content') }}</textarea>
                                 @error('content')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -49,7 +49,7 @@
                                     value="{{ old('date') }}"
                                     class="input input-bordered w-full @error('date') border-red-500 @enderror" />
                                 @error('date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -61,7 +61,7 @@
                                     value="{{ old('penalty_amount') }}"
                                     class="input input-bordered w-full @error('penalty_amount') border-red-500 @enderror" />
                                 @error('penalty_amount')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -71,7 +71,7 @@
                                 <textarea name="status" id="status" placeholder="Phát hiện ban đầu, Đang điều tra, Xác nhận vi phạm..."
                                     class="h-auto form-textarea input input-bordered w-full @error('status') border-red-500 @enderror" >{{ old('status') }}</textarea>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="w-full form-control">
@@ -81,7 +81,7 @@
                                 <input type="file" name="document" id="document"
                                     class="w-full max-w-xs file-input file-input-bordered file-input-accent" />
                                 @error('document')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

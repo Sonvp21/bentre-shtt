@@ -40,7 +40,7 @@
                                     value="{{ old('name', $commune->name) }}"
                                     class="input text-sm input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -53,7 +53,7 @@
                                     value="{{ old('area', $commune->area) }}"
                                     class="input text-sm input-bordered w-full {{ $errors->has('area') ? 'input-error' : '' }}" />
                                 @error('area')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -66,7 +66,7 @@
                                     value="{{ old('population', $commune->population) }}"
                                     class="input text-sm input-bordered w-full {{ $errors->has('population') ? 'input-error' : '' }}" />
                                 @error('population')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -79,7 +79,7 @@
                                     value="{{ old('updated_year', $commune->updated_year) }}"
                                     class="input text-sm input-bordered w-full {{ $errors->has('updated_year') ? 'input-error' : '' }}" />
                                 @error('updated_year')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

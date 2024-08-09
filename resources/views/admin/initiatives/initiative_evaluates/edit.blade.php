@@ -35,7 +35,7 @@
                                     @endforeach
                                 </select>
                                 @error('initiative_dossier_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -45,7 +45,7 @@
                                 <input type="text" name="name_evaluation" placeholder="..." value="{{ old('name_evaluation', $initiativeEvaluate->name_evaluation) }}"
                                     class="input input-bordered w-full {{ $errors->has('name_evaluation') ? 'input-error' : '' }}" />
                                 @error('name_evaluation')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -56,7 +56,7 @@
                                     value="{{ old('name_member', $initiativeEvaluate->name_member) }}"
                                     class="input input-bordered w-full {{ $errors->has('name_member') ? 'input-error' : '' }}" />
                                 @error('name_member')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -70,7 +70,7 @@
                                     value="{{ old('score', $initiativeEvaluate->score) }}"
                                     class="input input-bordered w-full {{ $errors->has('score') ? 'input-error' : '' }}" />
                                 @error('score')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -81,7 +81,7 @@
                                     value="{{ old('submission_date', $initiativeEvaluate->submission_date ? \Carbon\Carbon::parse($initiativeEvaluate->submission_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
                                 @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -102,7 +102,7 @@
                                         từ chối</option>
                                 </select>
                                 @error('submission_status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

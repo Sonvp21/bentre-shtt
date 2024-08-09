@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\AdvisorySupportController;
 use App\Http\Controllers\Admin\AnswerController;
 use App\Http\Controllers\Admin\CommuneController;
@@ -348,6 +349,7 @@ Route::group([
     Route::get(config('user-activity.route_path'), 'ActivityController@getIndex')->name('user_activity');
     Route::post(config('user-activity.route_path'), 'ActivityController@handlePostRequest');
 });
+Route::get('admin/users/activity', [ActivityController::class, 'index'])->name('users.activity');
 
 Route::get('/upload', [ImageSearchController::class, 'showUploadForm'])->name('image.upload');
 Route::post('/upload', [ImageSearchController::class, 'uploadAndSearch'])->name('image.search');

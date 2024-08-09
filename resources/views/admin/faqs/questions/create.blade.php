@@ -26,7 +26,7 @@
                                     value="{{ old('name_sender') }}"
                                     class="input input-bordered w-full {{ $errors->has('name_sender') ? 'input-error' : '' }}" />
                                 @error('name_sender')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -41,7 +41,7 @@
                                     <option value="2" {{ old('status') == '2' ? 'selected' : '' }}>Chưa phê duyệt</option>
                                 </select>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -53,7 +53,7 @@
                         <input type="text" name="email" placeholder="Nhập vào" value="{{ old('email') }}"
                             class="input input-bordered w-full {{ $errors->has('email') ? 'input-error' : '' }}" />
                         @error('email')
-                            <span class="text-xs text-red-500">{{ $message }}</span>
+                            <small class="text-red-500 text-left">{{ $message }}</small>
                         @enderror
                     </label>
 
@@ -64,7 +64,7 @@
                         <input type="text" name="title" placeholder="Nhập vào" value="{{ old('title') }}"
                             class="input input-bordered w-full {{ $errors->has('title') ? 'input-error' : '' }}" />
                         @error('title')
-                            <span class="text-xs text-red-500">{{ $message }}</span>
+                            <small class="text-red-500 text-left">{{ $message }}</small>
                         @enderror
                     </label>
 
@@ -76,7 +76,7 @@
                             class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('content') ? 'input-error' : '' }}"
                             rows="1">{{ old('content') }}</textarea>
                         @error('content')
-                            <span class="text-xs text-red-500">{{ $message }}</span>
+                            <small class="text-red-500 text-left">{{ $message }}</small>
                         @enderror
                     </label>
                 </div>

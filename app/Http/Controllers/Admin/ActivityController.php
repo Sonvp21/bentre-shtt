@@ -10,6 +10,34 @@ use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends Controller
 {
+    public function index()
+    {
+        $connection = config('database.default');
+        $driver = DB::connection($connection)->getDriverName();
+        
+        switch ($driver) {
+            case 'pgsql':
+                $sql = sprintf(
+                    "SELECT table_name FROM information_schema.tables where table_schema = '%s' ORDER BY table_schema,table_name;",
+                    DB::connection($connection)->getConfig('schema') ?: 'public'
+                );
+                $all = array_map('current', DB::select($sql));
+                break;
+            case 'sqlite':
+                $sql = "SELECT name as table_name FROM sqlite_master WHERE type='table' ORDER BY name";
+                $all = array_map('current', DB::select($sql));
+                break;
+            default:
+                $all = array_map('current', DB::select('SHOW TABLES'));
+        }
+    
+        $exclude = ['failed_jobs', 'password_resets', 'migrations', 'logs'];
+        $tables = array_diff($all, $exclude);
+    
+        return view('admin.users.show_activity', ['tables' => $tables]);
+    }
+    
+
     private $userInstance = "\App\Models\User";
 
     public function __construct()

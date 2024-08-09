@@ -34,7 +34,7 @@
                                     @endforeach
                                 </select>
                                 @error('initiative_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -45,7 +45,7 @@
                                     value="{{ old('name', $initiativeDossier->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -68,7 +68,7 @@
                                     value="{{ old('submission_date', $initiativeDossier->submission_date ? \Carbon\Carbon::parse($initiativeDossier->submission_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
                                 @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -96,7 +96,7 @@
                                         từ chối</option>
                                 </select>
                                 @error('submission_status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-full">
@@ -122,7 +122,7 @@
                                     <input id="document" type="file" name="document"
                                         class="file-input file-input-bordered file-input-accent w-full" />
                                     @error('document')
-                                        <small class="text-red-500">{{ $message }}</small>
+                                        <small class="text-red-500 text-left">{{ $message }}</small>
                                     @enderror
                                 @endif
                             </label>

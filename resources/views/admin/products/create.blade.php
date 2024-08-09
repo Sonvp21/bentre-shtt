@@ -32,7 +32,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             {{-- xã  --}}
@@ -51,7 +51,7 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -63,7 +63,7 @@
                                     value="{{ old('submission_date') }}"
                                     class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
                                 @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -76,7 +76,7 @@
                                 <input type="text" name="name" placeholder="Nhập vào" value="{{ old('name') }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -86,7 +86,7 @@
                                 <input type="text" name="owner" placeholder="Nhập vào" value="{{ old('owner') }}"
                                     class="input input-bordered w-full {{ $errors->has('owner') ? 'input-error' : '' }}" />
                                 @error('owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -96,7 +96,7 @@
                                 <input type="text" name="address" placeholder="Nhập vào" value="{{ old('address') }}"
                                     class="input input-bordered w-full {{ $errors->has('address') ? 'input-error' : '' }}" />
                                 @error('address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -106,7 +106,7 @@
                                 <input type="text" name="contact" placeholder="Nhập vào" value="{{ old('contact') }}"
                                     class="input input-bordered w-full {{ $errors->has('contact') ? 'input-error' : '' }}" />
                                 @error('contact')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -116,7 +116,7 @@
                                 <input type="text" name="representatives" placeholder="..." value="{{ old('representatives') }}"
                                     class="input input-bordered w-full {{ $errors->has('representatives') ? 'input-error' : '' }}" />
                                 @error('representatives')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -127,7 +127,7 @@
                                     placeholder="..." value="{{ old('status') }}"
                                     class="input input-bordered w-full {{ $errors->has('status') ? 'input-error' : '' }}" />
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -143,7 +143,7 @@
                                     class="file-input file-input-bordered file-input-accent w-full"
                                     accept=".pdf, .doc, .docx, .txt" /> <!-- Chỉ cho phép chọn các định dạng tài liệu -->
                                 @error('document')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             

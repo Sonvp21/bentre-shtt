@@ -27,9 +27,6 @@ class GeographicalIndication extends Model implements HasMedia
         'status',
         'view_count',
     ];
-    protected $casts = [
-        'issue_date' => 'date', // hoặc 'datetime' nếu cần
-    ];
 
     // Các mối quan hệ
     public function images()
@@ -63,11 +60,6 @@ class GeographicalIndication extends Model implements HasMedia
 
     public function getIssueDateAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format('Y-m-d') : null;
-    }
-
-    public function getFormattedIssueDateAttribute(): string
-    {
-        return $this->issue_date ? Carbon::parse($this->issue_date)->format('d-m-Y') : '';
+        return $value ? Carbon::parse($value)->format('d.m.Y') : null;
     }
 }

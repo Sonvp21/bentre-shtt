@@ -20,56 +20,56 @@
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Tên sáng kiến</span>
+                                    <span class="text-sm font-medium text-gray-700">Tên sáng kiến  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="name" placeholder="..." value="{{ old('name') }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Tác giả</span>
+                                    <span class="text-sm font-medium text-gray-700">Tác giả  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="author" placeholder="Nguyễn Văn A"
                                     value="{{ old('author') }}"
                                     class="input input-bordered w-full {{ $errors->has('author') ? 'input-error' : '' }}" />
                                 @error('author')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Chủ sáng kiến</span>
+                                    <span class="text-sm font-medium text-gray-700">Chủ sáng kiến  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="owner" placeholder="Nguyễn Văn A"
                                     value="{{ old('owner') }}"
                                     class="input input-bordered w-full {{ $errors->has('owner') ? 'input-error' : '' }}" />
                                 @error('owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Địa chỉ</span>
+                                    <span class="text-sm font-medium text-gray-700">Địa chỉ  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="address" placeholder="Nhập địa chỉ"
                                     value="{{ old('address') }}"
                                     class="input input-bordered w-full {{ $errors->has('address') ? 'input-error' : '' }}" />
                                 @error('address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Lĩnh vực</span>
+                                    <span class="text-sm font-medium text-gray-700">Lĩnh vực  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="fields" placeholder="Nông, lâm, nghiệp,...."
                                     value="{{ old('fields') }}"
                                     class="input input-bordered w-full {{ $errors->has('fields') ? 'input-error' : '' }}" />
                                 @error('fields')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -77,7 +77,7 @@
                         <div>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Năm công nhận</span>
+                                    <span class="text-sm font-medium text-gray-700">Năm công nhận  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <select id="recognition_year" name="recognition_year"
                                     class="input input-bordered w-full @error('recognition_year') border-red-500 @enderror">
@@ -89,7 +89,7 @@
                                     @endfor
                                 </select>
                                 @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -115,7 +115,7 @@
                                     <option value="7" {{ old('status') == '7' ? 'selected' : '' }}>Đã rút</option>
                                 </select>
                                 @error('status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

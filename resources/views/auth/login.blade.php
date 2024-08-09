@@ -39,7 +39,7 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-            <button class="btn-outline btn ml-auto" type="submit">
+            <button class="btn btn-primary ml-auto" type="submit">
                 <span>@lang('admin.login')</span>
             </button>            
         </div>

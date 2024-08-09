@@ -37,7 +37,7 @@
                                 <input type="text" name="title" placeholder="Nhập vào" value="{{ old('title') }}"
                                     class="input input-bordered w-full {{ $errors->has('title') ? 'input-error' : '' }}" />
                                 @error('title')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -48,7 +48,7 @@
                                     class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('content') ? 'input-error' : '' }}"
                                     rows="1">{{ old('content') }}</textarea>
                                 @error('content')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -58,7 +58,7 @@
                                 <textarea name="status" id="status"
                                     class="textarea textarea-bordered h-12 @error('status') border-red-500 @enderror" placeholder="...">{{ old('status') }}</textarea>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -71,7 +71,7 @@
                                     value="{{ old('published_at') }}"
                                     class="input input-bordered w-full @error('published_at') border-red-500 @enderror" />
                                 @error('published_at')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-full">
@@ -81,7 +81,7 @@
                                 <input type="file" name="document" id="document"
                                     class="file-input file-input-bordered file-input-accent w-full" />
                                 @error('document')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 

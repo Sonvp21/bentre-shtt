@@ -25,7 +25,7 @@
                                 <input type="text" name="name" placeholder="Nhập vào" value="{{ old('name') }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -37,7 +37,7 @@
                                     value="{{ old('unit_name') }}"
                                     class="input input-bordered w-full {{ $errors->has('unit_name') ? 'input-error' : '' }}" />
                                 @error('unit_name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -48,7 +48,7 @@
                                 <input type="text" name="field" placeholder="Nhập vào" value="{{ old('field') }}"
                                     class="input input-bordered w-full {{ $errors->has('field') ? 'input-error' : '' }}" />
                                 @error('field')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -62,7 +62,7 @@
                                     value="{{ old('submission_date') }}"
                                     class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
                                 @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -81,7 +81,7 @@
                                         từ chối</option>
                                 </select>
                                 @error('submission_status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="w-full form-control">
@@ -91,7 +91,7 @@
                                 <input type="file" name="document" id="document"
                                     class="w-full max-w-xs file-input file-input-bordered file-input-accent" />
                                 @error('document')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>

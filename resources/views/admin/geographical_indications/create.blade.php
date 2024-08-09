@@ -7,7 +7,7 @@
             </ul>
         </div>
         <x-admin.alerts.success />
-<x-admin.alerts.error />
+        <x-admin.alerts.error />
         <div class="overflow-x-auto bg-white rounded-lg mt-5">
 
             <form action="{{ route('admin.geographical_indications.store') }}" method="POST"
@@ -21,36 +21,36 @@
                         <div class="col-span-2">
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Tên sản phẩm</span>
+                                    <span class="text-sm font-medium text-gray-700">Tên sản phẩm  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="name" placeholder="Nhập vào" value="{{ old('name') }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Đơn vị quản lý</span>
+                                    <span class="text-sm font-medium text-gray-700">Đơn vị quản lý  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="management_unit" placeholder="Nhập vào"
                                     value="{{ old('management_unit') }}"
                                     class="input input-bordered w-full {{ $errors->has('management_unit') ? 'input-error' : '' }}" />
                                 @error('management_unit')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Đơn vị uỷ quyền</span>
+                                    <span class="text-sm font-medium text-gray-700">Đơn vị uỷ quyền  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="authorized_unit" placeholder="Nhập vào"
                                     value="{{ old('authorized_unit') }}"
                                     class="input input-bordered w-full {{ $errors->has('authorized_unit') ? 'input-error' : '' }}" />
                                 @error('authorized_unit')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -80,7 +80,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             {{-- xã  --}}
@@ -99,40 +99,40 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Số đơn</span>
+                                    <span class="text-sm font-medium text-gray-700">Số đơn  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="application_number" placeholder="Nhập vào"
                                     value="{{ old('application_number') }}"
                                     class="input input-bordered w-full {{ $errors->has('application_number') ? 'input-error' : '' }}" />
                                 @error('application_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Số văn bằng</span>
+                                    <span class="text-sm font-medium text-gray-700">Số văn bằng  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="certificate_number" placeholder="Enter Number Patent"
                                     value="{{ old('certificate_number') }}"
                                     class="input input-bordered w-full @error('certificate_number') border-red-500 @enderror" />
                                 @error('certificate_number')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
                                 <div class="label">
-                                    <span class="text-sm font-medium text-gray-700">Ngày cấp</span>
+                                    <span class="text-sm font-medium text-gray-700">Ngày cấp  <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="date" name="issue_date" placeholder="Select Submission Date"
                                     value="{{ old('issue_date') }}"
                                     class="input input-bordered w-full @error('issue_date') border-red-500 @enderror" />
                                 @error('issue_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -143,7 +143,7 @@
                                 <input type="file" name="document" id="document"
                                     class="file-input file-input-bordered file-input-accent w-full" />
                                 @error('document')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -168,9 +168,9 @@
                             <span class="text-sm font-medium text-gray-700">Ghi chú</span>
                         </div>
                         <textarea name="status" id="status"
-                            class="form-textarea input input-bordered w-full @error('status') border-red-500 @enderror" rows="4">{{ old('status') }}</textarea>
+                            class="textarea textarea-bordered @error('status') border-red-500 @enderror" rows="2">{{ old('status') }}</textarea>
                         @error('status')
-                            <span class="text-xs text-red-500">{{ $message }}</span>
+                            <small class="text-red-500 text-left">{{ $message }}</small>
                         @enderror
                     </label>
                 </div>

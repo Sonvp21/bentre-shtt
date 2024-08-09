@@ -35,7 +35,7 @@
                                     @endforeach
                                 </select>
                                 @error('type_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -47,7 +47,7 @@
                                     value="{{ old('name', $industrialDesign->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -58,7 +58,7 @@
                                     value="{{ old('owner', $industrialDesign->owner) }}"
                                     class="input input-bordered w-full {{ $errors->has('owner') ? 'input-error' : '' }}" />
                                 @error('owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -70,7 +70,7 @@
                                     value="{{ old('address', $industrialDesign->address) }}"
                                     class="input input-bordered w-full {{ $errors->has('address') ? 'input-error' : '' }}" />
                                 @error('address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -81,7 +81,7 @@
                                     value="{{ old('designer', $industrialDesign->designer) }}"
                                     class="input input-bordered w-full {{ $errors->has('designer') ? 'input-error' : '' }}" />
                                 @error('designer')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -92,7 +92,7 @@
                                     value="{{ old('designer_address', $industrialDesign->designer_address) }}"
                                     class="input input-bordered w-full {{ $errors->has('designer_address') ? 'input-error' : '' }}" />
                                 @error('designer_address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -103,7 +103,7 @@
                                     value="{{ old('representative_name', $industrialDesign->representative_name) }}"
                                     class="input input-bordered w-full {{ $errors->has('representative_name') ? 'input-error' : '' }}" />
                                 @error('representative_name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -114,7 +114,7 @@
                                     value="{{ old('representative_address', $industrialDesign->representative_address) }}"
                                     class="input input-bordered w-full {{ $errors->has('representative_address') ? 'input-error' : '' }}" />
                                 @error('representative_address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -126,7 +126,7 @@
                                     class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('description') ? 'input-error' : '' }}"
                                     rows="1">{!! old('description', $industrialDesign->description) !!}</textarea>
                                 @error('description')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -149,7 +149,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -169,7 +169,7 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -180,7 +180,7 @@
                                     value="{{ old('filing_number', $industrialDesign->filing_number) }}"
                                     class="input input-bordered w-full {{ $errors->has('filing_number') ? 'input-error' : '' }}" />
                                 @error('filing_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -192,7 +192,7 @@
                                     value="{{ old('filing_date', $industrialDesign->filing_date ? \Carbon\Carbon::parse($industrialDesign->filing_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('filing_date') border-red-500 @enderror" />
                                 @error('filing_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -204,7 +204,7 @@
                                     value="{{ old('publication_number', $industrialDesign->publication_number) }}"
                                     class="input input-bordered w-full {{ $errors->has('publication_number') ? 'input-error' : '' }}" />
                                 @error('publication_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -216,7 +216,7 @@
                                     value="{{ old('publication_date', $industrialDesign->publication_date ? \Carbon\Carbon::parse($industrialDesign->publication_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('publication_date') border-red-500 @enderror" />
                                 @error('publication_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -228,7 +228,7 @@
                                     value="{{ old('registration_number', $industrialDesign->registration_number) }}"
                                     class="input input-bordered w-full {{ $errors->has('registration_number') ? 'input-error' : '' }}" />
                                 @error('registration_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -240,7 +240,7 @@
                                     value="{{ old('registration_date', $industrialDesign->registration_date ? \Carbon\Carbon::parse($industrialDesign->registration_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('registration_date') border-red-500 @enderror" />
                                 @error('registration_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -253,7 +253,7 @@
                                     value="{{ old('expiration_date', $industrialDesign->expiration_date ? \Carbon\Carbon::parse($industrialDesign->expiration_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('expiration_date') border-red-500 @enderror" />
                                 @error('expiration_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -265,7 +265,7 @@
                                     value="{{ old('locarno_classes', $industrialDesign->locarno_classes) }}"
                                     class="input input-bordered w-full {{ $errors->has('locarno_classes') ? 'input-error' : '' }}" />
                                 @error('locarno_classes')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -293,7 +293,7 @@
                                         Đã rút lại</option>
                                 </select>
                                 @error('status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -306,7 +306,7 @@
                                     accept=".pdf, .doc, .docx"
                                     class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('documents') ? 'input-error' : '' }}" />
                                 @error('documents')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                                 <div id="documents-preview">
                                     @foreach ($industrialDesign->documents as $document)
@@ -323,7 +323,7 @@
                                 <input type="file" id="images" name="images[]" multiple accept="image/*"
                                     class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('images') ? 'input-error' : '' }}" />
                                 @error('images')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                                 <div id="images-preview" class="grid grid-cols-2 gap-4 mt-4">
                                     @foreach ($industrialDesign->images as $image)
@@ -347,7 +347,7 @@
                                 value="{{ old('longitude', $industrialDesign->getLongitude($industrialDesign->id)) }}"
                                 class="input input-bordered w-full {{ $errors->has('longitude') ? 'input-error' : '' }}" />
                             @error('longitude')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
 
@@ -359,7 +359,7 @@
                                 value="{{ old('latitude', $industrialDesign->getLatitude($industrialDesign->id)) }}"
                                 class="input input-bordered w-full {{ $errors->has('latitude') ? 'input-error' : '' }}" />
                             @error('latitude')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
                     </div>

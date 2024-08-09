@@ -25,7 +25,7 @@
                                  class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}"
                                 required>
                             @error('name')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
                     </div>

@@ -290,7 +290,7 @@
                 </a>
             </li>
 
-            <li><a target="_blank" href="{{ route('user_activity') }}" class="font-semibold group">
+            <li><a href="{{ route('users.activity') }}" class="font-semibold group {{ Request::routeIs('users.activity') ? 'active' : '' }}">
                     <i class="fal fa-journal-whills"></i>
                     Nhật ký hoạt động
                 </a>

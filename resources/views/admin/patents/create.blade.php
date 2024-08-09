@@ -33,19 +33,19 @@
                                     @endforeach
                                 </select>
                                 @error('type_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Tên Sáng chế
-                                        <span class="text-red-500">*</span></span>
+                                        <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="title" placeholder="Nhập vào" value="{{ old('title') }}"
                                     class="input input-bordered w-full {{ $errors->has('title') ? 'input-error' : '' }}" />
                                 @error('title')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -57,19 +57,19 @@
                                     value="{{ old('ipc_classes') }}"
                                     class="input input-bordered w-full {{ $errors->has('ipc_classes') ? 'input-error' : '' }}" />
                                 @error('ipc_classes')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Chủ đơn
-                                        <span class="text-red-500">*</span></span>
+                                        <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="applicant" placeholder="..." value="{{ old('applicant') }}"
                                     class="input input-bordered w-full {{ $errors->has('applicant') ? 'input-error' : '' }}" />
                                 @error('applicant')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -81,7 +81,7 @@
                                     value="{{ old('applicant_address') }}"
                                     class="input input-bordered w-full {{ $errors->has('applicant_address') ? 'input-error' : '' }}" />
                                 @error('applicant_address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -92,7 +92,7 @@
                                 <input type="text" name="inventor" placeholder="..." value="{{ old('inventor') }}"
                                     class="input input-bordered w-full {{ $errors->has('inventor') ? 'input-error' : '' }}" />
                                 @error('inventor')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -104,7 +104,7 @@
                                     value="{{ old('inventor_address') }}"
                                     class="input input-bordered w-full {{ $errors->has('inventor_address') ? 'input-error' : '' }}" />
                                 @error('inventor_address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -116,7 +116,7 @@
                                     value="{{ old('other_inventor') }}"
                                     class="input input-bordered w-full {{ $errors->has('other_inventor') ? 'input-error' : '' }}" />
                                 @error('other_inventor')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -128,7 +128,7 @@
                                     class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('abstract') ? 'input-error' : '' }}"
                                     rows="1">{{ old('abstract') }}</textarea>
                                 @error('abstract')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -140,7 +140,7 @@
                                     placeholder="Enter Legal Representative" value="{{ old('representative_name') }}"
                                     class="input input-bordered w-full {{ $errors->has('representative_name') ? 'input-error' : '' }}" />
                                 @error('representative_name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -152,7 +152,7 @@
                                     placeholder="Enter Address Representative" value="{{ old('representative_address') }}"
                                     class="input input-bordered w-full {{ $errors->has('representative_address') ? 'input-error' : '' }}" />
                                 @error('representative_address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -165,7 +165,7 @@
                                     accept=".pdf, .doc, .docx"
                                     class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('documents') ? 'input-error' : '' }}" />
                                 @error('documents')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                                 <div id="documents-preview"></div>
                             </label>
@@ -174,10 +174,10 @@
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Ảnh (tối đa 10MB) </span>
                                 </div>
-                                <input type="file" id="images" name="images[]" multiple accept="image/*"
+                                <input type="file" id="images" name="images[]" multiple accept="image/(*)"
                                     class="file-input file-input-bordered file-input-sm w-full max-w-xs {{ $errors->has('images') ? 'input-error' : '' }}" />
                                 @error('images')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                                 <div id="images-preview" class="grid grid-cols-1 gap-4 mt-4"></div>
                             </label>
@@ -200,7 +200,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             {{-- xã  --}}
@@ -219,7 +219,7 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -238,20 +238,20 @@
                                     </option>
                                 </select>
                                 @error('application_type')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
                             <label class="form-control w-[95%]">
                                 <div class="label">
                                     <span class="text-sm font-medium text-gray-700">Số đơn
-                                        <span class="text-red-500">*</span></span>
+                                        <span class="text-red-500">(*)</span></span>
                                 </div>
                                 <input type="text" name="filing_number" placeholder="..."
                                     value="{{ old('filing_number') }}"
                                     class="input input-bordered w-full {{ $errors->has('filing_number') ? 'input-error' : '' }}" />
                                 @error('filing_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -263,7 +263,7 @@
                                     value="{{ old('filing_date') }}"
                                     class="input input-bordered w-full @error('filing_date') border-red-500 @enderror" />
                                 @error('filing_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -275,7 +275,7 @@
                                     value="{{ old('publication_number') }}"
                                     class="input input-bordered w-full {{ $errors->has('publication_number') ? 'input-error' : '' }}" />
                                 @error('publication_number')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -287,7 +287,7 @@
                                     value="{{ old('publication_date') }}"
                                     class="input input-bordered w-full @error('publication_date') border-red-500 @enderror" />
                                 @error('publication_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -300,7 +300,7 @@
                                     value="{{ old('registration_number') }}"
                                     class="input input-bordered w-full @error('registration_number') border-red-500 @enderror" />
                                 @error('registration_number')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -313,7 +313,7 @@
                                     value="{{ old('registration_date') }}"
                                     class="input input-bordered w-full @error('registration_date') border-red-500 @enderror" />
                                 @error('registration_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -326,7 +326,7 @@
                                     placeholder="Select Patent Out of Date" value="{{ old('expiration_date') }}"
                                     class="input input-bordered w-full @error('expiration_date') border-red-500 @enderror" />
                                 @error('expiration_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -361,7 +361,7 @@
                                     </option>
                                 </select>
                                 @error('status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -375,7 +375,7 @@
                                 value=""
                                 class="input input-bordered w-full {{ $errors->has('longitude') ? 'input-error' : '' }}" />
                             @error('longitude')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
 
@@ -387,7 +387,7 @@
                                 value=""
                                 class="input input-bordered w-full {{ $errors->has('latitude') ? 'input-error' : '' }}" />
                             @error('latitude')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
                     </div>
@@ -418,7 +418,7 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+                const MAX_FILE_SIZE = 10 (*) 1024 (*) 1024; // 10MB
 
                 // Kiểm tra kích thước tài liệu
                 document.getElementById('documents').addEventListener('change', function(event) {

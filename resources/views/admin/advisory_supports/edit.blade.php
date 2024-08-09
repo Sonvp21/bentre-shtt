@@ -41,7 +41,7 @@
                                     value="{{ old('title', $advisorySupport->title) }}"
                                     class="input input-bordered w-full {{ $errors->has('title') ? 'input-error' : '' }}" />
                                 @error('title')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -52,7 +52,7 @@
                                     class="form-input rounded-md shadow-sm mt-1 block w-full {{ $errors->has('content') ? 'input-error' : '' }}"
                                     rows="1">{{ old('content', $advisorySupport->content) }}</textarea>
                                 @error('content')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -63,7 +63,7 @@
                                 <textarea name="status" id="status"
                                     class="textarea textarea-bordered h-12 @error('status') border-red-500 @enderror" placeholder="...">{{ old('status', $advisorySupport->status) }}</textarea>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -76,7 +76,7 @@
                                     value="{{ old('published_at', $advisorySupport->published_at ? \Carbon\Carbon::parse($advisorySupport->published_at)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('published_at') border-red-500 @enderror" />
                                 @error('published_at')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="w-full form-control">
@@ -102,7 +102,7 @@
                                     <input id="document" type="file" name="document"
                                         class="w-full max-w-xs file-input file-input-bordered file-input-accent" />
                                     @error('document')
-                                        <small class="text-red-500">{{ $message }}</small>
+                                        <small class="text-red-500 text-left">{{ $message }}</small>
                                     @enderror
                                 @endif
                             </label>

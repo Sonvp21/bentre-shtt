@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             {{-- xã  --}}
@@ -52,7 +52,7 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -63,7 +63,7 @@
                                 <input type="text" name="phone" placeholder="09987..." value="{{ old('phone') }}"
                                     class="input input-bordered w-full {{ $errors->has('phone') ? 'input-error' : '' }}" />
                                 @error('phone')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -75,7 +75,7 @@
                                     value="{{ old('address') }}"
                                     class="input input-bordered w-full {{ $errors->has('address') ? 'input-error' : '' }}" />
                                 @error('address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -86,7 +86,7 @@
                                     value="{{ old('birthday') }}"
                                     class="input input-bordered w-full {{ $errors->has('birthday') ? 'input-error' : '' }}" />
                                 @error('birthday')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -107,7 +107,7 @@
                                     @endforeach
                                 </select>
                                 @error('category_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label> --}}
 
@@ -126,7 +126,7 @@
                                     @endforeach
                                 </select>
                                 @error('role_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -137,7 +137,7 @@
                                 <input type="text" name="name" placeholder="..." value="{{ old('name') }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -148,7 +148,7 @@
                                     value="{{ old('full_name') }}"
                                     class="input input-bordered w-full {{ $errors->has('full_name') ? 'input-error' : '' }}" />
                                 @error('full_name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -160,7 +160,7 @@
                                     value="{{ old('email') }}"
                                     class="input input-bordered w-full {{ $errors->has('email') ? 'input-error' : '' }}" />
                                 @error('email')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -173,7 +173,7 @@
                                     value="{{ old('password') }}" autocomplete="new-password"
                                     class="input input-bordered w-full {{ $errors->has('password') ? 'input-error' : '' }}" />
                                 @error('password')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -194,7 +194,7 @@
                                     </option>
                                 </select>
                                 @error('status')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -203,7 +203,7 @@
                                 </div>
                                 <textarea name="description" id="description" class="textarea textarea-bordered"></textarea>
                                 @error('description')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <div class="items-center form-group">
@@ -229,7 +229,7 @@
                                 <div id="imagePreview" class="mt-5 gap-3 text-center"></div>
 
                                 @error('images')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </div>
 

@@ -33,7 +33,7 @@
                                 @endforeach
                             </select>
                             @error('technical_id')
-                                <small class="text-red-500">{{ $message }}</small>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
                         <label class="form-control w-[95%]">
@@ -50,7 +50,7 @@
                                 @endfor
                             </select>
                             @error('year')
-                                <small class="text-red-500">{{ $message }}</small>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
                         <label class="form-control w-[95%]">
@@ -60,7 +60,7 @@
                             <input type="text" name="rank" placeholder="Nhập vào" value="{{ old('rank') }}"
                                 class="input input-bordered w-full {{ $errors->has('rank') ? 'input-error' : '' }}" />
                             @error('rank')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
 
@@ -71,7 +71,7 @@
                             <textarea name="status" id="status" placeholder="..."
                                 class="h-auto form-textarea input input-bordered w-full @error('status') border-red-500 @enderror">{{ old('status') }}</textarea>
                             @error('status')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
+                                <small class="text-red-500 text-left">{{ $message }}</small>
                             @enderror
                         </label>
                     </div>

@@ -34,7 +34,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             {{-- xã  --}}
@@ -53,7 +53,7 @@
                                     @endforeach
                                 </select>
                                 @error('commune_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -65,7 +65,7 @@
                                     value="{{ old('submission_date', $product->submission_date ? \Carbon\Carbon::parse($product->submission_date)->format('Y-m-d') : '') }}"
                                     class="input input-bordered w-full @error('submission_date') border-red-500 @enderror" />
                                 @error('submission_date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -79,7 +79,7 @@
                                     value="{{ old('name', $product->name) }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -90,7 +90,7 @@
                                     value="{{ old('owner', $product->owner) }}"
                                     class="input input-bordered w-full {{ $errors->has('owner') ? 'input-error' : '' }}" />
                                 @error('owner')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -101,7 +101,7 @@
                                     value="{{ old('address', $product->address) }}"
                                     class="input input-bordered w-full {{ $errors->has('address') ? 'input-error' : '' }}" />
                                 @error('address')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -112,7 +112,7 @@
                                     value="{{ old('contact', $product->contact) }}"
                                     class="input input-bordered w-full {{ $errors->has('contact') ? 'input-error' : '' }}" />
                                 @error('contact')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -123,7 +123,7 @@
                                     value="{{ old('representatives', $product->representatives) }}"
                                     class="input input-bordered w-full {{ $errors->has('representatives') ? 'input-error' : '' }}" />
                                 @error('representatives')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -134,7 +134,7 @@
                                     value="{{ old('status', $product->status) }}"
                                     class="input input-bordered w-full {{ $errors->has('status') ? 'input-error' : '' }}" />
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
@@ -161,7 +161,7 @@
                                     <input id="document" type="file" name="document"
                                         class="file-input file-input-bordered file-input-accent w-full" />
                                     @error('document')
-                                        <small class="text-red-500">{{ $message }}</small>
+                                        <small class="text-red-500 text-left">{{ $message }}</small>
                                     @enderror
                                 @endif
                             </label>

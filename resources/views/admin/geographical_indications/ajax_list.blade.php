@@ -22,7 +22,7 @@
                 <td>{{ $geographicalIndication->management_unit }}</td>
                 {{-- <td>{{ $geographicalIndication->certificate_number }}</td> --}}
                 <td>{{ $geographicalIndication->authorized_unit }}</td>
-                <td class="text-center">{{ $geographicalIndication->formatted_issue_date }}</td>
+                <td class="text-center">{{ $geographicalIndication->issue_date }}</td>
                 <td class="text-center">{{ $geographicalIndication->status }}</td>
                 <td class="flex justify-around">
                     <a href="{{ route('admin.geographical_indications.edit', $geographicalIndication) }}"

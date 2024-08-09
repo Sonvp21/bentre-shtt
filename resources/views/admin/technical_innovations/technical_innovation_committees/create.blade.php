@@ -26,7 +26,7 @@
                                 <input type="text" name="name" placeholder="Nhập vào" value="{{ old('name') }}"
                                     class="input input-bordered w-full {{ $errors->has('name') ? 'input-error' : '' }}" />
                                 @error('name')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -45,7 +45,7 @@
                                     @endforeach
                                 </select>
                                 @error('technical_id')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -55,7 +55,7 @@
                                 <input type="text" name="score" placeholder="Nhập vào" value="{{ old('score') }}"
                                     class="input input-bordered w-full {{ $errors->has('score') ? 'input-error' : '' }}" />
                                 @error('score')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
 
@@ -69,7 +69,7 @@
                                     value="{{ old('date') }}"
                                     class="input input-bordered w-full @error('date') border-red-500 @enderror" />
                                 @error('date')
-                                    <small class="text-red-500">{{ $message }}</small>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                             <label class="form-control w-[95%]">
@@ -79,7 +79,7 @@
                                 <textarea name="status" id="status" placeholder="..."
                                     class="h-auto form-textarea input input-bordered w-full @error('status') border-red-500 @enderror">{{ old('status') }}</textarea>
                                 @error('status')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <small class="text-red-500 text-left">{{ $message }}</small>
                                 @enderror
                             </label>
                         </div>
